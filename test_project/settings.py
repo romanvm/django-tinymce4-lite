@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
-    'tests',
+    'tinymce_tests',
 ]
 
 MIDDLEWARE_CLASSES = [

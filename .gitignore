@@ -109,3 +109,4 @@ target/
 # Custom
 *.cmd
 venv/
+*.sqlite3

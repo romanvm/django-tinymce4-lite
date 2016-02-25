@@ -7,6 +7,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 # Default TinyMCE 4 layout
 DEFAULT = {
+    'selector': 'textarea',
     'theme': 'modern',
     'plugins': 'link image',
     'toolbar': 'styleselect | bold italic underline | alignleft aligncenter alignright alignjustify '

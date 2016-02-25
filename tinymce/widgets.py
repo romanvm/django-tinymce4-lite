@@ -12,7 +12,7 @@ import json
 from django.conf import settings
 from django.forms import Textarea, Media
 from django.forms.widgets import flatatt
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils.translation import get_language, get_language_bidi
@@ -42,7 +42,7 @@ class TinyMCE(Textarea):
     def render(self, name, value, attrs=None):
         if value is None:
             value = ''
-        value = smart_unicode(value)
+        value = smart_text(value)
         final_attrs = self.build_attrs(attrs)
         final_attrs['name'] = name
         mce_config = self.profile.copy()

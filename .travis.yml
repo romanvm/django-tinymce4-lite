@@ -10,8 +10,8 @@ env:
   - DJANGO_VERSION=1.8.9
   - DJANGO_VERSION=1.9.2
 before_install:
-  - apt-get -qq update
-  - apt-get install -y enchant
+  - sudo apt-get -qq update
+  - sudo apt-get install -y enchant
 install:
   - pip install -r test_requirements.txt
   - pip install -q Django==$DJANGO_VERSION

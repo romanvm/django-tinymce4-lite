@@ -1,6 +1,6 @@
 /* Fixes TinyMCE 4 widget position in Django admin */
 .form-row .mce-tinymce {
-  margin-left: 106px;
+  margin-left: {{ margin_left }}px;
 }
 .form-row .mce-fullscreen {
   margin-left: 0;

@@ -1,0 +1,15 @@
+language: python
+python:
+#  - "2.6"
+  - "2.7"
+#  - "3.3"
+#  - "3.4"
+  - "3.5"
+env:
+#  - DJANGO_VERSION=1.7.11
+  - DJANGO_VERSION=1.8.9
+  - DJANGO_VERSION=1.9.2
+install:
+  - pip install -r test_requirements.txt
+  - pip install -q Django==$DJANGO_VERSION
+script: python manage.py test tinymce_tests

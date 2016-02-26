@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
+from django.conf import settings
 
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     import simplejson as json
@@ -56,10 +57,13 @@ def css(request):
     Custom CSS for TinyMCE 4 widget
 
     By default it fixes the widget's left margin in Django Admin
+
     :param request:
     :return:
     """
-    if VERSION[0] == 1 and VERSION[1] <= 8:
+    if 'grappelli' in settings.INSTALLED_APPS:
+        margin_left = 0
+    elif VERSION[0] == 1 and VERSION[1] <= 8:
         margin_left = 106  # For old style admin
     else:
         margin_left = 170  # For Django >= 1.9 style admin

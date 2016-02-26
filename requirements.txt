@@ -1,0 +1,4 @@
+Django>=1.7.0
+simplejson
+pyenchant
+mock

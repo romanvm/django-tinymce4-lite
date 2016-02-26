@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'', include('tinymce_tests.urls', namespace='tests')),
 ]

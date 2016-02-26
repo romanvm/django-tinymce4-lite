@@ -10,7 +10,11 @@ addons:
   apt:
     packages:
      - enchant
+before_install:
+  - pip install codecov
 install:
   - pip install -r test_requirements.txt
   - pip install -q Django==$DJANGO_VERSION
-script: python manage.py test tinymce_tests
+script: coverage run manage.py test tinymce_tests
+after_success:
+ - codecov

@@ -7,6 +7,8 @@ from django.db import models
 from django.contrib.admin.widgets import AdminTextareaWidget
 from tinymce.widgets import TinyMCE, AdminTinyMCE
 
+__all__ = ['HTMLField']
+
 
 class HTMLField(models.TextField):
     """

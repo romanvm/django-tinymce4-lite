@@ -8,7 +8,7 @@ http://code.djangoproject.com/wiki/CustomWidgetsTinyMCE
 
 from __future__ import unicode_literals
 from __future__ import absolute_import
-import sys
+import json
 import logging
 from django.conf import settings
 from django.forms import Textarea, Media
@@ -22,11 +22,6 @@ from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
 import enchant
 import tinymce.settings as mce_settings
-
-if sys.version_info[0] == 2 and sys.version_info[1] < 7:
-    import simplejson as json
-else:
-    import json
 
 __all__ = ['TinyMCE']
 

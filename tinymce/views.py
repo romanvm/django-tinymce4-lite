@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from __future__ import absolute_import
-import sys
+import json
 import logging
 from django import VERSION
 from django.core.urlresolvers import reverse
@@ -10,11 +10,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
 from django.conf import settings
-
-if sys.version_info[0] == 2 and sys.version_info[1] < 7:
-    import simplejson as json
-else:
-    import json
 
 __all__ = ['spell_check', 'css', 'filebrowser']
 

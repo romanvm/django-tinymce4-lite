@@ -1,4 +1,8 @@
 # coding: utf-8
+# License: MIT, see LICENSE.txt
+"""
+django-tinymce4-lite views
+"""
 
 from __future__ import absolute_import
 import json
@@ -20,7 +24,14 @@ logger = logging.getLogger(__name__)
 @csrf_exempt
 def spell_check(request):
     """
-    Returns a HttpResponse that implements the TinyMCE spellchecker protocol.
+    Implements the TinyMCE 4 spellchecker protocol
+
+    :param request: Django http request with JSON-RPC payload from TinyMCE 4
+        containing a language code and a text to check for errors.
+    :type request: django.http.request.HttpRequest
+    :return: Django http response containing JSON-RPC payload
+        with spellcheck results for TinyMCE 4
+    :rtype: django.http.HttpResponse
     """
     data = json.loads(request.body.decode('utf-8'))
     output = {'id': data['id']}
@@ -51,10 +62,12 @@ def css(request):
     """
     Custom CSS for TinyMCE 4 widget
 
-    By default it fixes the widget's left margin in Django Admin
+    By default it fixes widget's position in Django Admin
 
-    :param request:
-    :return:
+    :param request: Django http request
+    :type request: django.http.request.HttpRequest
+    :return: Django http response with CSS file for TinyMCE 4
+    :rtype: django.http.HttpResponse
     """
     if 'grappelli' in settings.INSTALLED_APPS:
         margin_left = 0
@@ -67,6 +80,16 @@ def css(request):
 
 
 def filebrowser(request):
+    """
+    JavaScript callback function for `django-filebrowser`_
+
+    :param request: Django http request
+    :type request: django.http.request.HttpRequest
+    :return: Django http response with filebrowser JavaScript code for for TinyMCE 4
+    :rtype: django.http.HttpResponse
+
+    .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
+    """
     try:
         fb_url = request.build_absolute_uri(reverse('fb_browse'))
     except:

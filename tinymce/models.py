@@ -1,5 +1,5 @@
 # coding: utf-8
-# Copyright (c) 2008 Joost Cassee
+# Copyright (c) 2008 Joost Cassee, 2016 Roman Miroshnychenko
 # Licensed under the terms of the MIT License (see LICENSE.txt)
 
 from __future__ import absolute_import
@@ -12,9 +12,17 @@ __all__ = ['HTMLField']
 
 class HTMLField(models.TextField):
     """
-    A text area field for HTML content.
+    A text area model field for HTML content.
 
     It uses the TinyMCE 4 widget in forms.
+
+    Example::
+
+        from django.db.models import Model
+        form tinymce.models import HTMLField
+
+        class Foo(Model):
+            html_content = HTMLField('HTML content')
     """
     def __init__(self, *args, **kwargs):
         self.tinymce_profile = kwargs.pop('profile', None)

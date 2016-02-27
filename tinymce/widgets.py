@@ -1,4 +1,5 @@
 # coding: utf-8
+# License: MIT, see LICENSE.txt
 """
 TinyMCE 4 forms widget
 
@@ -32,9 +33,10 @@ logger.setLevel(20)
 
 def get_language_config():
     """
-    Creates a language configuration for TinyMCE4 based on Django settings
+    Creates a language configuration for TinyMCE4 based on Django project settings
 
-    :return: config
+    :return: language- and locale-related parameters for TinyMCE 4
+    :rtype: dict
     """
     config = {'language': get_language()[:2]}
     if get_language_bidi():
@@ -63,8 +65,10 @@ def convert_language_code(django_lang):
     """
     Converts Django language codes "ll-cc" into ISO codes "ll_CC" or "ll"
 
-    :param django_lang:
-    :return: iso_lang
+    :param django_lang: Django language code as ll-cc
+    :type django_lang: str
+    :return: ISO language code as ll_CC
+    :rtype: str
     """
     lang_and_country = django_lang.split('-')
     try:
@@ -75,11 +79,19 @@ def convert_language_code(django_lang):
 
 class TinyMCE(Textarea):
     """
-    TinyMCE Widget
+    TinyMCE 4 widget
 
-    :param attrs:
-    :param mce_attrs:
-    :param profile:
+    It replaces a textarea form widget with a rich-text WYSIWYG `TinyMCE 4`_ editor widget.
+
+    :param attrs: General Django widget attributes.
+    :type attrs: dict
+    :param mce_attrs: Additional configuration parameters for TinyMCE 4.
+        They *amend* the existing configuration.
+    :type mce_attrs: dict
+    :param profile: TinyMCE 4 configuration parameters.
+        They *replace* the existing configuration.
+
+    .. _TinyMCE 4: https://www.tinymce.com/
     """
     def __init__(self, attrs=None, mce_attrs=None, profile=None):
         super(TinyMCE, self).__init__(attrs)
@@ -124,4 +136,5 @@ class TinyMCE(Textarea):
 
 
 class AdminTinyMCE(TinyMCE, admin_widgets.AdminTextareaWidget):
+    """TinyMCE 4 widget for Django Admin interface"""
     pass

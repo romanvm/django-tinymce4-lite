@@ -19,7 +19,7 @@ class HTMLField(models.TextField):
     Example::
 
         from django.db.models import Model
-        form tinymce.models import HTMLField
+        from tinymce import HTMLField
 
         class Foo(Model):
             html_content = HTMLField('HTML content')

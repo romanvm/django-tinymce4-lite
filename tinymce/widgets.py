@@ -90,6 +90,7 @@ class TinyMCE(Textarea):
     :type mce_attrs: dict
     :param profile: TinyMCE 4 configuration parameters.
         They *replace* the existing configuration.
+    :type profile: dict
 
     .. _TinyMCE 4: https://www.tinymce.com/
     """

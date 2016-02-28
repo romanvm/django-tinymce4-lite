@@ -1,4 +1,3 @@
-test_project/*
-tinymce_tests/*
+test_tinymce/*
 docs/*
 manage.py

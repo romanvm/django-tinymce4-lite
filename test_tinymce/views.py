@@ -4,10 +4,10 @@ from .models import TestModel
 
 
 class TestIndexView(TemplateView):
-    template_name = 'tinymce_tests/index.html'
+    template_name = 'test_tinymce/index.html'
 
 
 class TestCreateView(CreateView):
-    template_name = 'tinymce_tests/create.html'
+    template_name = 'test_tinymce/create.html'
     fields = ('title', 'content')
     model = TestModel

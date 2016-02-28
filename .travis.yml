@@ -13,8 +13,8 @@ addons:
 before_install:
   - pip install codecov
 install:
-  - pip install -r test_requirements.txt
+  - pip install -q pyenchant mock
   - pip install -q Django==$DJANGO_VERSION
-script: coverage run manage.py test tinymce_tests
+script: coverage run manage.py test test_tinymce
 after_success:
  - codecov

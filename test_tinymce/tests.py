@@ -15,7 +15,7 @@ except ImportError:
 
 class RenderTinyMCEWidgetTestCase(TestCase):
     def test_rendering_tinymce4_widget(self):
-        response = self.client.get(reverse('tests:create'))
+        response = self.client.get(reverse('create'))
         self.assertContains(response, 'tinymce.min.js')
         self.assertContains(response, 'tinyMCE.init(')
 
@@ -23,7 +23,7 @@ class RenderTinyMCEWidgetTestCase(TestCase):
         User.objects.create_superuser('test', 'test@test.com', 'test')
         client = Client()
         client.login(username ='test', password='test')
-        response = client.get('/admin/tinymce_tests/testmodel/add/', follow=True)
+        response = client.get('/admin/test_tinymce/testmodel/add/', follow=True)
         self.assertContains(response, 'tinymce.min.js')
         self.assertContains(response, 'tinyMCE.init(')
 

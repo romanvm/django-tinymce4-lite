@@ -1,4 +1,4 @@
-"""test_project URL Configuration
+"""test_tinymce URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
@@ -13,16 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
+from __future__ import absolute_import
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from filebrowser.sites import site
+from .views import TestIndexView, TestCreateView
 
 
 urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^admin/', admin.site.urls),
-    url(r'', include('tinymce_tests.urls', namespace='tests')),
+    url(r'^$', TestIndexView.as_view(), name='index'),
+    url(r'^add-object/$', TestCreateView.as_view(), name='create')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

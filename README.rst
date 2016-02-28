@@ -34,7 +34,7 @@ Install requirements::
 
 Copy ``tinymce`` folder to your ``PYTHONPATH``.
 
-Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your project::
+Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your project:
 
 .. code-block:: python
 
@@ -43,7 +43,7 @@ Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your project::
         'tinymce',
     )
 
-Add ``tinymce.urls`` to ``urls.py`` for your project::
+Add ``tinymce.urls`` to ``urls.py`` for your project:
 
 .. code-block:: python
 
@@ -52,7 +52,9 @@ Add ``tinymce.urls`` to ``urls.py`` for your project::
         (r'^tinymce/', include('tinymce.urls')),
     )
 
-In your code::
+In your code:
+
+.. code-block:: python
 
     from django.db import models
     from tinymce import HTMLField

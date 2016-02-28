@@ -31,7 +31,7 @@ Quick Start
 
 Install requirements::
 
-    $ pip install -r requirements.txt
+  $ pip install -r requirements.txt
 
 Copy ``tinymce`` folder to your ``PYTHONPATH``.
 
@@ -39,19 +39,20 @@ Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your project:
 
 .. code-block:: python
 
-    INSTALLED_APPS = (
-        ...
-        'tinymce',
-    )
+  INSTALLED_APPS = (
+      ...
+      'tinymce',
+  )
 
 Add ``tinymce.urls`` to ``urls.py`` for your project:
 
 .. code-block:: python
 
-    urlpatterns = patterns('',
-        ...
-        (r'^tinymce/', include('tinymce.urls')),
-    )
+  urlpatterns = [
+      ...
+      url(r'^tinymce/', include('tinymce.urls')),
+      ...
+  ]
 
 In your code:
 
@@ -64,7 +65,7 @@ In your code:
         ...
         content = HTMLField('Content')
 
-In your templates (if you are using TinyMCE 4 in your site forms):
+In your templates, if you are using TinyMCE 4 in your site forms:
 
 .. code-block:: html
 
@@ -79,6 +80,7 @@ In your templates (if you are using TinyMCE 4 in your site forms):
   </body>
   </html>
 
+In Django Admin the widget is used automatically for all models that have ``HTMLField`` fields.
 
 Documentation
 =============

@@ -9,9 +9,10 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 DEFAULT = {
     'selector': 'textarea',
     'theme': 'modern',
-    'plugins': 'link image preview codesample',
-    'toolbar1': 'styleselect | bold italic | alignleft aligncenter alignright alignjustify '
-               '| bullist numlist | outdent indent | link image | codesample | preview',
+    'plugins': 'link image preview codesample contextmenu table',
+    'toolbar1': 'bold italic underline | alignleft aligncenter alignright alignjustify '
+               '| bullist numlist | outdent indent | table | link image | codesample | preview',
+    'contextmenu': 'formats | link image',
     'menubar': False,
     'inline': False,
     'statusbar': True,

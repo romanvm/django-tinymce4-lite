@@ -9,13 +9,13 @@ django-tinymce4-lite
   :target: https://www.quantifiedcode.com/app/project/48b63a65324642af823606c3c0444395
   :alt: Code issues
 
-django-tinymce4-lite is a remade fork of `django-tinymce4`_. It provides a fully functional `TinyMCE 4`_ editor widget
-that can be used in Django forms and models. The application can use
-`django-filebrowser`_ or `django-filebrowser-no-grappelli`_ as a file manager for TinyMCE 4 to insert images and
-file links into edited text.
+django-tinymce4-lite is a remade fork of `django-tinymce4`_. It provides a fully functional `TinyMCE 4`_
+editor widget that can be used in Django forms and models.
+The application can use `django-filebrowser`_ or `django-filebrowser-no-grappelli`_
+as a file manager for TinyMCE 4 to insert images and file links into edited text.
 
 **Warning**: TinyMCE 4 is incompatible with TinyMCE 3. Read `TinyMCE docs`_ for more information
-about how to configure TimyMCE 4 editor.
+about how to configure TimyMCE 4 editor widget.
 
 Compatibility
 -------------
@@ -27,7 +27,7 @@ Compatibility
 Quick Start
 ===========
 
-(The application is fully functional. I need to complete docs and a PyPI package.)
+(The application is fully functional. I need to complete documentation and a PyPI package.)
 
 Install requirements::
 
@@ -76,6 +76,11 @@ In your templates (if you are using TinyMCE 4 in your site forms):
   </head>
   <body>
   ...
+    <form action="foo" method="post">
+      {% csrf_token %}
+      ...
+    </form>
+  ...
   </body>
   </html>
 
@@ -95,4 +100,3 @@ MIT license. See LICENSE.txt
 .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
 .. _TinyMCE docs: https://www.tinymce.com/docs/
-

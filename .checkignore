@@ -1,3 +1,4 @@
 test_project/*
 tinymce_tests/*
+docs/*
 manage.py

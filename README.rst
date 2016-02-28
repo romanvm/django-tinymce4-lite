@@ -76,11 +76,6 @@ In your templates (if you are using TinyMCE 4 in your site forms):
   </head>
   <body>
   ...
-    <form action="foo" method="post">
-      {% csrf_token %}
-      ...
-    </form>
-  ...
   </body>
   </html>
 

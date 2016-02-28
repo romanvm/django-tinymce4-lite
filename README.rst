@@ -28,7 +28,7 @@ Quick Start
 
 (The application is fully functional. I need to complete docs and a PyPI package.)
 
-Install requirements:
+Install requirements::
 
     $ pip install -r requirements.txt
 
@@ -36,12 +36,16 @@ Copy ``tinymce`` folder to your ``PYTHONPATH``.
 
 Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your project::
 
+.. code-block:: python
+
     INSTALLED_APPS = (
         ...
         'tinymce',
     )
 
 Add ``tinymce.urls`` to ``urls.py`` for your project::
+
+.. code-block:: python
 
     urlpatterns = patterns('',
         ...
@@ -81,7 +85,7 @@ TBD
 License
 =======
 
-MIT. See LICENSE.txt
+MIT license. See LICENSE.txt
 
 .. _django-tinymce4: https://github.com/dani0805/django-tinymce4
 .. _TinyMCE 4: https://www.tinymce.com/

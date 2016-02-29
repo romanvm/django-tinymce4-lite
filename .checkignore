@@ -1,3 +1,5 @@
-test_tinymce/*
 docs/*
+test_tinymce/*
 manage.py
+setup.py
+metadata.py

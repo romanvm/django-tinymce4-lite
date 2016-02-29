@@ -45,7 +45,6 @@ setup(
     url='https://github.com/romanvm/django-tinymce4-lite',
     install_requires=[
         'Django>=1.8.0',
-        'pyenchant'
     ],
     zip_safe=False
 )

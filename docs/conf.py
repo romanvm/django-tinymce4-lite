@@ -4,7 +4,9 @@ import sys
 import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test_tinymce.settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'test_tinymce.settings')
+
+import metadata
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -26,8 +28,8 @@ project = u'django-tinymce4-lite'
 copyright = u'2016, Roman Miroshnychenko'
 author = u'Roman Miroshnychenko'
 
-version = u'1.0.0'
-release = u'1.0.0'
+version = metadata.version
+release = metadata.release
 
 language = None
 exclude_patterns = ['_build']

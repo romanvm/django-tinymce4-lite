@@ -1,0 +1,6 @@
+include *.py *.txt *.rst
+recursive-include tinymce *
+recursive-include test_tinymce *
+resursive-include docs *.rst *.py Makefile make.bat
+global-exclude *.pyc __pycache__
+prune docs/_build

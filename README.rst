@@ -63,7 +63,8 @@ In your code:
         ...
         content = HTMLField('Content')
 
-In your templates, if you are using TinyMCE 4 in your site forms:
+In Django Admin the widget is used automatically for all models that have ``HTMLField`` fields.
+If you are using TinyMCE 4 in your website forms, add ``form.media`` variable into your templates:
 
 .. code-block:: html
 
@@ -78,7 +79,7 @@ In your templates, if you are using TinyMCE 4 in your site forms:
   </body>
   </html>
 
-In Django Admin the widget is used automatically for all models that have ``HTMLField`` fields.
+
 
 Documentation
 =============

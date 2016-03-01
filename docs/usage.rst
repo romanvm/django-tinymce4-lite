@@ -18,8 +18,10 @@ For example:
         ...
         content = HTMLField('Content')
 
-If you are using TinyMCE 4 in your website forms, you need to add ``form.media`` variable
-to the ``<head>`` section of your templates:
+
+In Django Admin interface the widget is used automatically for all models that have
+:class:`HTMLField<tinymce.HTMLField>` fields. If you are using TinyMCE 4 in your website forms,
+you need to add ``form.media`` variable to the ``<head>`` section of your templates:
 
 .. code-block:: html
 
@@ -33,6 +35,3 @@ to the ``<head>`` section of your templates:
   ...
   </body>
   </html>
-
-In Django Admin interface the widget is used automatically for all models that have
-:class:`HTMLField<tinymce.HTMLField>` fields.

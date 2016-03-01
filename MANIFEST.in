@@ -1,4 +1,5 @@
 include *.py *.txt *.rst
+exclude publish_docs.py
 recursive-include tinymce *
 recursive-include test_tinymce *
 resursive-include docs *.rst *.py Makefile make.bat

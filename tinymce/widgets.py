@@ -134,11 +134,6 @@ class TinyMCE(Textarea):
             html = '<div{0}>{1}</div>\n'.format(flatatt(final_attrs), escape(value))
         else:
             html = '<textarea{0}>{1}</textarea>\n'.format(flatatt(final_attrs), escape(value))
-        callbacks = mce_settings.CALLBACKS.copy()
-        if mce_settings.USE_FILEBROWSER and 'file_browser_callback' not in callbacks:
-            callbacks['file_browser_callback'] = 'djangoFileBrowser'
-        if mce_settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
-            callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
         html += '<script type="text/javascript">{0}</script>'.format(
             render_tinymce_init_js(mce_config, mce_settings.CALLBACKS.copy())
         )

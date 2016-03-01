@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create a Test Model</title>
+  <title>TinyMCE 4 Editor Example</title>
   {{ form.media }}
 </head>
 <body>
-<h1>Create a test model</h1>
+<h1>An Example of TinyMCE 4 Editor</h1>
 <hr>
 <form action="" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" value="Create" />
+  <input type="submit" value="Create" disabled />
 </form>
 </body>
 </html>

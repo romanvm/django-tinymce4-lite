@@ -66,7 +66,7 @@ In your code:
 In Django Admin the widget is used automatically for all models that have ``HTMLField`` fields.
 If you are using TinyMCE 4 in your website forms, add ``form.media`` variable into your templates:
 
-.. code-block:: html
+.. code-block:: django
 
   <!DOCTYPE html>
   <html>

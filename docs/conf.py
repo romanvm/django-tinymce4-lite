@@ -46,7 +46,9 @@ html_theme_options = {
     'github_user': 'romanvm',
     'github_repo': 'django-tinymce4-lite',
     'github_banner': True,
-    'show_related': False,
+    'travis_button': True,
+    'codecov_button': True,
+    'description': 'TinyMCE 4 editor for Django'
 }
 
 html_sidebars = {
@@ -54,7 +56,6 @@ html_sidebars = {
         'about.html',
         'navigation.html',
         'searchbox.html',
-        'relations.html',
     ]
 }
 

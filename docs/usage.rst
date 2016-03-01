@@ -24,7 +24,7 @@ In Django Admin interface the widget is used automatically for all models that h
 :class:`HTMLField<tinymce.HTMLField>` fields. If you are using TinyMCE 4 in your website forms,
 you need to add ``form.media`` variable to the ``<head>`` section of your templates:
 
-.. code-block:: html
+.. code-block:: django
 
   <!DOCTYPE html>
   <html>

@@ -17,6 +17,12 @@ Compatibility
 - **Python**: 2.7, 3.4, 3.5
 - **Django**: 1.8, 1.9
 
+License
+-------
+
+`MIT license <https://en.wikipedia.org/wiki/MIT_License>`_.
+
+
 Naming Conventions
 ------------------
 
@@ -31,6 +37,7 @@ a JavaScript `TinyMCE`_ editor widget. If a version number is omitted, TinyMCE v
 .. _TinyMCE: https://www.tinymce.com/
 
 Contents:
+---------
 
 .. toctree::
   :maxdepth: 2
@@ -39,6 +46,7 @@ Contents:
   configuration
   usage
   advanced
+  test
   modules
 
 Indices and tables

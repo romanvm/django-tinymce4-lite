@@ -1,14 +1,20 @@
 Configuration
 =============
 
-The tinymce4-lite configuration options
----------------------------------------
+Application Configuration
+-------------------------
 
-The following options can be defined in your Django project's :file:`settings.py` file.
+The following options can be defined for **tinymce4-lite** in your Django project's
+:file:`settings.py` file.
 
 ``TINYMCE_DEFAULT_CONFIG`` -- TinyMCE 4 widget configuration.
 **tinymce4-lite** provides reasonable default configuration with essential editing capabilities,
 so you need to use this option only if you want to create your own custom TinyMCE configuration.
+
+.. note:: In **tinymce4-lite** the TinyMCE configuration is defined as a Python :class:`dict`.
+  The :class:`dict` configuration is then translated to JSON configuration
+  according to :class:`json.JSONEncoder` rules.
+
 Default configuration::
 
   DEFAULT = {
@@ -24,10 +30,6 @@ Default configuration::
       'height': 360,
   }
 
-.. note:: TinyMCE configuration is defined as a Python :class:`dict`.
-  The :class:`dict` configuration is translated to TinyMCE JSON configuration
-  according to :class:`json.JSONEncoder` rules.
-
 ``TINYMCE_SPELLCHECKER`` -- enables spellchecker function for TinyMCE. For the default configuration it also adds
 a spellcheck button to TinyMCE toolbar. Default: ``False``.
 
@@ -37,7 +39,7 @@ Default: ``True`` if ``'filebrowser'`` is added to `INSTALLED_APPS`_, else ``Fal
 
 ``TINYMCE_JS_URL`` -- a path to TinyMCE JavaScript library.
 Default: :file:`{your_static_url}/tinymce/js/tinymce/tinymce.min.js`.
-The following example shows how to load TinyMCE library from a CDN::
+The following example shows how to load the TinyMCE library from a CDN::
 
   TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
 
@@ -46,7 +48,7 @@ Default styles are used to correct TinyMCE widget position in Django Admin inter
 
 ``TINYMCE_CALLBACKS`` -- allows to define custom TinyMCE callbacks, for example ``file_browser_callback``
 or ``spellchecker_callback``. This is a Python dictionary where keys are the names of callbacks and values are
-valid JavaScript objects as Python strings. Default: ``{}`` (an empty :class:`dict`).
+JavaScript objects as Python strings. Default: ``{}`` (an empty :class:`dict`).
 Read `TinyMCE documentation`_ to learn about available callbacks.
 
 .. note:: Custom ``file_browser_callback`` and ``spellchecker_callback`` options defined in ``TINYMCE_CALLBACKS``

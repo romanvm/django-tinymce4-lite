@@ -6,9 +6,10 @@ The tinymce4-lite configuration options
 
 The following options can be defined in your Django project's :file:`settings.py` file.
 
-``TINYMCE_DEFAULT_CONFIG`` -- TinyMCE 4 widget configuration. tinymce4-lite provides reasonable default configuration
-with essential editing capabilities, so you need to use this option only if you want to create your own custom
-TinyMCE configuration. Default configuration::
+``TINYMCE_DEFAULT_CONFIG`` -- TinyMCE 4 widget configuration.
+**tinymce4-lite** provides reasonable default configuration with essential editing capabilities,
+so you need to use this option only if you want to create your own custom TinyMCE configuration.
+Default configuration::
 
   DEFAULT = {
       'selector': 'textarea',
@@ -50,7 +51,7 @@ Read `TinyMCE documentation`_ to learn about available callbacks.
 Language Configuration
 ----------------------
 
-By default tinymce4-lite uses `LANGUAGE_CODE`_ and `LANGUAGES`_ Django options to automatically set up
+By default **tinymce4-lite** uses `LANGUAGE_CODE`_ and `LANGUAGES`_ Django options to automatically set up
 TinyMCE interface language and available spellchecker dictionaries. That is why it is recommended
 to define both options in your project's :file:`settings.py`.
 
@@ -68,7 +69,7 @@ using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`
 .. note:: Django language codes in ``LANGUAGES`` must match dictionary filenames.
   For example, ``'en-us'`` in ``LANGUAGES`` (with a country code)
   corresponds to :file:`en_US.dic`/:file:`en_US.aff` dictionary files,
-  and ``'uk`` (no country code) corresponds to :file:`uk.dic`/:file:`uk.aff` dictionary files.
+  and ``'uk'`` (no country code) corresponds to :file:`uk.dic`/:file:`uk.aff` dictionary files.
 
 Also you can completely override TinyMCE automatic configuration by defining the necessary language options
 in ``TINYMCE_DEFAULT_CONFIG``.

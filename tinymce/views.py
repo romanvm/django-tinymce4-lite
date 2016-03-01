@@ -94,4 +94,5 @@ def filebrowser(request):
         fb_url = request.build_absolute_uri(reverse('fb_browse'))
     except:
         fb_url = request.build_absolute_uri(reverse('filebrowser:fb_browse'))
-    return render(request, 'tinymce/filebrowser.js', {'fb_url': fb_url})
+    return render(request, 'tinymce/filebrowser.js', {'fb_url': fb_url},
+                  content_type='text/javascript')

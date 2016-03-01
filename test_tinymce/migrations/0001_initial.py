@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import tinymce.models
+import tinymce.fields
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='TestModel',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', tinymce.models.HTMLField(verbose_name='HTML Content')),
+                ('content', tinymce.fields.HTMLField(verbose_name='HTML Content')),
             ],
         ),
     ]

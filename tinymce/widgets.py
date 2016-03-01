@@ -129,7 +129,7 @@ class TinyMCE(Textarea):
         final_attrs['name'] = name
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
-        mce_config['selector'] += '#{0}'.format(final_attrs['id'])
+        mce_config['selector'] = mce_config.get('selector', 'textarea') + '#{0}'.format(final_attrs['id'])
         if mce_config.get('inline', False):
             html = '<div{0}>{1}</div>\n'.format(flatatt(final_attrs), escape(value))
         else:

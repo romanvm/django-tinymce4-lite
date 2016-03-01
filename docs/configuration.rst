@@ -23,12 +23,12 @@ TinyMCE configuration. Default configuration::
       'height': 360,
   }
 
-``TINYMCE_SPELLCHECKER`` -- enables spellchecker function for TinyMCE. For default configuration it also adds
+``TINYMCE_SPELLCHECKER`` -- enables spellchecker function for TinyMCE. For the default configuration it also adds
 a spellcheck button to TinyMCE toolbar. Default: ``False``.
 
 ``TINYMCE_FILEBROWSER`` -- enables file browser support in TinyMCE image and link dialogs.
 tinymce4-lite supports both `django-filebrowser`_ and  `django-filebrowser-no-grappelli`_ file browsers.
-Default: ``False``.
+Default: ``True`` if ``'filebrowser'`` is added to `INSTALLED_APPS`_, else ``False``.
 
 ``TINYMCE_JS_URL`` -- a path to TinyMCE JavaScript library.
 Default: :file:`{your_static_url}/tinymce/js/tinymce/tinymce.min.js`.
@@ -42,7 +42,7 @@ Default styles are used to correct TinyMCE widget position in Django Admin inter
 ``TINYMCE_CALLBACKS`` -- allows to define custom TinyMCE callbacks, for example ``file_browser_callback``
 or ``spellchecker_callback``. This is a Python dictionary where keys are the names of callbacks and values are
 valid JavaScript objects as Python strings. Default: ``{}`` (an empty :class:`dict`).
-Read `TinyMCE documentation`_ about available callbacks.
+Read `TinyMCE documentation`_ to learn about available callbacks.
 
 .. note:: Custom ``file_browser_callback`` and ``spellchecker_callback`` options defined in ``TINYMCE_CALLBACKS``
   override tinymce4-lite built-in callbacks.
@@ -81,4 +81,4 @@ in ``TINYMCE_DEFAULT_CONFIG``.
 .. _pyenchant documentation: http://pythonhosted.org/pyenchant/tutorial.html#adding-language-dictionaries
 .. _this page: http://www.softmaker.com/en/download/dictionaries
 .. _7zip: http://www.7-zip.org/
-
+.. _INSTALLED_APPS: https://docs.djangoproject.com/en/1.9/ref/settings/#installed-apps

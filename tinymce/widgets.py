@@ -77,7 +77,7 @@ def convert_language_code(django_lang):
         return lang_and_country[0]
 
 
-def render_tinymce_init_js(mce_config, callbacks):
+def render_tinymce_init_js(mce_config, callbacks, id_=''):
     """
     Renders TinyMCE.init() JavaScript code
 
@@ -85,6 +85,8 @@ def render_tinymce_init_js(mce_config, callbacks):
     :type mce_config: dict
     :param callbacks: TinyMCE callbacks
     :type callbacks: dict
+    :param id_: HTML element's ID to which TinyMCE is attached.
+    :type id_: str
     :return: TinyMCE.init() code
     :rtype: str
     """
@@ -92,6 +94,8 @@ def render_tinymce_init_js(mce_config, callbacks):
         callbacks['file_browser_callback'] = 'djangoFileBrowser'
     if mce_settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
         callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
+    if id_:
+        mce_config['selector'] = mce_config.get('selector', 'textarea') + '#{0}'.format(id_)
     mce_json = json.dumps(mce_config, indent=2)
     return render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
                                                                 'tinymce_config': mce_json[1:-1]})
@@ -129,13 +133,12 @@ class TinyMCE(Textarea):
         final_attrs['name'] = name
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
-        mce_config['selector'] = mce_config.get('selector', 'textarea') + '#{0}'.format(final_attrs['id'])
         if mce_config.get('inline', False):
             html = '<div{0}>{1}</div>\n'.format(flatatt(final_attrs), escape(value))
         else:
             html = '<textarea{0}>{1}</textarea>\n'.format(flatatt(final_attrs), escape(value))
         html += '<script type="text/javascript">{0}</script>'.format(
-            render_tinymce_init_js(mce_config, mce_settings.CALLBACKS.copy())
+            render_tinymce_init_js(mce_config, mce_settings.CALLBACKS.copy(), final_attrs['id'])
         )
         return mark_safe(html)
 

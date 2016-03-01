@@ -24,6 +24,10 @@ Default configuration::
       'height': 360,
   }
 
+.. note:: TinyMCE configuration is defined as a Python :class:`dict`.
+  The :class:`dict` configuration is translated to TinyMCE JSON configuration
+  according to :class:`json.JSONEncoder` rules.
+
 ``TINYMCE_SPELLCHECKER`` -- enables spellchecker function for TinyMCE. For the default configuration it also adds
 a spellcheck button to TinyMCE toolbar. Default: ``False``.
 
@@ -62,6 +66,14 @@ is used as a default one. The list of spellchecker languages also depends on ava
 For example, on Windows the default **pyenchant** installation includes only English, German and French spellchecker
 dictionaries. Read `pyenchant documentation`_ to learn how to add additional spellchecker dictionaries.
 
+You can view the list available languages by running ``enchant.list_languages()`` function in a console
+from your working Python environment. For example::
+
+  >>> import enchant
+  >>> enchant.list_languages()
+  ['de_DE', 'en_AU', 'en_GB', 'en_US', 'fr_FR']
+
+
 Additional spellchecker dictionaries can be downloaded from `this page`_. Unpack a :file:`.sox` file
 using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`.aff` for your language into
 **pyenchant**/**enchant** installation.
@@ -71,7 +83,7 @@ using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`
   corresponds to :file:`en_US.dic`/:file:`en_US.aff` dictionary files,
   and ``'uk'`` (no country code) corresponds to :file:`uk.dic`/:file:`uk.aff` dictionary files.
 
-Also you can completely override TinyMCE automatic configuration by defining the necessary language options
+Also you can completely override TinyMCE automatic language configuration by defining the necessary language options
 in ``TINYMCE_DEFAULT_CONFIG``.
 
 .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser

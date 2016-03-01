@@ -38,6 +38,7 @@ Contents:
   installation
   configuration
   usage
+  advanced
   modules
 
 Indices and tables

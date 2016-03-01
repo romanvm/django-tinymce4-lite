@@ -28,13 +28,12 @@ Quick Start
 
 (The application is fully functional. I need to complete documentation and a PyPI package.)
 
-Install requirements::
+Install **django-tinymce4-lite**::
 
-  $ pip install -r requirements.txt
+  $ pip install git+https://github.com/romanvm/django-tinymce4-lite.git#egg=django-tinymce4-lite
 
-Copy ``tinymce`` folder to your ``PYTHONPATH``.
 
-Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your project:
+Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your Django project:
 
 .. code-block:: python
 

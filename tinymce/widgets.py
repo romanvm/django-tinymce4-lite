@@ -24,7 +24,7 @@ from django.contrib.admin import widgets as admin_widgets
 import enchant
 import tinymce.settings as mce_settings
 
-__all__ = ['TinyMCE']
+__all__ = ['TinyMCE', 'render_tinymce_init_js']
 
 logging.basicConfig(format='[%(asctime)s] %(module)s: %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -77,6 +77,26 @@ def convert_language_code(django_lang):
         return lang_and_country[0]
 
 
+def render_tinymce_init_js(mce_config, callbacks):
+    """
+    Renders TinyMCE.init() JavaScript code
+
+    :param mce_config: TinyMCE 4 configuration
+    :type mce_config: dict
+    :param callbacks: TinyMCE callbacks
+    :type callbacks: dict
+    :return: TinyMCE.init() code
+    :rtype: str
+    """
+    if mce_settings.USE_FILEBROWSER and 'file_browser_callback' not in callbacks:
+        callbacks['file_browser_callback'] = 'djangoFileBrowser'
+    if mce_settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
+        callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
+    mce_json = json.dumps(mce_config, indent=2)
+    return render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
+                                                                'tinymce_config': mce_json[1:-1]})
+
+
 class TinyMCE(Textarea):
     """
     TinyMCE 4 widget
@@ -98,7 +118,7 @@ class TinyMCE(Textarea):
         super(TinyMCE, self).__init__(attrs)
         self.mce_attrs = mce_attrs or {}
         self.profile = get_language_config()
-        default_profile = profile or mce_settings.CONFIG
+        default_profile = profile or mce_settings.CONFIG.copy()
         self.profile.update(default_profile)
 
     def render(self, name, value, attrs=None):
@@ -110,20 +130,17 @@ class TinyMCE(Textarea):
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
         mce_config['selector'] += '#{0}'.format(final_attrs['id'])
-        mce_json = json.dumps(mce_config, indent=2)
         if mce_config.get('inline', False):
             html = '<div{0}>{1}</div>\n'.format(flatatt(final_attrs), escape(value))
         else:
             html = '<textarea{0}>{1}</textarea>\n'.format(flatatt(final_attrs), escape(value))
-        callbacks = mce_settings.CALLBACKS
+        callbacks = mce_settings.CALLBACKS.copy()
         if mce_settings.USE_FILEBROWSER and 'file_browser_callback' not in callbacks:
             callbacks['file_browser_callback'] = 'djangoFileBrowser'
         if mce_settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
             callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
         html += '<script type="text/javascript">{0}</script>'.format(
-            render_to_string('tinymce/tinymce_init.js',
-                             context={'callbacks': callbacks,
-                                      'tinymce_config': mce_json[1:-1]})
+            render_tinymce_init_js(mce_config, mce_settings.CALLBACKS.copy())
         )
         return mark_safe(html)
 

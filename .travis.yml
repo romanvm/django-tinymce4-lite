@@ -19,8 +19,16 @@ script: coverage run manage.py test test_tinymce
 after_success:
  - codecov
 deploy:
-  provider: script
-  script: python publish_docs.py
-  skip_cleanup: true
-  on:
-    tags: true
+  - provider: script
+    script: python publish_docs.py
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: pypi
+    skip_cleanup: true
+    user: $PYPI_USER
+    password: $PYPI_PASS
+    distributions: "sdist bdist_wheel"
+    server: https://testpypi.python.org/pypi
+    on:
+      tags: true

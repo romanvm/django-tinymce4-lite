@@ -18,8 +18,6 @@ For example:
         ...
         content = HTMLField('Content')
 
-.. _forms-media:
-
 Don't forget to apply `safe`_ filter to the HTML content in your templates to render it properly.
 For example:
 
@@ -29,10 +27,14 @@ For example:
 
 .. warning:: If you are using TinyMCE editor in publicly facing webpages, it is strongly recommended to define
   `valid_elements`_ option for TinyMCE to limit the set of allowed HTML elements and/or
-  filter submitted content for security reasons.
+  to filter submitted content for security reasons.
 
 In Django Admin interface the widget is used automatically for all models that have
-:class:`HTMLField<tinymce.HTMLField>` fields. If you are using TinyMCE 4 in your website forms,
+:class:`HTMLField<tinymce.HTMLField>` fields.
+
+.. _forms-media:
+
+If you are using TinyMCE 4 in your website forms,
 you need to add ``form.media`` template variable to the ``<head>`` section of your templates:
 
 .. code-block:: django

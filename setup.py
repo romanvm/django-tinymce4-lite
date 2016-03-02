@@ -24,9 +24,9 @@ setup(
                 'a fully functional TinyMCE 4 editor widget for models and forms.',
     long_description=long_description,
     license='MIT License',
-    keywords='django widget tinymce',
+    keywords='django wysiwyg widget tinymce',
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',

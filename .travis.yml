@@ -18,3 +18,9 @@ install:
 script: coverage run manage.py test test_tinymce
 after_success:
  - codecov
+deploy:
+  provider: script
+  script: python publish_docs.py
+  skip_cleanup: true
+  on:
+    tags: true

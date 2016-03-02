@@ -2,6 +2,7 @@
 # License: MIT, see LICENSE.txt
 """
 django-tinymce4-lite
+--------------------
 
 This application provides a rich-text WYSIWYG `TinyMCE 4`_ widget
 for Django forms and models.

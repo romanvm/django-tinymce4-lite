@@ -3,8 +3,8 @@ Advanced Usage
 
 .. _custom-css:
 
-Applying CSS to Edited Content
-------------------------------
+Applying custom CSS
+-------------------
 
 The `content_style`_ and `content_css`_ TinyMCE configuration options allow to define custom Cascading Style Sheets
 for the content in TinyMCE editor window.
@@ -33,7 +33,7 @@ Code Samples
 TinyMCE v.4.3 and later includes `codesample`_ plugin that allows to insert the samples of programming code
 into edited content with pretty syntax highlighting. The ``codesample`` plugin uses `Prism`_ library
 for syntax highlighting (default theme). The plugin supports the following languages:
-HTML/XML, JavaScript, CSS, PHP, Ruby, Python, Java, C, C# and C++.
+**HTML/XML**, **JavaScript**, **CSS**, **PHP**, **Ruby**, **Python**, **Java**, **C#** and **C**/**C++**.
 
 The ``codesample`` plugin already includes the necessary Prism components to correctly display code samples
 in TinyMCE, but to make code samples correctly appear on webpages authored with TinyMCE you need to include
@@ -66,7 +66,7 @@ The Preview Button
 
 The `preview`_ plugin in TinyMCE 4, unlike in TinyMCE 3, does not support custom preview dialogs.
 Use :ref:`custom Style Sheets<custom-css>` as described in the first subsection on this page.
-They work for a preview window too.
+They work for the preview window too.
 
 .. _codesample: https://www.tinymce.com/docs/plugins/codesample/
 .. _Prism: http://prismjs.com/

@@ -7,8 +7,10 @@ Application Configuration
 The following options can be defined for **tinymce4-lite** in your Django project's
 :file:`settings.py` file.
 
+.. _TINYMCE_DEFAULT_CONFIG:
+
 ``TINYMCE_DEFAULT_CONFIG`` -- TinyMCE 4 widget configuration.
-**tinymce4-lite** provides reasonable default configuration with essential editing capabilities,
+**tinymce4-lite** provides a reasonable default configuration with essential editing capabilities,
 so you need to use this option only if you want to create your own custom TinyMCE configuration.
 
 .. note:: In **tinymce4-lite** the TinyMCE configuration is defined as a Python :class:`dict`.
@@ -33,8 +35,12 @@ Default configuration::
 ``TINYMCE_SPELLCHECKER`` -- enables spellchecker function for TinyMCE. For the default configuration it also adds
 a spellcheck button to TinyMCE toolbar. Default: ``False``.
 
+.. note:: If you are using a custom TinyMCE configuration, don't forget to add `spellchecker`_ plugin to
+  your configuration, and add the necessary menu item/toolbar button. Also read `Language Configuration`_
+  subsection about how to configure the spellchecker.
+
 ``TINYMCE_FILEBROWSER`` -- enables file browser support in TinyMCE image and link dialogs.
-tinymce4-lite supports both `django-filebrowser`_ and  `django-filebrowser-no-grappelli`_ file browsers.
+**tinymce4-lite** supports both `django-filebrowser`_ and  `django-filebrowser-no-grappelli`_ file browsers.
 Default: ``True`` if ``'filebrowser'`` is added to `INSTALLED_APPS`_, else ``False``.
 
 ``TINYMCE_JS_URL`` -- a path to TinyMCE JavaScript library.
@@ -44,15 +50,15 @@ The following example shows how to load the TinyMCE library from a CDN::
   TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
 
 ``TINYMCE_CSS_URL`` -- a path to a CSS file with additional styles for TinyMCE.
-Default styles are used to correct TinyMCE widget position in Django Admin interface.
+The default CSS here is rendered from a template and used to correct TinyMCE widget position in Django Admin interface.
 
 ``TINYMCE_CALLBACKS`` -- allows to define custom TinyMCE callbacks, for example ``file_browser_callback``
-or ``spellchecker_callback``. This is a Python dictionary where keys are the names of callbacks and values are
+or ``spellchecker_callback``. This is a Python :class:`dict` where keys are the names of callbacks and values are
 JavaScript objects as Python strings. Default: ``{}`` (an empty :class:`dict`).
 Read `TinyMCE documentation`_ to learn about available callbacks.
 
 .. note:: Custom ``file_browser_callback`` and ``spellchecker_callback`` options defined in ``TINYMCE_CALLBACKS``
-  override tinymce4-lite built-in callbacks.
+  override **tinymce4-lite** built-in callbacks.
 
 Language Configuration
 ----------------------
@@ -64,11 +70,11 @@ to define both options in your project's :file:`settings.py`.
 ``LANGUAGE_CODE`` option defines TinyMCE interface language and writing directionality.
 
 ``LANGUAGES`` option defines the list of available spellchecker languages. The first language in this list
-is used as a default one. The list of spellchecker languages also depends on available **pyenchant** dictionaries.
+is used as the default one. The list of spellchecker languages also depends on available **pyenchant** dictionaries.
 For example, on Windows the default **pyenchant** installation includes only English, German and French spellchecker
 dictionaries. Read `pyenchant documentation`_ to learn how to add additional spellchecker dictionaries.
 
-You can view the list available languages by running ``enchant.list_languages()`` function in a console
+You can view the list available spellchecker dictionaries by running ``enchant.list_languages()`` function in a console
 from your working Python environment. For example::
 
   >>> import enchant
@@ -86,7 +92,7 @@ using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`
   and ``'uk'`` (no country code) corresponds to :file:`uk.dic`/:file:`uk.aff` dictionary files.
 
 Also you can completely override TinyMCE automatic language configuration by defining the necessary language options
-in ``TINYMCE_DEFAULT_CONFIG``.
+in `TINYMCE_DEFAULT_CONFIG`_.
 
 .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
@@ -97,3 +103,4 @@ in ``TINYMCE_DEFAULT_CONFIG``.
 .. _this page: http://www.softmaker.com/en/download/dictionaries
 .. _7zip: http://www.7-zip.org/
 .. _INSTALLED_APPS: https://docs.djangoproject.com/en/1.9/ref/settings/#installed-apps
+.. _spellchecker: https://www.tinymce.com/docs/plugins/spellchecker/

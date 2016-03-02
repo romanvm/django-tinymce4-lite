@@ -1,12 +1,9 @@
 # coding: utf-8
 
+import json
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-try:
-    import json
-except ImportError:
-    import simplejson as json
 try:
     from unittest import mock
 except ImportError:

@@ -2,7 +2,8 @@ Test Project
 ============
 
 The **tinymce4-lite** sources include **test_tinymce** project that can be used to run automated tests
-or to try a live TinyMCE 4 editor widget.
+or to try a live TinyMCE 4 editor widget. The test project can also serve as a basic example of
+**tinymce4-lite** usage.
 
 To use the test project, first you need to install the necessary dependencies::
 

@@ -31,7 +31,6 @@ deploy:
     user: $PYPI_USER
     password: $PYPI_PASS
     distributions: "sdist bdist_wheel"
-    server: https://testpypi.python.org/pypi
     on:
       tags: true
       python: "3.5"

@@ -3,7 +3,7 @@ Installation
 
 Install **django-tinymce4-lite** from the GitHub repo::
 
-  $ pip install git+https://github.com/romanvm/django-tinymce4-lite.git#egg=django-tinymce4-lite
+  $ pip install django-tinymce4-lite
 
 
 Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your Django project:

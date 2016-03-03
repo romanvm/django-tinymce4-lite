@@ -8,6 +8,8 @@ django-tinymce4-lite
 .. image:: https://www.quantifiedcode.com/api/v1/project/48b63a65324642af823606c3c0444395/badge.svg
   :target: https://www.quantifiedcode.com/app/project/48b63a65324642af823606c3c0444395
   :alt: Code issues
+.. image:: https://badge.fury.io/py/django.tinymce4-lite.svg
+    :target: https://badge.fury.io/py/django.tinymce4-lite
 
 **django-tinymce4-lite** is a reworked fork of `django-tinymce4`_. It provides a fully functional `TinyMCE 4`_
 editor widget that can be used in Django forms and models.

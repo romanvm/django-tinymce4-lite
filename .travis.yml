@@ -20,7 +20,9 @@ after_success:
  - codecov
 deploy:
   - provider: script
-    script: python publish_docs.py
+    script:
+      - wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
+      - python publish_docs.py
     skip_cleanup: true
     on:
       branch: master

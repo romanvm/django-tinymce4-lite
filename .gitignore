@@ -110,5 +110,5 @@ target/
 *.cmd
 venv*/
 *.sqlite3
-static/
-media/
+/static/
+/media/

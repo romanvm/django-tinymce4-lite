@@ -60,6 +60,8 @@ Read `TinyMCE documentation`_ to learn about available callbacks.
 .. note:: Custom ``file_browser_callback`` and ``spellchecker_callback`` options defined in ``TINYMCE_CALLBACKS``
   override **tinymce4-lite** built-in callbacks.
 
+.. _language_config:
+
 Language Configuration
 ----------------------
 

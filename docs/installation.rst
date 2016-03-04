@@ -36,6 +36,8 @@ For example, on Debian/Ubuntu use the following command::
 
   $ sudo apt-get install enchant
 
+Read :ref:`"Language Configuration"<language_config>` subsection about configuring the **tinymce4-lite** spellchecker.
+
 .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
 .. _django-filebrowser documentation: https://django-filebrowser.readthedocs.org/en/latest/

@@ -18,11 +18,10 @@ install:
 script: coverage run manage.py test test_tinymce
 after_success:
  - codecov
+before_deploy: wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
 deploy:
   - provider: script
-    script:
-      - wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
-      - python publish_docs.py
+    script: python publish_docs.py
     skip_cleanup: true
     on:
       branch: master

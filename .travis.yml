@@ -4,8 +4,8 @@ python:
   - "3.4"
   - "3.5"
 env:
-  - DJANGO_VERSION=1.8.9
-  - DJANGO_VERSION=1.9.2
+  - DJANGO_VERSION=1.8.13
+  - DJANGO_VERSION=1.9.6
 addons:
   apt:
     packages:

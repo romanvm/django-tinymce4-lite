@@ -21,7 +21,6 @@ from django.utils.translation import get_language, get_language_bidi
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
-import enchant
 import tinymce.settings as mce_settings
 
 __all__ = ['TinyMCE', 'render_tinymce_init_js']
@@ -44,7 +43,8 @@ def get_language_config():
     else:
         config['directionality'] = 'ltr'
     if mce_settings.USE_SPELLCHECKER:
-        enchant_languages = enchant.list_languages()
+        from enchant import list_languages
+        enchant_languages = list_languages()
         logger.info('Enchant languages: {0}'.format(enchant_languages))
         lang_names = []
         for lang, name in settings.LANGUAGES:

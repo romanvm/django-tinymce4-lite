@@ -1,7 +1,7 @@
 Installation
 ============
 
-Install **django-tinymce4-lite** from the GitHub repo::
+Install **django-tinymce4-lite** from PyPI::
 
   $ pip install django-tinymce4-lite
 

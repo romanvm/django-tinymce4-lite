@@ -27,7 +27,7 @@ deploy:
     on:
       branch: master
       python: "3.5"
-      condition: "$DJANGO_VERSION = 1.9.6"
+      condition: "$DJANGO_VERSION = 1.10"
   - provider: pypi
     skip_cleanup: true
     user: $PYPI_USER
@@ -36,4 +36,4 @@ deploy:
     on:
       tags: true
       python: "3.5"
-      condition: "$DJANGO_VERSION = 1.9.6"
+      condition: "$DJANGO_VERSION = 1.10"

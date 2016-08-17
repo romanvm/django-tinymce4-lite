@@ -48,6 +48,7 @@ Contents:
   advanced
   test
   modules
+  changelog
 
 Indices and tables
 ==================

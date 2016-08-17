@@ -37,7 +37,8 @@ def get_language_config():
     :return: language- and locale-related parameters for TinyMCE 4
     :rtype: dict
     """
-    config = {'language': get_language()[:2]}
+    language_code = get_language() or settings.LANGUAGE_CODE
+    config = {'language': language_code[:2]}
     if get_language_bidi():
         config['directionality'] = 'rtl'
     else:

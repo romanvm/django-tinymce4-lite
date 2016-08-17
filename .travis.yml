@@ -37,3 +37,5 @@ deploy:
       tags: true
       python: "3.5"
       condition: "$DJANGO_VERSION = 1.10"
+notifications:
+  email: false

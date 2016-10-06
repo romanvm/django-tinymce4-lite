@@ -53,7 +53,7 @@ The following example shows how to load the TinyMCE library from a CDN::
 widget, for example, custom TinyMCE plugins. Default: ``None``.
 
 ``TINYMCE_CSS_URL`` -- a path to a CSS file with additional styles for TinyMCE. Unlike
-``content_style`` and ``content_css`` TinyMCE settings (see :ref:`Applying custom CSS<custom-css>`),
+``content_style`` and ``content_css`` TinyMCE settings (see ":ref:`Applying custom CSS<custom-css>`"),
 this CSS is applied to the TinyMCE widget itself, for example to correct the widget position on a page.
 Default: ``None``.
 

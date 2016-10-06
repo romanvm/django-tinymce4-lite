@@ -55,7 +55,7 @@ def spell_check(request):
         logger.exception(error)
     if error is not None:
         output['error'] = error
-    return HttpResponse(json.dumps(output), content_type='application/json')
+    return HttpResponse(json.dumps(output), content_type='application/json; charset=UTF-8')
 
 
 def css(request):

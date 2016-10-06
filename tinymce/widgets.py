@@ -148,7 +148,11 @@ class TinyMCE(Textarea):
         js = [mce_settings.JS_URL]
         if mce_settings.USE_FILEBROWSER:
             js.append(reverse('tinymce-filebrowser'))
-        css = {'all': [mce_settings.CSS_URL or reverse('tinymce-css')]}
+        if mce_settings.ADDIONAL_JS_URLS:
+            js += mce_settings.ADDIONAL_JS_URLS
+        css = {'all': [reverse('tinymce-css')]}
+        if mce_settings.CSS_URL:
+            css['all'].append(mce_settings.CSS_URL)
         return Media(js=js, css=css)
 
 

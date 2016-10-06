@@ -49,8 +49,13 @@ The following example shows how to load the TinyMCE library from a CDN::
 
   TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
 
-``TINYMCE_CSS_URL`` -- a path to a CSS file with additional styles for TinyMCE.
-The default CSS here is rendered from a template and used to correct TinyMCE widget position in Django Admin interface.
+``TINYMCE_ADDITIONAL_JS_URLS`` -- a :class:`list` of URLs for additional JavaScript files to be used with the TinyMCE
+widget, for example, custom TinyMCE plugins. Default: ``None``.
+
+``TINYMCE_CSS_URL`` -- a path to a CSS file with additional styles for TinyMCE. Unlike
+``content_style`` and ``content_css`` TinyMCE settings (see :ref:`Applying custom CSS<custom-css>`),
+this CSS is applied to the TinyMCE widget itself, for example to correct the widget position on a page.
+Default: ``None``.
 
 ``TINYMCE_CALLBACKS`` -- allows to define custom TinyMCE callbacks, for example ``file_browser_callback``
 or ``spellchecker_callback``. This is a Python :class:`dict` where keys are the names of callbacks and values are

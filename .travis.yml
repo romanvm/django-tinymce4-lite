@@ -6,7 +6,7 @@ python:
 env:
   - DJANGO_VERSION=1.8.13
   - DJANGO_VERSION=1.9.6
-  - DJANGO_VERSION=1.10
+  - DJANGO_VERSION=1.10.2
 addons:
   apt:
     packages:
@@ -16,7 +16,9 @@ before_install:
 install:
   - pip install -q -r test_requirements.txt
   - pip install -q Django==$DJANGO_VERSION
-script: coverage run manage.py test test_tinymce
+script:
+  - python setup.py build
+  - coverage run manage.py test test_tinymce
 after_success:
  - codecov
 before_deploy: wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
@@ -27,7 +29,7 @@ deploy:
     on:
       branch: master
       python: "3.5"
-      condition: "$DJANGO_VERSION = 1.10"
+      condition: "$DJANGO_VERSION = 1.10.2"
   - provider: pypi
     skip_cleanup: true
     user: $PYPI_USER
@@ -36,6 +38,6 @@ deploy:
     on:
       tags: true
       python: "3.5"
-      condition: "$DJANGO_VERSION = 1.10"
+      condition: "$DJANGO_VERSION = 1.10.2"
 notifications:
   email: false

@@ -1,20 +1,23 @@
 #!/usr/bin/env python
+import os
+from codecs import open
 from setuptools import setup
 import metadata
 
 app_name = metadata.name
 version = metadata.version
+cwd = os.path.dirname(os.path.abspath(__file__))
 
 
 def read(filename):
-    with open(filename) as fp:
-        return fp.read()
+    with open(filename, encoding='utf-8') as fo:
+        return fo.read()
 
 
-long_description = read('README.rst')
+long_description = read('README.rst') + '\n\n' + read(os.path.join(cwd, 'docs', 'changelog.rst'))
 
 setup(
-    name='django-%s' % app_name,
+    name='django-{0}'.format(app_name),
     version=version,
     packages=['tinymce'],
     include_package_data=True,
@@ -41,6 +44,7 @@ setup(
         'Framework :: Django',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
+        'Framework :: Django :: 1.10',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],

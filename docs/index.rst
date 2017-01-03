@@ -14,13 +14,14 @@ In addition to that, the application includes a spellchecker service for TinyMCE
 Compatibility
 -------------
 
-- **Python**: 2.7, 3.4, 3.5
+- **Python**: 2.7, 3+
 - **Django**: 1.8, 1.9, 1.10
 
 License
 -------
 
-`MIT license <https://en.wikipedia.org/wiki/MIT_License>`_.
+- **django-tinymce4-lite** software: `MIT license <https://en.wikipedia.org/wiki/MIT_License>`_.
+- This documentation: `CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0/>`_.
 
 
 Naming Conventions

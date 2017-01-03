@@ -71,7 +71,7 @@ tinymce.addI18n('ga',{
 "G": "U",
 "Color": "Dath",
 "Right to left": "Deas-go-cl\u00e9",
-"Left to right": "Cl\u00e9-go-Deas",
+"Left to right": "Cl\u00e9-go-deas",
 "Emoticons": "Straoiseoga",
 "Robots": "R\u00f3bait",
 "Document properties": "Air\u00edonna na C\u00e1ip\u00e9ise",

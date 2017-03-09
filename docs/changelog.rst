@@ -1,5 +1,9 @@
 Changelog
 =========
+1.3.1 (unreleased)
+------------------
+- Fix language file configuration for language with country codes [Gagaro]
+
 1.3.0
 -----
 - Upgraded TinyMCE to v.4.5.1

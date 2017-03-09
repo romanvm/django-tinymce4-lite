@@ -34,6 +34,14 @@ logger.setLevel(20)
 
 
 def language_file_exists(language_code):
+    """
+    Check if TinyMCE has a language file for the specified lang code
+
+    :param language_code: language code
+    :type language_code: str
+    :return: check result
+    :rtype: bool
+    """
     filename = '{0}.js'.format(language_code)
     path = os.path.join('tinymce', 'js', 'tinymce', 'langs', filename)
     return finders.find(path) is not None

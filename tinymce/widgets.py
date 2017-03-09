@@ -55,10 +55,12 @@ def get_language_config():
     :rtype: dict
     """
     language_code = convert_language_code(get_language() or settings.LANGUAGE_CODE)
-    if language_file_exists(language_code):
-        config = {'language': language_code}
-    else:
-        config = {'language': language_code[:2]}
+    if not language_file_exists(language_code):
+        language_code = language_code[:2]
+        if not language_file_exists(language_code):
+            # Fall back to English if Tiny MCE 4 does not have required translation
+            language_code = 'en'
+    config = {'language': language_code}
     if get_language_bidi():
         config['directionality'] = 'rtl'
     else:

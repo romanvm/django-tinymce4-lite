@@ -11,7 +11,10 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 import json
 import logging
+import os
+
 from django.conf import settings
+from django.contrib.staticfiles import finders
 from django.forms import Textarea, Media
 from django.forms.widgets import flatatt
 from django.utils.encoding import smart_text
@@ -30,6 +33,12 @@ logger = logging.getLogger(__name__)
 logger.setLevel(20)
 
 
+def language_file_exists(language_code):
+    filename = '{0}.js'.format(language_code)
+    path = os.path.join('tinymce', 'js', 'tinymce', 'langs', filename)
+    return finders.find(path) is not None
+
+
 def get_language_config():
     """
     Creates a language configuration for TinyMCE4 based on Django project settings
@@ -37,8 +46,11 @@ def get_language_config():
     :return: language- and locale-related parameters for TinyMCE 4
     :rtype: dict
     """
-    language_code = get_language() or settings.LANGUAGE_CODE
-    config = {'language': language_code[:2]}
+    language_code = convert_language_code(get_language() or settings.LANGUAGE_CODE)
+    if language_file_exists(language_code):
+        config = {'language': language_code}
+    else:
+        config = {'language': language_code[:2]}
     if get_language_bidi():
         config['directionality'] = 'rtl'
     else:

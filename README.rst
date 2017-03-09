@@ -5,7 +5,7 @@ django-tinymce4-lite
   :target: https://travis-ci.org/romanvm/django-tinymce4-lite
 .. image:: https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master
   :target: https://codecov.io/github/romanvm/django-tinymce4-lite?branch=master
-.. image:: https://badge.fury.io/py/django.tinymce4-lite.svg
+.. image:: https://badge.fury.io/py/django-tinymce4-lite.svg
     :target: https://badge.fury.io/py/django.tinymce4-lite
 
 **django-tinymce4-lite** is a reworked fork of `django-tinymce4`_. It provides a fully functional `TinyMCE 4`_

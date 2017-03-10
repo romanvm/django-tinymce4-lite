@@ -1,8 +1,9 @@
 Changelog
 =========
 
-1.3.1 (unreleased)
-------------------
+1.3.1
+-----
+- Upgraded TinyMCE to v.4.5.5
 - Fix language file configuration for languages with country codes [Gagaro].
 - Test rendering TinyMCE 4 with Selenium/PhantomJS.
 

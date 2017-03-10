@@ -1,8 +1,10 @@
 Changelog
 =========
+
 1.3.1 (unreleased)
 ------------------
-- Fix language file configuration for language with country codes [Gagaro]
+- Fix language file configuration for languages with country codes [Gagaro].
+- Test rendering TinyMCE 4 with Selenium/PhantomJS.
 
 1.3.0
 -----

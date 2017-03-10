@@ -7,7 +7,7 @@ import metadata
 
 app_name = metadata.name
 version = metadata.version
-cwd = os.path.dirname(os.path.abspath(__file__))
+this_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def read(filename):
@@ -15,7 +15,8 @@ def read(filename):
         return fo.read()
 
 
-long_description = read('README.rst') + '\n\n' + read(os.path.join(cwd, 'docs', 'changelog.rst'))
+long_description = read('README.rst') + '\n\n' + \
+                   read(os.path.join(this_dir, 'docs', 'changelog.rst'))
 
 setup(
     name='django-{0}'.format(app_name),

@@ -1,6 +1,7 @@
-Django==1.8.9
+Django==1.8.17
 pyenchant
 mock
 django-filebrowser-no-grappelli
 Pillow
 Sphinx
+Selenium

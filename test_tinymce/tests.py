@@ -1,7 +1,9 @@
 # coding: utf-8
 
 import json
-from django.test import TestCase, Client
+from selenium.webdriver import PhantomJS
+from django.test import TestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 try:
@@ -10,17 +12,33 @@ except ImportError:
     import mock
 
 
-class RenderTinyMCEWidgetTestCase(TestCase):
+class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
+    def setUp(self):
+        self.browser = PhantomJS()
+        super(RenderTinyMCEWidgetTestCase, self).setUp()
+
+    def tearDown(self):
+        self.browser.quit()
+        super(RenderTinyMCEWidgetTestCase, self).tearDown()
+
     def test_rendering_tinymce4_widget(self):
-        response = self.client.get(reverse('create'))
-        self.assertContains(response, 'tinymce.min.js')
-        self.assertContains(response, 'tinyMCE.init(')
+        # Test if TinyMCE 4 widget is actually rendered by JavaScript
+        self.browser.get(self.live_server_url + reverse('create'))
+        self.browser.find_element_by_id('mceu_16')
+
+    def test_rendering_with_different_language(self):
+        with self.settings(LANGUAGE_CODE='fr-fr'):
+            self.browser.get(self.live_server_url + reverse('create'))
+            self.browser.find_element_by_id('mceu_16')
+            self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
+                            self.browser.page_source)
 
     def test_rendering_tinymce4_admin_widget(self):
+        # Since emulating login with Selenium is too much fuss
+        # we test only basic functionality
         User.objects.create_superuser('test', 'test@test.com', 'test')
-        client = Client()
-        client.login(username ='test', password='test')
-        response = client.get('/admin/test_tinymce/testmodel/add/', follow=True)
+        self.client.login(username ='test', password='test')
+        response = self.client.get('/admin/test_tinymce/testmodel/add/', follow=True)
         self.assertContains(response, 'tinymce.min.js')
         self.assertContains(response, 'tinyMCE.init(')
 

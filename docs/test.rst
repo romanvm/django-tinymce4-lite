@@ -21,6 +21,9 @@ To run automated tests, enter in the console::
 
   $ python manage.py test test_tinymce
 
+.. note:: Tests require `PhantomJS <http://phantomjs.org>`_
+  headless browser engine.
+
 To open TinyMCE 4 editor, run the test server::
 
   $ python manage.py runserver

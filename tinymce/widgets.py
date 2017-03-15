@@ -16,7 +16,7 @@ import os
 from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.forms import Textarea, Media
-from django.forms.widgets import flatatt
+from django.forms.utils import flatatt
 from django.utils.encoding import smart_text
 from django.utils.safestring import mark_safe
 from django.utils.html import escape

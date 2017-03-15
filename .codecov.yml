@@ -1,0 +1,5 @@
+ignore:
+  - "test_tinymce/*"
+  - "manage.py"
+  - "setup.py"
+  - "metadata.py"

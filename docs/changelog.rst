@@ -1,5 +1,8 @@
 Changelog
 =========
+1.3.2
+-----
+- Fix compatibility with Django v.1.11
 
 1.3.1
 -----

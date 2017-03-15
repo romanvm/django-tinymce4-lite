@@ -148,7 +148,7 @@ class TinyMCE(Textarea):
         default_profile = profile or mce_settings.CONFIG.copy()
         self.profile.update(default_profile)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             value = ''
         value = smart_text(value)

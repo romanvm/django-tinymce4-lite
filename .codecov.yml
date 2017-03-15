@@ -1,5 +1,5 @@
 ignore:
-  - "test_tinymce/*"
+  - "test_tinymce/.*"
   - "manage.py"
   - "setup.py"
   - "metadata.py"

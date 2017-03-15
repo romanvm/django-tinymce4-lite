@@ -68,7 +68,8 @@ def get_language_config():
     if mce_settings.USE_SPELLCHECKER:
         from enchant import list_languages
         enchant_languages = list_languages()
-        logger.info('Enchant languages: {0}'.format(enchant_languages))
+        if settings.DEBUG:
+            logger.info('Enchant languages: {0}'.format(enchant_languages))
         lang_names = []
         for lang, name in settings.LANGUAGES:
             lang = convert_language_code(lang)

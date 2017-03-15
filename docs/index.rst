@@ -9,7 +9,12 @@ but full-featured TinyMCE 4 experience in Django projects.
 
 **django-tinymce4-lite** can use `django-filebrowser`_ or `django-filebrowser-no-grappelli`_
 as a file manager for TinyMCE 4 to insert images and file links into edited text.
-In addition to that, the application includes a spellchecker service for TinyMCE 4 spellchecker plugin.
+If you don't know which one to choose I'd recommend ``django-filebrowser-no-grappelli``
+because it does not have extra dependencies and provides a separate entry in
+Django Admin for managing uploaded files.
+
+The application also includes a spellchecker service for TinyMCE 4 spellchecker
+plugin.
 
 Compatibility
 -------------

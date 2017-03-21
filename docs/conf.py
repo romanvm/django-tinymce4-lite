@@ -48,7 +48,8 @@ html_theme_options = {
     'github_banner': True,
     'travis_button': True,
     'codecov_button': True,
-    'description': 'TinyMCE 4 editor for Django'
+    'description': 'TinyMCE 4 editor for Django',
+    'font_family': 'Georgia',
 }
 
 html_sidebars = {

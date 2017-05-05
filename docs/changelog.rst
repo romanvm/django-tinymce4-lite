@@ -1,18 +1,23 @@
 Changelog
 =========
+
+1.4.0
+-----
+- Upgraded TinyMCE to v.4.6.0.
+
 1.3.2
 -----
-- Fix compatibility with Django v.1.11
+- Fixed compatibility with Django v.1.11.
 
 1.3.1
 -----
-- Upgraded TinyMCE to v.4.5.5
-- Fix language file configuration for languages with country codes [Gagaro].
-- Test rendering TinyMCE 4 with Selenium/PhantomJS.
+- Upgraded TinyMCE to v.4.5.5.
+- Fixed language file configuration for languages with country codes [Gagaro].
+- Rendering of the TinyMCE 4 is now tested with Selenium/PhantomJS.
 
 1.3.0
 -----
-- Upgraded TinyMCE to v.4.5.1
+- Upgraded TinyMCE to v.4.5.1.
 
 1.2.0
 -----
@@ -21,11 +26,9 @@ Changelog
 
 1.1.0
 -----
-
-- Upgraded TinyMCE to v.4.4.1
-- Added Django 1.10 to compatibility matrix
+- Upgraded TinyMCE to v.4.4.1.
+- Added Django 1.10 to compatibility matrix.
 
 1.0.0
 -----
-
-- Initial PyPI release
+- Initial PyPI release.

@@ -7,7 +7,7 @@ editor widget that can be used in Django forms and models.
 .. figure:: _static/screenshot.png
   :alt: TinyMCE 4 in Django Admin
 
-  *TinyMCE 4 editor in Django Admin Interface*
+  *TinyMCE 4 editor in Django Admin interface*
 
 In this fork all legacy and broken code has been cleaned in order to provide simple
 but full-featured TinyMCE 4 experience in Django projects.

@@ -35,6 +35,7 @@ class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
             print('*** Start browser log ***')
             print(self.browser.get_log('browser'))
             print('**** End browser log ****')
+            raise
 
 
     def test_rendering_with_different_language(self):
@@ -46,6 +47,7 @@ class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
                 print('*** Start browser log ***')
                 print(self.browser.get_log('browser'))
                 print('**** End browser log ****')
+                raise
             else:
                 self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
                                 self.browser.page_source)

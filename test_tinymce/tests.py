@@ -1,7 +1,10 @@
 # coding: utf-8
 
+from __future__ import print_function
 import json
 from selenium.webdriver import PhantomJS
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.common.exceptions import WebDriverException
 from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.urlresolvers import reverse
@@ -14,7 +17,9 @@ except ImportError:
 
 class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
     def setUp(self):
-        self.browser = PhantomJS()
+        desired = DesiredCapabilities.PHANTOMJS
+        desired['loggingPrefs'] = {'browser': 'ALL'}
+        self.browser = PhantomJS(desired_capabilities=desired)
         super(RenderTinyMCEWidgetTestCase, self).setUp()
 
     def tearDown(self):
@@ -24,14 +29,26 @@ class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
     def test_rendering_tinymce4_widget(self):
         # Test if TinyMCE 4 widget is actually rendered by JavaScript
         self.browser.get(self.live_server_url + reverse('create'))
-        self.browser.find_element_by_id('mceu_16')
+        try:
+            self.browser.find_element_by_id('mceu_16')
+        except WebDriverException:
+            print('*** Start browser log ***')
+            print(self.browser.get_log('browser'))
+            print('**** End browser log ****')
+
 
     def test_rendering_with_different_language(self):
         with self.settings(LANGUAGE_CODE='fr-fr'):
             self.browser.get(self.live_server_url + reverse('create'))
-            self.browser.find_element_by_id('mceu_16')
-            self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
-                            self.browser.page_source)
+            try:
+                self.browser.find_element_by_id('mceu_16')
+            except WebDriverException:
+                print('*** Start browser log ***')
+                print(self.browser.get_log('browser'))
+                print('**** End browser log ****')
+            else:
+                self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
+                                self.browser.page_source)
 
     def test_rendering_tinymce4_admin_widget(self):
         # Since emulating login with Selenium is too much fuss

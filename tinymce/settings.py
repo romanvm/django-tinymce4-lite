@@ -16,6 +16,7 @@ DEFAULT = {
     'menubar': False,
     'inline': False,
     'statusbar': True,
+    'width': 1024,
     'height': 360,
 }
 """Default TinyMCE 4 configuration"""

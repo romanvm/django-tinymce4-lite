@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.4.1
+-----
+- Upgraded TinyMCE to v.4.6.2
+- Added text format selector to the default editor configuration.
+
 1.4.0
 -----
 - Upgraded TinyMCE to v.4.6.0.

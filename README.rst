@@ -12,6 +12,9 @@ django-tinymce4-lite
 
 **django-tinymce4-lite** is a reworked fork of `django-tinymce4`_. It provides a fully functional `TinyMCE 4`_
 editor widget that can be used in Django forms and models.
+
+.. image:: http://romanvm.github.io/django-tinymce4-lite/_images/screenshot.png
+
 The application can use `django-filebrowser`_ or `django-filebrowser-no-grappelli`_
 as a file manager for TinyMCE 4 to insert images and file links into edited text.
 

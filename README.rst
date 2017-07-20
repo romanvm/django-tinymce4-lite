@@ -5,8 +5,6 @@ django-tinymce4-lite
   :target: https://travis-ci.org/romanvm/django-tinymce4-lite
 .. image:: https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master
   :target: https://codecov.io/github/romanvm/django-tinymce4-lite?branch=master
-.. image:: https://www.quantifiedcode.com/api/v1/project/48b63a65324642af823606c3c0444395/badge.svg
-  :target: https://www.quantifiedcode.com/app/project/48b63a65324642af823606c3c0444395
 .. image:: https://badge.fury.io/py/django-tinymce4-lite.svg
   :target: https://badge.fury.io/py/django.tinymce4-lite
 

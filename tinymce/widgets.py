@@ -66,7 +66,12 @@ def get_language_config():
     else:
         config['directionality'] = 'ltr'
     if mce_settings.USE_SPELLCHECKER:
-        from enchant import list_languages
+        try:
+            from enchant import list_languages
+        except ImportError as ex:
+            raise ImportError(
+                'To use spellchecker you need to install pyenchant first!'
+            ).with_traceback(ex.__traceback__)
         enchant_languages = list_languages()
         if settings.DEBUG:
             logger.info('Enchant languages: {0}'.format(enchant_languages))

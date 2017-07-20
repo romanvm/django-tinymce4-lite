@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.4.2
+-----
+- Upgraded TinyMCE to v.4.6.4
+- Fixed the default editor config.
+
 1.4.1
 -----
 - Upgraded TinyMCE to v.4.6.2

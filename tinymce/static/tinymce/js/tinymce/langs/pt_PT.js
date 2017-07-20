@@ -60,7 +60,7 @@ tinymce.addI18n('pt_PT',{
 "Upper Alpha": "A. B. C. ...",
 "Upper Roman": "I. II. III. ...",
 "Lower Roman": "i. ii. iii. ...",
-"Id should start with a letter, followed only by letters, numbers, dashes, dots, colons or underscores.": "O ID deve come\u00e7ar com uma letra, seguido por letras, n\u00fameros, tra\u00e7os, pontos, dois pontos ou sobtra\u00e7os.",
+"Id should start with a letter, followed only by letters, numbers, dashes, dots, colons or underscores.": "O ID deve come\u00e7ar com uma letra, seguido de apenas letras, n\u00fameros, pontos, dois pontos, tra\u00e7os ou subtra\u00e7os.",
 "Name": "Nome",
 "Anchor": "\u00c2ncora",
 "Id": "ID",

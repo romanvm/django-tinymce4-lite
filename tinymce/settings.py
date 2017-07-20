@@ -9,14 +9,14 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 DEFAULT = {
     'selector': 'textarea',
     'theme': 'modern',
-    'plugins': 'link image preview codesample contextmenu table code',
+    'plugins': 'link image preview codesample contextmenu table code lists',
     'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
                '| bullist numlist | outdent indent | table | link image | codesample | preview code',
     'contextmenu': 'formats | link image',
     'menubar': False,
     'inline': False,
     'statusbar': True,
-    'width': 1024,
+    'width': 'auto',
     'height': 360,
 }
 """Default TinyMCE 4 configuration"""

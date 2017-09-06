@@ -4,8 +4,6 @@
 
 from __future__ import absolute_import
 from django.conf import settings
-# from django.contrib.staticfiles.storage import staticfiles_storage
-from django.contrib.staticfiles.templatetags.staticfiles import static
 
 DEFAULT = {
     'selector': 'textarea',
@@ -28,7 +26,7 @@ if USE_SPELLCHECKER:
     DEFAULT['toolbar1'] += ' | spellchecker'
 CONFIG = getattr(settings, 'TINYMCE_DEFAULT_CONFIG', DEFAULT)
 """TinyMCE 4 configuration"""
-JS_URL = getattr(settings, 'TINYMCE_JS_URL', static('tinymce/js/tinymce/tinymce.min.js'))
+JS_URL = getattr(settings, 'TINYMCE_JS_URL', 'tinymce/js/tinymce/tinymce.min.js')
 """TinyMCE 4 JavaScript code"""
 ADDIONAL_JS_URLS = getattr(settings, 'TINYMCE_ADDITIONAL_JS_URLS', None)
 """Additional JS files for TinyMCE (e.g. custom plugins)"""

@@ -126,8 +126,10 @@ def render_tinymce_init_js(mce_config, callbacks, id_=''):
     if id_:
         mce_config['selector'] = mce_config.get('selector', 'textarea') + '#{0}'.format(id_)
     mce_json = json.dumps(mce_config, indent=2)
-    return render_to_string('tinymce/tinymce_init.js', context={'callbacks': callbacks,
-                                                                'tinymce_config': mce_json[1:-1]})
+    return render_to_string('tinymce/tinymce_init.js',
+                            context={'callbacks': callbacks,
+                                     'tinymce_config': mce_json[1:-1],
+                                     'is_admin_inline': '__prefix__' in id_})
 
 
 class TinyMCE(Textarea):
@@ -160,6 +162,7 @@ class TinyMCE(Textarea):
         value = smart_text(value)
         final_attrs = self.build_attrs(attrs)
         final_attrs['name'] = name
+        final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4_editor').lstrip()
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
         if mce_config.get('inline', False):

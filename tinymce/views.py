@@ -73,7 +73,7 @@ def css(request):
     if 'grappelli' in settings.INSTALLED_APPS:
         margin_left = 0
     elif VERSION[0] == 1 and VERSION[1] <= 8:
-        margin_left = 106  # For old style admin
+        margin_left = 110  # For old style admin
     else:
         margin_left = 170  # For Django >= 1.9 style admin
     content = render_to_string('tinymce/tinymce4.css',

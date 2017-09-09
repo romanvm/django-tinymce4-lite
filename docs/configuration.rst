@@ -17,6 +17,8 @@ so you need to use this option only if you want to create your own custom TinyMC
   The :class:`dict` configuration is then translated to JSON configuration
   according to :class:`json.JSONEncoder` rules.
 
+See `TinyMCE documentation`_ for available configuration options.
+
 Default configuration::
 
   DEFAULT = {

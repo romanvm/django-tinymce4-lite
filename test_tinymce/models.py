@@ -8,3 +8,11 @@ class TestModel(models.Model):
     A model for testing TinyMCE 4 rendering
     """
     content = HTMLField(verbose_name='HTML Content')
+
+
+class TestChildModel(models.Model):
+    """
+    A model for testing TinyMCE 4 rendering in admin inlines
+    """
+    content = HTMLField(verbose_name='HTML Child Content')
+    parent = models.ForeignKey(TestModel)

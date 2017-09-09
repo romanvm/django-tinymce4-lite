@@ -16,16 +16,16 @@ except ImportError:
     import mock
 
 
-class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
+class RenderTinyMceWidgetTestCase(StaticLiveServerTestCase):
     def setUp(self):
         desired = DesiredCapabilities.PHANTOMJS
         desired['loggingPrefs'] = {'browser': 'ALL'}
         self.browser = PhantomJS(desired_capabilities=desired)
-        super(RenderTinyMCEWidgetTestCase, self).setUp()
+        super(RenderTinyMceWidgetTestCase, self).setUp()
 
     def tearDown(self):
         self.browser.quit()
-        super(RenderTinyMCEWidgetTestCase, self).tearDown()
+        super(RenderTinyMceWidgetTestCase, self).tearDown()
 
     def test_rendering_tinymce4_widget(self):
         # Test if TinyMCE 4 widget is actually rendered by JavaScript
@@ -53,21 +53,44 @@ class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
                 self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
                                 self.browser.page_source)
 
-    def test_rendering_tinymce4_admin_widget(self):
+
+class RenderTinyMceAdminWidgetTestCase(StaticLiveServerTestCase):
+    def setUp(self):
+        desired = DesiredCapabilities.PHANTOMJS
+        desired['loggingPrefs'] = {'browser': 'ALL'}
+        self.browser = PhantomJS(desired_capabilities=desired)
         User.objects.create_superuser('test', 'test@test.com', 'test')
         self.browser.get(self.live_server_url + '/admin')
-        login_field = self.browser.find_element_by_id('id_username')
-        login_field.send_keys('test')
-        pass_field = self.browser.find_element_by_id('id_password')
-        pass_field.send_keys('test')
-        submit_button = self.browser.find_element_by_css_selector('input[type="submit"]')
-        submit_button.click()
+        self.browser.find_element_by_id('id_username').send_keys('test')
+        self.browser.find_element_by_id('id_password').send_keys('test')
+        self.browser.find_element_by_css_selector('input[type="submit"]').click()
         time.sleep(0.1)
+        super(RenderTinyMceAdminWidgetTestCase, self).setUp()
+
+    def tearDown(self):
+        self.browser.quit()
+        super(RenderTinyMceAdminWidgetTestCase, self).tearDown()
+
+    def test_rendering_tinymce4_admin_widget(self):
         self.browser.get(self.live_server_url + '/admin/test_tinymce/testmodel/add/')
         time.sleep(0.1)
+        editors = self.browser.find_elements_by_class_name('mce-tinymce')
         try:
-            self.browser.find_element_by_id('mceu_16')
-        except WebDriverException:
+            self.assertTrue(len(editors) == 2)
+        except AssertionError:
+            print('*** Start browser log ***')
+            print(self.browser.get_log('browser'))
+            print('**** End browser log ****')
+            raise
+
+    def test_adding_tinymce_widget_in_admin_inline(self):
+        self.browser.get(self.live_server_url + '/admin/test_tinymce/testmodel/add/')
+        time.sleep(0.1)
+        self.browser.find_element_by_css_selector('div.add-row a').click()
+        editors = self.browser.find_elements_by_class_name('mce-tinymce')
+        try:
+            self.assertTrue(len(editors) == 3)
+        except AssertionError:
             print('*** Start browser log ***')
             print(self.browser.get_log('browser'))
             print('**** End browser log ****')

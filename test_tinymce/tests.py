@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import json
+import time
 from selenium.webdriver import PhantomJS
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import WebDriverException
@@ -53,13 +54,24 @@ class RenderTinyMCEWidgetTestCase(StaticLiveServerTestCase):
                                 self.browser.page_source)
 
     def test_rendering_tinymce4_admin_widget(self):
-        # Since emulating login with Selenium is too much fuss
-        # we test only basic functionality
         User.objects.create_superuser('test', 'test@test.com', 'test')
-        self.client.login(username ='test', password='test')
-        response = self.client.get('/admin/test_tinymce/testmodel/add/', follow=True)
-        self.assertContains(response, 'tinymce.min.js')
-        self.assertContains(response, 'tinyMCE.init(')
+        self.browser.get(self.live_server_url + '/admin')
+        login_field = self.browser.find_element_by_id('id_username')
+        login_field.send_keys('test')
+        pass_field = self.browser.find_element_by_id('id_password')
+        pass_field.send_keys('test')
+        submit_button = self.browser.find_element_by_css_selector('input[type="submit"]')
+        submit_button.click()
+        time.sleep(0.1)
+        self.browser.get(self.live_server_url + '/admin/test_tinymce/testmodel/add/')
+        time.sleep(0.1)
+        try:
+            self.browser.find_element_by_id('mceu_16')
+        except WebDriverException:
+            print('*** Start browser log ***')
+            print(self.browser.get_log('browser'))
+            print('**** End browser log ****')
+            raise
 
 
 class SpellCheckViewTestCase(TestCase):

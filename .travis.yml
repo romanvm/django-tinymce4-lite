@@ -6,7 +6,7 @@ env:
   - DJANGO_VERSION=1.8.17
   - DJANGO_VERSION=1.9.12
   - DJANGO_VERSION=1.10.6
-  - DJANGO_VERSION=1.11
+  - DJANGO_VERSION=1.11.5
 addons:
   apt:
     packages:
@@ -34,7 +34,7 @@ deploy:
     on:
       branch: master
       python: "3.6"
-      condition: "$DJANGO_VERSION = 1.11"
+      condition: "$DJANGO_VERSION = 1.11.5"
   - provider: pypi
     skip_cleanup: true
     user: $PYPI_USER
@@ -43,6 +43,6 @@ deploy:
     on:
       tags: true
       python: "3.6"
-      condition: "$DJANGO_VERSION = 1.11"
+      condition: "$DJANGO_VERSION = 1.11.5"
 notifications:
   email: false

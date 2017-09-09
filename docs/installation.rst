@@ -47,8 +47,8 @@ the **tinymce4-lite** spellchecker.
 
 .. note:: If you are using :class:`django.contrib.staticfiles.storage.ManifestStaticFilesStorage`
   for static files and need to collect static files for your Django deployment,
-  you have to temporarily switch to `DEBUG = True` in your project's settings
-  before running ``collectstatic`` command, and then switch to `DEBUG = False`
+  you have to temporarily switch to ``DEBUG = True`` in your project's settings
+  before running ``collectstatic`` command, and then switch to ``DEBUG = False``
   back again. This will allow to correctly create hash-versioned static files and
   `manifest.json`.
 

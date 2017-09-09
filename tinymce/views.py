@@ -9,8 +9,9 @@ import json
 import logging
 from django import VERSION
 from django.core.urlresolvers import reverse
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
 from django.conf import settings
@@ -31,7 +32,7 @@ def spell_check(request):
     :type request: django.http.request.HttpRequest
     :return: Django http response containing JSON-RPC payload
         with spellcheck results for TinyMCE 4
-    :rtype: django.http.HttpResponse
+    :rtype: django.http.JsonResponse
     """
     data = json.loads(request.body.decode('utf-8'))
     output = {'id': data['id']}
@@ -75,8 +76,12 @@ def css(request):
         margin_left = 106  # For old style admin
     else:
         margin_left = 170  # For Django >= 1.9 style admin
-    return render(request, 'tinymce/tinymce4.css', {'margin_left': margin_left},
-                  content_type='text/css')
+    content = render_to_string('tinymce/tinymce4.css',
+                               context={'margin_left': margin_left},
+                               request=request)
+    response = HttpResponse(content, content_type='text/css')
+    response['Cache-Control'] = 'no-store'
+    return response
 
 
 def filebrowser(request):

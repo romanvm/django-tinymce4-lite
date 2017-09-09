@@ -76,7 +76,7 @@ class RenderTinyMceAdminWidgetTestCase(StaticLiveServerTestCase):
         time.sleep(0.1)
         editors = self.browser.find_elements_by_class_name('mce-tinymce')
         try:
-            self.assertTrue(len(editors) == 2)
+            self.assertEqual(len(editors), 2)
         except AssertionError:
             print('*** Start browser log ***')
             print(self.browser.get_log('browser'))
@@ -89,7 +89,19 @@ class RenderTinyMceAdminWidgetTestCase(StaticLiveServerTestCase):
         self.browser.find_element_by_css_selector('div.add-row a').click()
         editors = self.browser.find_elements_by_class_name('mce-tinymce')
         try:
-            self.assertTrue(len(editors) == 3)
+            self.assertEqual(len(editors), 3)
+        except AssertionError:
+            print('*** Start browser log ***')
+            print(self.browser.get_log('browser'))
+            print('**** End browser log ****')
+            raise
+        self.browser.find_element_by_css_selector('a.inline-deletelink').click()
+        editors = self.browser.find_elements_by_class_name('mce-tinymce')
+        self.assertEqual(len(editors), 2)
+        self.browser.find_element_by_css_selector('div.add-row a').click()
+        editors = self.browser.find_elements_by_class_name('mce-tinymce')
+        try:
+            self.assertEqual(len(editors), 3)
         except AssertionError:
             print('*** Start browser log ***')
             print(self.browser.get_log('browser'))

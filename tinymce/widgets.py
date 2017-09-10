@@ -106,7 +106,7 @@ def convert_language_code(django_lang):
         return lang_and_country[0]
 
 
-def render_tinymce_init_js(mce_config, callbacks, id_=''):
+def render_tinymce_init_js(mce_config, callbacks, id_):
     """
     Renders TinyMCE.init() JavaScript code
 
@@ -162,7 +162,7 @@ class TinyMCE(Textarea):
         value = smart_text(value)
         final_attrs = self.build_attrs(attrs)
         final_attrs['name'] = name
-        final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4_editor').lstrip()
+        final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4-editor').lstrip()
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
         if mce_config.get('inline', False):

@@ -25,7 +25,7 @@
       $(mutations).each(function(i, mutation) {
         $(mutation.addedNodes).each(function(i, node) {
           // Add TinyMCE widgets to new textareas.
-          $row.find('.tinymce4-editor').each(function(i, elem) {
+          $(node).find('.tinymce4-editor').each(function(i, elem) {
             if ($(elem).css('display') != 'none' && elem.id.indexOf('__prefix__') == -1) {
               tinymce4_init(elem.tagName + '#' + elem.id);
             }
@@ -33,7 +33,7 @@
         }); // End addedNodes
         $(mutation.removedNodes).each(function(i, node) {
           // Remove TinyMCE widgets from textareas inside removed nodes.
-          $row.find('.tinymce4-editor').each(function(i, elem) {
+          $(node).find('.tinymce4-editor').each(function(i, elem) {
             $(tinymce.EditorManager.editors).each(function(i, editor) {
               if (editor.id == elem.id) {
                 editor.remove();

@@ -24,6 +24,7 @@ from django.utils.translation import get_language, get_language_bidi
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
+from django.contrib.staticfiles.storage import staticfiles_storage
 from jsmin import jsmin
 import tinymce.settings as mce_settings
 
@@ -185,6 +186,8 @@ class TinyMCE(Textarea):
             js.append(reverse('tinymce-filebrowser'))
         if mce_settings.ADDIONAL_JS_URLS:
             js += mce_settings.ADDIONAL_JS_URLS
+        if mce_settings.USE_SPELLCHECKER:
+            js.append(staticfiles_storage.url('tinymce/js/tinymce4.js'))
         css = {'all': [reverse('tinymce-css')]}
         if mce_settings.CSS_URL:
             css['all'].append(mce_settings.CSS_URL)

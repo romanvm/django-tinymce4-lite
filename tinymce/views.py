@@ -11,7 +11,6 @@ from django import VERSION
 from django.core.urlresolvers import reverse
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
 from django.conf import settings
 from jsmin import jsmin
@@ -22,7 +21,6 @@ logging.basicConfig(format='[%(asctime)s] %(module)s: %(levelname)s - %(message)
 logger = logging.getLogger(__name__)
 
 
-@csrf_exempt
 def spell_check(request):
     """
     Implements the TinyMCE 4 spellchecker protocol
@@ -34,6 +32,7 @@ def spell_check(request):
         with spellcheck results for TinyMCE 4
     :rtype: django.http.JsonResponse
     """
+    print(request.META['HTTP_X_CSRFTOKEN'])
     data = json.loads(request.body.decode('utf-8'))
     output = {'id': data['id']}
     error = None

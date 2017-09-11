@@ -57,6 +57,22 @@ def spell_check(request):
     return JsonResponse(output)
 
 
+def spell_check_callback(request):
+    """
+    JavaScript callback for TinyMCE4 spellchecker function
+
+    :param request: Django http request
+    :type request: django.http.request.HttpRequest
+    :return: Django http response with spellchecker callback JavaScript code
+    :rtype: django.http.HttpResponse
+    """
+    response = HttpResponse(
+        jsmin(render_to_string('tinymce/spellcheck-callback.js')),
+        content_type='application/javascript')
+    response['Cache-Control'] = 'no-store'
+    return response
+
+
 def css(request):
     """
     Custom CSS for TinyMCE 4 widget

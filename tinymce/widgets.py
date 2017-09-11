@@ -124,7 +124,7 @@ def render_tinymce_init_js(mce_config, callbacks, id_):
     if mce_settings.USE_FILEBROWSER and 'file_browser_callback' not in callbacks:
         callbacks['file_browser_callback'] = 'djangoFileBrowser'
     if mce_settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
-        callbacks['spellchecker_callback'] = render_to_string('tinymce/spellchecker.js')
+        callbacks['spellchecker_callback'] = 'tinymce4_spellcheck'
     if id_:
         mce_config['selector'] = mce_config.get('selector', 'textarea') + '#{0}'.format(id_)
     mce_json = json.dumps(mce_config, indent=2)
@@ -187,7 +187,7 @@ class TinyMCE(Textarea):
         if mce_settings.ADDIONAL_JS_URLS:
             js += mce_settings.ADDIONAL_JS_URLS
         if mce_settings.USE_SPELLCHECKER:
-            js.append(staticfiles_storage.url('tinymce/js/tinymce4.js'))
+            js.append(reverse('tinymce-spellcheck-callback'))
         css = {'all': [reverse('tinymce-css')]}
         if mce_settings.CSS_URL:
             css['all'].append(mce_settings.CSS_URL)

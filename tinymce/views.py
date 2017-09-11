@@ -67,7 +67,8 @@ def spell_check_callback(request):
     :rtype: django.http.HttpResponse
     """
     response = HttpResponse(
-        jsmin(render_to_string('tinymce/spellcheck-callback.js')),
+        jsmin(render_to_string('tinymce/spellcheck-callback.js',
+                               request=request)),
         content_type='application/javascript')
     response['Cache-Control'] = 'no-store'
     return response

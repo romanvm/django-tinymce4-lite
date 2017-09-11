@@ -102,4 +102,6 @@ def filebrowser(request):
     content = jsmin(render_to_string('tinymce/filebrowser.js',
                                      context={'fb_url': fb_url},
                                      request=request))
-    return HttpResponse(content, content_type='application/javascript')
+    response = HttpResponse(content, content_type='application/javascript')
+    response['Cache-Control'] = 'no-store'
+    return response

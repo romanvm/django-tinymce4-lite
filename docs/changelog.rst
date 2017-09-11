@@ -5,15 +5,16 @@ Changelog
 -----
 - Implemented correct handling of editor widgets inside inline formsets
   in Django admin interface.
+- Upgraded TinyMCE to v.4.6.6.
 
 1.4.2
 -----
-- Upgraded TinyMCE to v.4.6.4
+- Upgraded TinyMCE to v.4.6.4.
 - Fixed the default editor config.
 
 1.4.1
 -----
-- Upgraded TinyMCE to v.4.6.2
+- Upgraded TinyMCE to v.4.6.2.
 - Added text format selector to the default editor configuration.
 
 1.4.0

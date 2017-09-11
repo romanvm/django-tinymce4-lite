@@ -29,7 +29,7 @@ setup(
                 'a fully functional TinyMCE 4 editor widget for models and forms.',
     long_description=long_description,
     license='MIT License',
-    keywords='django wysiwyg widget tinymce',
+    keywords='django wysiwyg editor widget tinymce',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
@@ -51,6 +51,7 @@ setup(
     url='https://github.com/romanvm/django-tinymce4-lite',
     install_requires=[
         'Django>=1.8.0',
+        'jsmin',
     ],
     zip_safe=False
 )

@@ -15,6 +15,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
 from django.conf import settings
+from jsmin import jsmin
 
 __all__ = ['spell_check', 'css', 'filebrowser']
 
@@ -99,5 +100,7 @@ def filebrowser(request):
         fb_url = request.build_absolute_uri(reverse('fb_browse'))
     except:
         fb_url = request.build_absolute_uri(reverse('filebrowser:fb_browse'))
-    return render(request, 'tinymce/filebrowser.js', {'fb_url': fb_url},
-                  content_type='application/javascript')
+    content = jsmin(render_to_string('tinymce/filebrowser.js',
+                                     context={'fb_url': fb_url},
+                                     request=request))
+    return HttpResponse(content, content_type='application/javascript')

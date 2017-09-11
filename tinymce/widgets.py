@@ -24,6 +24,7 @@ from django.utils.translation import get_language, get_language_bidi
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
+from jsmin import jsmin
 import tinymce.settings as mce_settings
 
 __all__ = ['TinyMCE', 'render_tinymce_init_js']
@@ -170,7 +171,10 @@ class TinyMCE(Textarea):
         else:
             html = '<textarea{0}>{1}</textarea>\n'.format(flatatt(final_attrs), escape(value))
         html += '<script type="text/javascript">{0}</script>'.format(
-            render_tinymce_init_js(mce_config, mce_settings.CALLBACKS.copy(), final_attrs['id'])
+            jsmin(render_tinymce_init_js(mce_config,
+                                         mce_settings.CALLBACKS.copy(),
+                                         final_attrs['id'])
+                  )
         )
         return mark_safe(html)
 

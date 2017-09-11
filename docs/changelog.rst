@@ -3,7 +3,8 @@ Changelog
 
 1.5.0
 -----
-- Implemented correct handling of editor widgets inside inline formsets
+- Security: protected spellchecker REST endpoint from CRSF.
+- Implemented correct handling of TinyMCE widgets inside inline formsets
   in Django admin interface.
 - Upgraded TinyMCE to v.4.6.6.
 

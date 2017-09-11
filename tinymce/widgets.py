@@ -24,7 +24,6 @@ from django.utils.translation import get_language, get_language_bidi
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
-from django.contrib.staticfiles.storage import staticfiles_storage
 from jsmin import jsmin
 import tinymce.settings as mce_settings
 

@@ -32,7 +32,6 @@ def spell_check(request):
         with spellcheck results for TinyMCE 4
     :rtype: django.http.JsonResponse
     """
-    print(request.META['HTTP_X_CSRFTOKEN'])
     data = json.loads(request.body.decode('utf-8'))
     output = {'id': data['id']}
     error = None

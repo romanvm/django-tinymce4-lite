@@ -39,6 +39,7 @@ def spell_check(request):
     data = json.loads(request.body.decode('utf-8'))
     output = {'id': data['id']}
     error = None
+    status = 200
     try:
         from enchant.checker import SpellChecker
         if data['params']['lang'] not in enchant.list_languages():
@@ -57,7 +58,8 @@ def spell_check(request):
         logger.exception(error)
     if error is not None:
         output['error'] = error
-    return JsonResponse(output)
+        status = 500
+    return JsonResponse(output, status=status)
 
 
 def spell_check_callback(request):

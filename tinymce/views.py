@@ -14,6 +14,10 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 from jsmin import jsmin
+try:
+    import enchant
+except ImportError:
+    pass
 
 __all__ = ['spell_check', 'css', 'filebrowser']
 
@@ -36,7 +40,6 @@ def spell_check(request):
     output = {'id': data['id']}
     error = None
     try:
-        import enchant
         from enchant.checker import SpellChecker
         if data['params']['lang'] not in enchant.list_languages():
             error = 'Missing {0} dictionary!'.format(data['params']['lang'])
@@ -44,7 +47,7 @@ def spell_check(request):
         checker = SpellChecker(data['params']['lang'])
         checker.set_text(strip_tags(data['params']['text']))
         output['result'] = {checker.word: checker.suggest() for err in checker}
-    except ImportError:
+    except NameError:
         error = 'The pyenchant package is not installed!'
         logger.exception(error)
     except RuntimeError:

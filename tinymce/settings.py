@@ -3,6 +3,7 @@
 """The django-tinymce4-lite configuration options"""
 
 from __future__ import absolute_import
+import sys
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 
@@ -27,8 +28,15 @@ if USE_SPELLCHECKER:
     DEFAULT['toolbar1'] += ' | spellchecker'
 CONFIG = getattr(settings, 'TINYMCE_DEFAULT_CONFIG', DEFAULT)
 """TinyMCE 4 configuration"""
-JS_URL = getattr(settings, 'TINYMCE_JS_URL', staticfiles_storage.url('tinymce/js/tinymce/tinymce.min.js'))
+JS_URL = getattr(settings, 'TINYMCE_JS_URL', None)
 """TinyMCE 4 JavaScript code"""
+if JS_URL is None:
+    # Ugly hack that allows to run collectstatic command with ManifestStaticFilesStorage
+    _orig_debug = settings.DEBUG
+    if 'collectstatic' in sys.argv:
+        settings.DEBUG = True
+    JS_URL = staticfiles_storage.url('tinymce/js/tinymce/tinymce.min.js')
+    settings.DEBUG = _orig_debug
 ADDIONAL_JS_URLS = getattr(settings, 'TINYMCE_ADDITIONAL_JS_URLS', None)
 """Additional JS files for TinyMCE (e.g. custom plugins)"""
 CSS_URL = getattr(settings, 'TINYMCE_CSS_URL', None)

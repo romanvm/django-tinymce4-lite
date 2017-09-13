@@ -166,7 +166,7 @@ class TinyMCE(Textarea):
         final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4-editor').lstrip()
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
-        if mce_config.get('inline', False):
+        if mce_config.get('inline'):
             html = '<div{0}>{1}</div>\n'.format(flatatt(final_attrs), escape(value))
         else:
             html = '<textarea{0}>{1}</textarea>\n'.format(flatatt(final_attrs), escape(value))

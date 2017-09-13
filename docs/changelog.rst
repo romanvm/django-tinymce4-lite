@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.5.1
+-----
+- Fixed running collectstatic command with ManifestStaticFilesStorage and
+  ``DEBUG = False``.
+
 1.5.0
 -----
 - **Security**: protected spellchecker REST endpoint from CRSF.

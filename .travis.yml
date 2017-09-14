@@ -22,7 +22,7 @@ install:
   - pip install -q -r test_requirements.txt
   - pip install -q Django==$DJANGO_VERSION
 script:
-  - python setup.py build
+  - python setup.py install
   - coverage run manage.py test test_tinymce
 after_success:
  - codecov

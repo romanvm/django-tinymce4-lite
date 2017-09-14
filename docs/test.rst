@@ -21,8 +21,13 @@ To run automated tests, enter in the console::
 
   $ python manage.py test test_tinymce
 
-.. note:: Tests require `PhantomJS <http://phantomjs.org>`_
-  headless browser engine.
+Tests require web-browsers: Firefox on Windows and Chrome on other platforms.
+You also need to download respective Selenium drivers for your platform:
+`Gecko driver<https://github.com/mozilla/geckodriver/releases>`_ or
+`Chrome driver <https://sites.google.com/a/chromium.org/chromedriver/>`_.
+Set the necessary permissions for a driver executable and add the directory
+where it resides your system ``PATH`` environment variable.
+Also check Travis CI configuration ``.travis.yml``.
 
 To open TinyMCE 4 editor, run the test server::
 

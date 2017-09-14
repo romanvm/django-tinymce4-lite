@@ -23,7 +23,7 @@ To run automated tests, enter in the console::
 
 Tests require web-browsers: Firefox on Windows and Chrome on other platforms.
 You also need to download respective Selenium drivers for your platform:
-`Gecko driver<https://github.com/mozilla/geckodriver/releases>`_ or
+`Gecko driver <https://github.com/mozilla/geckodriver/releases>`_ or
 `Chrome driver <https://sites.google.com/a/chromium.org/chromedriver/>`_.
 Set the necessary permissions for a driver executable and add the directory
 where it resides your system ``PATH`` environment variable.

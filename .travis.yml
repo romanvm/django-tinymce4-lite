@@ -9,6 +9,9 @@ env:
   - DJANGO_VERSION=1.11.5
 addons:
   chrome: stable
+  apt:
+    packages:
+    - enchant
 before_install:
   - pip install codecov
   - wget https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip

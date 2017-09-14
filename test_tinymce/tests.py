@@ -151,6 +151,12 @@ class SpellCheckViewTestCase(TestCase):
         self.assertTrue('error' in json.loads(response.content.decode('utf-8')))
 
 
+class SpellCheckCallBackTestCase(TestCase):
+    def test_spell_check_callback(self):
+        response = self.client.get(reverse('tinymce-spellcheck-callback'))
+        self.assertContains(response, reverse('tinymce-spellchecker'))
+
+
 class CssViewTestCase(TestCase):
     def test_css_view(self):
         response = self.client.get(reverse('tinymce-css'))

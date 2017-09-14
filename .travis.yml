@@ -8,17 +8,14 @@ env:
   - DJANGO_VERSION=1.10.6
   - DJANGO_VERSION=1.11.5
 addons:
-  apt:
-    packages:
-     - enchant
+  chrome: stable
 before_install:
   - pip install codecov
-  - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  - tar xjf phantomjs-2.1.1-linux-x86_64.tar.bz2
-  - chmod +x ./phantomjs-2.1.1-linux-x86_64/bin/phantomjs
+  - wget https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip
+  - chmod +x chromedriver
+  - export PATH=$TRAVIS_BUILD_DIR:$PATH
 install:
-  - export PATH=$TRAVIS_BUILD_DIR/phantomjs-2.1.1-linux-x86_64/bin:$PATH
-  - phantomjs --version
   - pip install -q -r test_requirements.txt
   - pip install -q Django==$DJANGO_VERSION
 script:

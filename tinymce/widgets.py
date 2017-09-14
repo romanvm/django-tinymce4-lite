@@ -25,7 +25,7 @@ from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
 from jsmin import jsmin
-import tinymce.settings as mce_settings
+from . import settings as mce_settings
 
 __all__ = ['TinyMCE', 'render_tinymce_init_js']
 

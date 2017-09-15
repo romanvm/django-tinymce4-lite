@@ -4,9 +4,9 @@ from __future__ import print_function
 import json
 import sys
 import time
+from contextlib import contextmanager
 from selenium.webdriver import Chrome, ChromeOptions, Firefox
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.common.exceptions import WebDriverException
 from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.urlresolvers import reverse
@@ -15,6 +15,22 @@ try:
     from unittest import mock
 except ImportError:
     import mock
+
+
+@contextmanager
+def log_browser_errors(browser):
+    """
+    Log errors caught by browser engine
+
+    :param browser: Selenium browser
+    """
+    try:
+        yield
+    except Exception:
+        print('*** Start browser log ***')
+        print(browser.get_log('browser'))
+        print('**** End browser log ****')
+        raise
 
 
 class SeleniumTestCase(StaticLiveServerTestCase):
@@ -51,26 +67,14 @@ class RenderTinyMceWidgetTestCase(SeleniumTestCase):
     def test_rendering_tinymce4_widget(self):
         # Test if TinyMCE 4 widget is actually rendered by JavaScript
         self.browser.get(self.live_server_url + reverse('create'))
-        try:
+        with log_browser_errors(self.browser):
             self.browser.find_element_by_id('mceu_16')
-        except WebDriverException:
-            print('*** Start browser log ***')
-            print(self.browser.get_log('browser'))
-            print('**** End browser log ****')
-            raise
-
 
     def test_rendering_with_different_language(self):
         with self.settings(LANGUAGE_CODE='fr-fr'):
             self.browser.get(self.live_server_url + reverse('create'))
-            try:
+            with log_browser_errors(self.browser):
                 self.browser.find_element_by_id('mceu_16')
-            except WebDriverException:
-                print('*** Start browser log ***')
-                print(self.browser.get_log('browser'))
-                print('**** End browser log ****')
-                raise
-            else:
                 self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
                                 self.browser.page_source)
 
@@ -88,39 +92,23 @@ class RenderTinyMceAdminWidgetTestCase(SeleniumTestCase):
     def test_rendering_tinymce4_admin_widget(self):
         self.browser.get(self.live_server_url + '/admin/test_tinymce/testmodel/add/')
         time.sleep(0.2)
-        editors = self.browser.find_elements_by_class_name('mce-tinymce')
-        try:
+        with log_browser_errors(self.browser):
+            editors = self.browser.find_elements_by_class_name('mce-tinymce')
             self.assertEqual(len(editors), 2)
-        except AssertionError:
-            print('*** Start browser log ***')
-            print(self.browser.get_log('browser'))
-            print('**** End browser log ****')
-            raise
 
     def test_adding_tinymce_widget_in_admin_inline(self):
         self.browser.get(self.live_server_url + '/admin/test_tinymce/testmodel/add/')
         time.sleep(0.2)
-        self.browser.find_element_by_css_selector('div.add-row a').click()
-        editors = self.browser.find_elements_by_class_name('mce-tinymce')
-        try:
+        with log_browser_errors(self.browser):
+            self.browser.find_element_by_css_selector('div.add-row a').click()
+            editors = self.browser.find_elements_by_class_name('mce-tinymce')
             self.assertEqual(len(editors), 3)
-        except AssertionError:
-            print('*** Start browser log ***')
-            print(self.browser.get_log('browser'))
-            print('**** End browser log ****')
-            raise
-        self.browser.find_element_by_css_selector('a.inline-deletelink').click()
-        editors = self.browser.find_elements_by_class_name('mce-tinymce')
-        self.assertEqual(len(editors), 2)
-        self.browser.find_element_by_css_selector('div.add-row a').click()
-        editors = self.browser.find_elements_by_class_name('mce-tinymce')
-        try:
+            self.browser.find_element_by_css_selector('a.inline-deletelink').click()
+            editors = self.browser.find_elements_by_class_name('mce-tinymce')
+            self.assertEqual(len(editors), 2)
+            self.browser.find_element_by_css_selector('div.add-row a').click()
+            editors = self.browser.find_elements_by_class_name('mce-tinymce')
             self.assertEqual(len(editors), 3)
-        except AssertionError:
-            print('*** Start browser log ***')
-            print(self.browser.get_log('browser'))
-            print('**** End browser log ****')
-            raise
 
 
 class SpellCheckViewTestCase(TestCase):

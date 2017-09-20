@@ -20,7 +20,7 @@ try:
 except ImportError:
     pass
 
-__all__ = ['spell_check', 'css', 'filebrowser']
+__all__ = ['spell_check', 'spell_check_callback', 'css', 'filebrowser']
 
 logging.basicConfig(format='[%(asctime)s] %(module)s: %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)

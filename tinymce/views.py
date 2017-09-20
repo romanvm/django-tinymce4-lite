@@ -13,6 +13,7 @@ from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.views.decorators.cache import never_cache
 from jsmin import jsmin
 try:
     import enchant
@@ -62,6 +63,7 @@ def spell_check(request):
     return JsonResponse(output, status=status)
 
 
+@never_cache
 def spell_check_callback(request):
     """
     JavaScript callback for TinyMCE4 spellchecker function
@@ -71,14 +73,13 @@ def spell_check_callback(request):
     :return: Django http response with spellchecker callback JavaScript code
     :rtype: django.http.HttpResponse
     """
-    response = HttpResponse(
+    return HttpResponse(
         jsmin(render_to_string('tinymce/spellcheck-callback.js',
                                request=request)),
         content_type='application/javascript')
-    response['Cache-Control'] = 'no-store'
-    return response
 
 
+@never_cache
 def css(request):
     """
     Custom CSS for TinyMCE 4 widget
@@ -96,14 +97,13 @@ def css(request):
         margin_left = 110  # For old style admin
     else:
         margin_left = 170  # For Django >= 1.9 style admin
-    content = render_to_string('tinymce/tinymce4.css',
-                               context={'margin_left': margin_left},
-                               request=request)
-    response = HttpResponse(content, content_type='text/css')
-    response['Cache-Control'] = 'no-store'
-    return response
+    return HttpResponse(render_to_string('tinymce/tinymce4.css',
+                                         context={'margin_left': margin_left},
+                                         request=request),
+                        content_type='text/css')
 
 
+@never_cache
 def filebrowser(request):
     """
     JavaScript callback function for `django-filebrowser`_
@@ -119,9 +119,7 @@ def filebrowser(request):
         fb_url = request.build_absolute_uri(reverse('fb_browse'))
     except:
         fb_url = request.build_absolute_uri(reverse('filebrowser:fb_browse'))
-    content = jsmin(render_to_string('tinymce/filebrowser.js',
-                                     context={'fb_url': fb_url},
-                                     request=request))
-    response = HttpResponse(content, content_type='application/javascript')
-    response['Cache-Control'] = 'no-store'
-    return response
+    return HttpResponse(jsmin(render_to_string('tinymce/filebrowser.js',
+                                               context={'fb_url': fb_url},
+                                               request=request)),
+                        content_type='application/javascript')

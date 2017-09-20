@@ -49,8 +49,6 @@
       });
     }
 
-    var inline_group = $('div.inline-group');
-
     // Use MutationObserver to track adding or removing Django admin inline formsets
     // to add adn remove TinyMCE editor widgets.
     var observer = new MutationObserver(function(mutations) {
@@ -71,7 +69,9 @@
       }); // End mutations
     }); // End MutationObserver
 
-    observer.observe(inline_group[0], { childList: true, subtree: true });
+    $('div.inline-group').each(function (index, node) {
+        observer.observe(node, { childList: true, subtree: true })
+    });
   }); // End document.ready
 })(django.jQuery);
 {% endif %}

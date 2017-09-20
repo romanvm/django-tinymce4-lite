@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.5.2
+-----
+- Fixed rendering TinyMCE widgets with multiple inline formsets in Django admin
+  (se-bastiaan).
+
 1.5.1
 -----
 - Fixed running collectstatic command with ManifestStaticFilesStorage and
@@ -34,7 +39,7 @@ Changelog
 1.3.1
 -----
 - Upgraded TinyMCE to v.4.5.5.
-- Fixed language file configuration for languages with country codes [Gagaro].
+- Fixed language file configuration for languages with country codes (Gagaro).
 - Rendering of the TinyMCE 4 is now tested with Selenium/PhantomJS.
 
 1.3.0

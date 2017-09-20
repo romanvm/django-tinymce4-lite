@@ -16,7 +16,7 @@ from django.conf import settings
 from django.views.decorators.cache import never_cache
 from jsmin import jsmin
 try:
-    import enchant
+    from enchant import checker, list_languages
 except ImportError:
     pass
 
@@ -42,13 +42,13 @@ def spell_check(request):
     error = None
     status = 200
     try:
-        from enchant.checker import SpellChecker
-        if data['params']['lang'] not in enchant.list_languages():
+        if data['params']['lang'] not in list_languages():
             error = 'Missing {0} dictionary!'.format(data['params']['lang'])
             raise RuntimeError(error)
-        checker = SpellChecker(data['params']['lang'])
-        checker.set_text(strip_tags(data['params']['text']))
-        output['result'] = {checker.word: checker.suggest() for err in checker}
+        spell_checker = checker.SpellChecker(data['params']['lang'])
+        spell_checker.set_text(strip_tags(data['params']['text']))
+        output['result'] = {spell_checker.word: spell_checker.suggest()
+                            for err in spell_checker}
     except NameError:
         error = 'The pyenchant package is not installed!'
         logger.exception(error)

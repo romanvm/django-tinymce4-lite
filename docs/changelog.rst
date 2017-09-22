@@ -5,10 +5,13 @@ Changelog
 -----
 - Fixed rendering TinyMCE widgets with multiple inline formsets in Django admin
   (se-bastiaan).
+- Fixed running Django management commands with ``ManifestStaticFilesStorage`` and
+  ``DEBUG = False`` (hopefully).
+- Upgraded TinyMCE to v.4.6.7.
 
 1.5.1
 -----
-- Fixed running collectstatic command with ManifestStaticFilesStorage and
+- Fixed running collectstatic command with ``ManifestStaticFilesStorage`` and
   ``DEBUG = False``.
 
 1.5.0

@@ -3,9 +3,25 @@
 """The django-tinymce4-lite configuration options"""
 
 from __future__ import absolute_import
+import re
 import sys
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
+
+
+def is_managed():
+    """
+    Check if a Django project is being managed with ``manage.py`` or
+    ``django-admin`` scripts
+
+    :return: Check result
+    :rtype: bool
+    """
+    for item in sys.argv:
+        if re.search(r'manage.py|django-admin', item) is not None:
+            return True
+    return False
+
 
 DEFAULT = {
     'selector': 'textarea',
@@ -31,9 +47,9 @@ CONFIG = getattr(settings, 'TINYMCE_DEFAULT_CONFIG', DEFAULT)
 JS_URL = getattr(settings, 'TINYMCE_JS_URL', None)
 """TinyMCE 4 JavaScript code"""
 if JS_URL is None:
-    # Ugly hack that allows to run collectstatic command with ManifestStaticFilesStorage
+    # Ugly hack that allows to run management commands with ManifestStaticFilesStorage
     _orig_debug = settings.DEBUG
-    if 'collectstatic' in sys.argv:
+    if is_managed():
         settings.DEBUG = True
     JS_URL = staticfiles_storage.url('tinymce/js/tinymce/tinymce.min.js')
     settings.DEBUG = _orig_debug

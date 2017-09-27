@@ -8,7 +8,10 @@ from __future__ import absolute_import
 import json
 import logging
 from django import VERSION
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags

@@ -21,7 +21,10 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils.translation import get_language, get_language_bidi
 from django.template.loader import render_to_string
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 from django.contrib.admin import widgets as admin_widgets
 from jsmin import jsmin
 from . import settings as mce_settings

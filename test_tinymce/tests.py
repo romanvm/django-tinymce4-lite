@@ -9,7 +9,10 @@ from selenium.webdriver import Chrome, ChromeOptions, Firefox
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 try:
     from unittest import mock

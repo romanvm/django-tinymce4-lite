@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django import VERSION
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,7 +33,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'filebrowser',
     'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'test_tinymce',
 ]
+
+# A hack to allow testing with Django 2.0
+if VERSION <= (1, 11, 9999):
+    INSTALLED_APPS.insert(0, 'filebrowser')
 
 MIDDLEWARE_CLASSES = [
     # 'django.middleware.security.SecurityMiddleware',

@@ -15,19 +15,22 @@ Including another URLconf
 """
 
 from __future__ import absolute_import
+from django import VERSION
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-from filebrowser.sites import site
 from .views import TestCreateView
 
 
 urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^admin/filebrowser/', include(site.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^$', TestCreateView.as_view(), name='create')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if VERSION <= (1, 11, 9999):
+    from filebrowser.sites import site
+    urlpatterns.insert(0, url(r'^admin/filebrowser/', include(site.urls)))

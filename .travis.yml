@@ -7,10 +7,10 @@ env:
   - DJANGO_VERSION=1.9.12
   - DJANGO_VERSION=1.10.6
   - DJANGO_VERSION=1.11.5
-  - DJANGO_VERSION=2.0a1
+  - DJANGO_VERSION=2.0b1
 matrix:
   exclude:
-    - env: DJANGO_VERSION=2.0a1
+    - env: DJANGO_VERSION=2.0b1
       python: "2.7"
 addons:
   chrome: stable

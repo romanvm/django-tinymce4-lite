@@ -155,11 +155,17 @@ class TinyMCE(Textarea):
         default_profile = profile or mce_settings.CONFIG.copy()
         self.profile.update(default_profile)
 
+    def build_attrs(self, base_attrs, extra_attrs=None, **kwargs):
+        attributes = dict(base_attrs, **kwargs)
+        if extra_attrs:
+            attributes.update(extra_attrs)
+        return attributes
+
     def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             value = ''
         value = smart_text(value)
-        final_attrs = self.build_attrs(attrs)
+        final_attrs = self.build_attrs(self.attrs, attrs)
         final_attrs['name'] = name
         final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4-editor').lstrip()
         mce_config = self.profile.copy()

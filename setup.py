@@ -16,7 +16,7 @@ def read(filename):
 
 
 long_description = read('README.rst') + '\n\n' + \
-                   read(os.path.join(this_dir, 'docs', 'changelog.rst'))
+                   read(os.path.join(this_dir, 'Changelog.rst'))
 
 setup(
     name='django-{0}'.format(app_name),

@@ -4,6 +4,7 @@ Changelog
 1.6.0
 -----
 
+- Updgraded TinyMCE to v.4.7.2.
 - Added compatibility with Django 2.0 (thomwiggers).
 - Fixed dropped widget attributes in Django => 1.11 (bentrm).
 - Fixed missing Changelog in ``sdist`` .gz distribution.

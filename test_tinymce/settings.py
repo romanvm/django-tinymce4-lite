@@ -54,10 +54,14 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if VERSION[:2] < (1, 10):
+    MIDDLEWARE_CLASSES.append(
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware'
+    )
 
 MIDDLEWARE = MIDDLEWARE_CLASSES
 

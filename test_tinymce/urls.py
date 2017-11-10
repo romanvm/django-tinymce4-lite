@@ -31,6 +31,6 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # A hack to allow testing with Django 2.0
-if VERSION <= (1, 11, 9999):
+if VERSION[:2] <= (1, 11):
     from filebrowser.sites import site
     urlpatterns.insert(0, url(r'^admin/filebrowser/', include(site.urls)))

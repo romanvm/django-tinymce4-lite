@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 ]
 
 # A hack to allow testing with Django 2.0
-if VERSION <= (1, 11, 9999):
+if VERSION[:2] <= (1, 11):
     INSTALLED_APPS.insert(0, 'filebrowser')
 
 MIDDLEWARE_CLASSES = [

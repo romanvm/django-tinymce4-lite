@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.6.0
+-----
+
+- Added compatibility with Django 2.0 (thomwiggers).
+- Fixed dropped widget attributes in Django => 1.11 (bentrm).
+- Fixed missing Changelog in ``sdist`` .gz distribution.
+
 1.5.2
 -----
 - Fixed rendering TinyMCE widgets with multiple inline formsets in Django admin

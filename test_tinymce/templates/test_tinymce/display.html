@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TinyMCE 4 Editor: Display Text</title>
+</head>
+<body>
+  <h1>TinyMCE 4 Editor Example: Display Text</h1>
+  <hr>
+  <h3>Text you have entered:</h3>
+  <div class="content">{{ test_model.content|safe }}</div>
+  <p><a href="{% url 'create' %}">Back</a></p>
+</body>
+</html>

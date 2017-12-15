@@ -25,7 +25,7 @@ from .views import TestCreateView, TestDisplayView
 
 urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^admin/filebrowser/', site.urls),
     url(r'^admin/', admin.site.urls),
     url(r'^content/(?P<pk>\d+)/$', TestDisplayView.as_view(), name='display'),
     url(r'^$', TestCreateView.as_view(), name='create')

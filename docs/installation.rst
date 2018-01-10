@@ -25,8 +25,8 @@ Add ``tinymce.urls`` to ``urls.py`` for your project:
   ]
 
 
-If you want to use `django-filebrowser`_ or `django-filebrowser-no-grappelli`_ file manager,
-install one of those packages. Refer to `django-filebrowser documentation`_ to learn
+If you want to use `django-filebrowser-no-grappelli`_ file manager,
+install this package. Refer to `django-filebrowser documentation`_ to learn
 how to install and configure the filebrowser application.
 
 For TinyMCE spellchecker plugin you need to install `pyenchant`_ package::
@@ -45,18 +45,11 @@ if they are missing from ``pyenchant`` default installation on your system.
 Read :ref:`"Language Configuration"<language_config>` subsection about configuring
 the **tinymce4-lite** spellchecker.
 
-.. note:: If you are using :class:`django.contrib.staticfiles.storage.ManifestStaticFilesStorage`
-  for static files and need to collect static files for your Django deployment,
-  you have to temporarily switch to ``DEBUG = True`` in your project's settings
-  before running ``collectstatic`` command, and then switch to ``DEBUG = False``
-  back again. This will allow to correctly create hash-versioned static files and
-  ``manifest.json``.
-
 Upgrade
 -------
 
-It is recommended to upgrade `tinymce4-lite` by specifying the exact
-application version::
+It is strongly recommended to upgrade `tinymce4-lite` by specifying the exact
+application version you want to upgrade to::
 
   $ pip install django-tinymce4-lite==X.Y.Z
 
@@ -66,7 +59,6 @@ folder where your project's static files are served from::
 
   $ python manage.py collectstatic
 
-See information about ``ManifestStaticFilesStorage`` in the preceding sub-section.
 
 .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli

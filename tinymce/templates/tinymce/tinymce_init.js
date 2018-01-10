@@ -7,6 +7,11 @@
         {% for key, value in callbacks.items %}
           '{{ key }}': {{ value|safe }},
         {% endfor %}
+        setup: function (editor) {
+          editor.on('change', function () {
+            editor.save();
+          });
+        },
         {{ tinymce_config|safe }}
       };
       if (typeof selector != 'undefined') {

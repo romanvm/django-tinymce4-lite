@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TinyMCE 4 Editor Example</title>
+  <title>TinyMCE 4 Editor: Enter Text</title>
   {{ form.media }}
 </head>
 <body>
-<h1>TinyMCE 4 Editor Example</h1>
+<h1>TinyMCE 4 Editor Example: Enter Text</h1>
 <hr>
-<form action="" method="post">
+<form id="editor_form" action="{% url 'create' %}" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" value="Create" disabled />
+  <input id="submit_btn" type="submit" value="Create">
 </form>
 </body>
 </html>

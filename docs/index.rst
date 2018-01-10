@@ -12,11 +12,13 @@ editor widget that can be used in Django forms and models.
 In this fork all legacy and broken code has been cleaned in order to provide simple
 but full-featured TinyMCE 4 experience in Django projects.
 
-**django-tinymce4-lite** can use `django-filebrowser`_ or `django-filebrowser-no-grappelli`_
+**django-tinymce4-lite** can use `django-filebrowser-no-grappelli`_
 as a file manager for TinyMCE 4 to insert images and file links into edited text.
-If you don't know which one to choose I'd recommend ``django-filebrowser-no-grappelli``
-because it does not have extra dependencies and provides a separate entry in
-Django Admin for managing uploaded files.
+
+.. note:: Currently ``django-filebrowser`` (grapelli-based) is not compatible
+  with **django-tinymce4-lite** because it lacks support for TinyMCE 4. See this
+  `pull request <https://github.com/sehmaschine/django-filebrowser/pull/255>`_
+  for more details.
 
 The application also includes a spellchecker service for TinyMCE 4 spellchecker
 plugin.

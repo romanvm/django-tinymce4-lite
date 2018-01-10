@@ -1,9 +1,16 @@
 Changelog
 =========
 
+1.7.0
+-----
+- Upgraded TinyMCE to v.4.7.4
+- Fixed using TinyMCE in non-admin forms.
+- Fixed compatibility with ``django-filebrowser-no-grapelli``.
+  This broke compatibility with ``django-filebrowser``
+  (based on grapelli) until the latter adds support for TinyMCE 4.
+
 1.6.0
 -----
-
 - Upgraded TinyMCE to v.4.7.2.
 - Added compatibility with Django 2.0 (thomwiggers).
 - Fixed dropped widget attributes in Django => 1.11 (bentrm).

@@ -8,16 +8,17 @@ django-tinymce4-lite
 .. image:: https://badge.fury.io/py/django-tinymce4-lite.svg
   :target: https://badge.fury.io/py/django.tinymce4-lite
 
-**django-tinymce4-lite** is a reworked fork of `django-tinymce4`_. It provides a fully functional `TinyMCE 4`_
-editor widget that can be used in Django forms and models.
+**django-tinymce4-lite** is a reworked fork of `django-tinymce4`_.
+It provides a fully functional `TinyMCE 4`_ editor widget that can be used
+in Django forms and models.
 
 .. image:: http://romanvm.github.io/django-tinymce4-lite/_images/screenshot.png
 
-The application can use `django-filebrowser`_ or `django-filebrowser-no-grappelli`_
-as a file manager for TinyMCE 4 to insert images and file links into edited text.
+The application can use `django-filebrowser-no-grappelli`_ as a file manager
+for TinyMCE 4 to insert images and file links into edited text.
 
-**Warning**: TinyMCE 4 is incompatible with TinyMCE 3. Read `TinyMCE docs`_ for more information
-about how to configure TimyMCE 4 editor widget.
+**Warning**: TinyMCE 4 is incompatible with TinyMCE 3. Read `TinyMCE docs`_
+for more information about how to configure TimyMCE 4 editor widget.
 
 Compatibility
 -------------
@@ -62,8 +63,9 @@ In your code:
         ...
         content = HTMLField('Content')
 
-In Django Admin the widget is used automatically for all models that have ``HTMLField`` fields.
-If you are using TinyMCE 4 in your website forms, add ``form.media`` variable into your templates:
+In Django Admin the widget is used automatically for all models that have
+``HTMLField`` fields. If you are using TinyMCE 4 in your website forms,
+add ``form.media`` variable into your templates:
 
 .. code-block:: django
 

@@ -39,4 +39,5 @@ The browser will open a webpage with a TinyMCE 4 editor.
 .. note:: The commands described in this section need to be run from the **tinymce4-lite**
   sources root directory.
 
-The test project is very basic and does nothing else, except for displaying the TinyMCE 4 editor.
+The test project is very simple. It allows you to try rich text editing in
+TinyMCE 4 and then save the text and see how it looks on a web-page.

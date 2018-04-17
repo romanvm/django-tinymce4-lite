@@ -1,4 +1,5 @@
 language: python
+sudo: required
 python:
   - "2.7"
   - "3.6"
@@ -6,8 +7,8 @@ env:
   - DJANGO_VERSION=1.8.17
   - DJANGO_VERSION=1.9.12
   - DJANGO_VERSION=1.10.6
-  - DJANGO_VERSION=1.11.5
-  - DJANGO_VERSION=2.0
+  - DJANGO_VERSION=1.11.12
+  - DJANGO_VERSION=2.0.4
 matrix:
   exclude:
     - env: DJANGO_VERSION=2.0
@@ -19,7 +20,7 @@ addons:
     - enchant
 before_install:
   - pip install codecov
-  - wget https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip
+  - wget https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip
   - unzip chromedriver_linux64.zip
   - chmod +x chromedriver
   - export PATH=$TRAVIS_BUILD_DIR:$PATH
@@ -39,7 +40,7 @@ deploy:
     on:
       branch: master
       python: "3.6"
-      condition: "$DJANGO_VERSION = 1.11.5"
+      condition: "$DJANGO_VERSION = 2.0.4"
   - provider: pypi
     skip_cleanup: true
     user: $PYPI_USER
@@ -48,6 +49,6 @@ deploy:
     on:
       tags: true
       python: "3.6"
-      condition: "$DJANGO_VERSION = 1.11.5"
+      condition: "$DJANGO_VERSION = 2.0.4"
 notifications:
   email: false

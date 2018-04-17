@@ -24,7 +24,7 @@ setup(
     packages=['tinymce'],
     include_package_data=True,
     author='Roman Miroshnychenko (fork author)',
-    author_email='romanvm@yandex.ua',
+    author_email='roman1972@gmail.com',
     description='A Django application that provides '
                 'a fully functional TinyMCE 4 editor widget for models and forms.',
     long_description=long_description,

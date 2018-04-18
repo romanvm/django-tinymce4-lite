@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.7.1
+-----
+
+- Upgraded TinyMCE to v.4.7.11
+
 1.7.0
 -----
 - Upgraded TinyMCE to v.4.7.4

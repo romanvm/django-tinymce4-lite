@@ -106,10 +106,10 @@ in `TINYMCE_DEFAULT_CONFIG`_.
 
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
 .. _TinyMCE documentation: https://www.tinymce.com/docs/
-.. _LANGUAGE_CODE: https://docs.djangoproject.com/en/1.9/ref/settings/#language-code
-.. _LANGUAGES: https://docs.djangoproject.com/en/1.9/ref/settings/#languages
+.. _LANGUAGE_CODE: https://docs.djangoproject.com/en/2.0/ref/settings/#language-code
+.. _LANGUAGES: https://docs.djangoproject.com/en/2.0/ref/settings/#languages
 .. _pyenchant documentation: http://pythonhosted.org/pyenchant/tutorial.html#adding-language-dictionaries
 .. _this page: http://www.softmaker.com/en/download/dictionaries
 .. _7zip: http://www.7-zip.org/
-.. _INSTALLED_APPS: https://docs.djangoproject.com/en/1.9/ref/settings/#installed-apps
+.. _INSTALLED_APPS: https://docs.djangoproject.com/en/2.0/ref/settings/#installed-apps
 .. _spellchecker: https://www.tinymce.com/docs/plugins/spellchecker/

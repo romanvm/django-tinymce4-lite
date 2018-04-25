@@ -43,7 +43,7 @@ a spellcheck button to TinyMCE toolbar. Default: ``False``.
   subsection about how to configure the spellchecker.
 
 ``TINYMCE_FILEBROWSER`` -- enables file browser support in TinyMCE image and link dialogs.
-**tinymce4-lite** supports both `django-filebrowser`_ and  `django-filebrowser-no-grappelli`_ file browsers.
+**tinymce4-lite** supports `django-filebrowser-no-grappelli`_ file browser.
 Default: ``True`` if ``'filebrowser'`` is added to `INSTALLED_APPS`_, else ``False``.
 
 ``TINYMCE_JS_URL`` -- a path to TinyMCE JavaScript library.
@@ -104,7 +104,6 @@ using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`
 Also you can completely override TinyMCE automatic language configuration by defining the necessary language options
 in `TINYMCE_DEFAULT_CONFIG`_.
 
-.. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
 .. _TinyMCE documentation: https://www.tinymce.com/docs/
 .. _LANGUAGE_CODE: https://docs.djangoproject.com/en/1.9/ref/settings/#language-code

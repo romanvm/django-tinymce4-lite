@@ -119,9 +119,9 @@ def filebrowser(request):
     .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
     """
     try:
-        fb_url = request.build_absolute_uri(reverse('fb_browse'))
+        fb_url = reverse('fb_browse')
     except:
-        fb_url = request.build_absolute_uri(reverse('filebrowser:fb_browse'))
+        fb_url = reverse('filebrowser:fb_browse')
     return HttpResponse(jsmin(render_to_string('tinymce/filebrowser.js',
                                                context={'fb_url': fb_url},
                                                request=request)),

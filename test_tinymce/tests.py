@@ -146,12 +146,14 @@ class SpellCheckCallBackTestCase(TestCase):
     def test_spell_check_callback(self):
         response = self.client.get(reverse('tinymce-spellcheck-callback'))
         self.assertContains(response, reverse('tinymce-spellchecker'))
+        self.assertIn('charset=utf-8', response.serialize_headers())
 
 
 class CssViewTestCase(TestCase):
     def test_css_view(self):
         response = self.client.get(reverse('tinymce-css'))
         self.assertContains(response, 'margin-left')
+        self.assertIn('charset=utf-8', response.serialize_headers())
 
 
 class FileBrowserViewTestCase(TestCase):
@@ -160,3 +162,4 @@ class FileBrowserViewTestCase(TestCase):
         mock_reverse.return_value = '/filebrowser'
         response = self.client.get(reverse('tinymce-filebrowser'))
         self.assertContains(response, '/filebrowser')
+        self.assertIn('charset=utf-8', response.serialize_headers())

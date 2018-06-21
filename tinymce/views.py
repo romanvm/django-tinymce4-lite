@@ -79,7 +79,7 @@ def spell_check_callback(request):
     return HttpResponse(
         jsmin(render_to_string('tinymce/spellcheck-callback.js',
                                request=request)),
-        content_type='application/javascript')
+        content_type='application/javascript; charset=utf-8')
 
 
 @never_cache
@@ -103,7 +103,7 @@ def css(request):
     return HttpResponse(render_to_string('tinymce/tinymce4.css',
                                          context={'margin_left': margin_left},
                                          request=request),
-                        content_type='text/css')
+                        content_type='text/css; charset=utf-8')
 
 
 @never_cache
@@ -125,4 +125,4 @@ def filebrowser(request):
     return HttpResponse(jsmin(render_to_string('tinymce/filebrowser.js',
                                                context={'fb_url': fb_url},
                                                request=request)),
-                        content_type='application/javascript')
+                        content_type='application/javascript; charset=utf-8')

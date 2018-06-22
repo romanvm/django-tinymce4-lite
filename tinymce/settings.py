@@ -18,7 +18,7 @@ def is_managed():
     :rtype: bool
     """
     for item in sys.argv:
-        if re.search(r'manage.py|django-admin', item) is not None:
+        if re.search(r'manage.py|django-admin|django', item) is not None:
             return True
     return False
 

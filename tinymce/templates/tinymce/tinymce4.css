@@ -7,6 +7,6 @@
 }
 @media (max-width: 767px) {
     .form-row .mce-tinymce {
-        margin-left: 0;
+        margin-left: {{ margin_left_up_to_767px }}px;
     }
 }

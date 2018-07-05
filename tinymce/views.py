@@ -100,8 +100,16 @@ def css(request):
         margin_left = 110  # For old style admin
     else:
         margin_left = 170  # For Django >= 1.9 style admin
+        
+    margin_left_up_to_767px = margin_left # For Django < 2.0 admin
+    if VERSION[:2] >= (2, 0):
+        margin_left_up_to_767px = 0 # For Django >= 2.0 responsive admin
+        
     return HttpResponse(render_to_string('tinymce/tinymce4.css',
-                                         context={'margin_left': margin_left},
+                                         context={
+                                             'margin_left': margin_left,
+                                             'margin_left_up_to_767px': margin_left_up_to_767px
+                                         },
                                          request=request),
                         content_type='text/css')
 

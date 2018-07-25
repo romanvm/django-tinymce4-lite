@@ -5,8 +5,10 @@
 .form-row .mce-fullscreen {
   margin-left: 0;
 }
+{% if responsive_admin %}
 @media (max-width: 767px) {
     .form-row .mce-tinymce {
-        margin-left: {{ margin_left_up_to_767px }}px;
+        margin-left: 0;
     }
 }
+{% endif %}

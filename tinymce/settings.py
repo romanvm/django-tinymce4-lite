@@ -5,8 +5,17 @@
 from __future__ import absolute_import
 import re
 import sys
+import warnings
 from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
+
+
+if sys.version_info[:2] < (3, 0):
+    warnings.warn(
+        'Python 2 support will be removed in future releases!',
+        category=DeprecationWarning
+    )
+
 
 
 def is_managed():

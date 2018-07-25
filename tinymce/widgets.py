@@ -12,6 +12,7 @@ from __future__ import absolute_import
 import json
 import logging
 import os
+import sys
 from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.forms import Textarea, Media
@@ -34,6 +35,11 @@ __all__ = ['TinyMCE', 'render_tinymce_init_js']
 logging.basicConfig(format='[%(asctime)s] %(module)s: %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 logger.setLevel(20)
+
+if sys.version_info[:2] < (3, 0):
+    logger.warning(
+        'Deprecation warning: Python 2 support will be removed in future releases!'
+    )
 
 
 def language_file_exists(language_code):

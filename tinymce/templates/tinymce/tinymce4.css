@@ -5,3 +5,8 @@
 .form-row .mce-fullscreen {
   margin-left: 0;
 }
+@media (max-width: 767px) {
+    .form-row .mce-tinymce {
+        margin-left: {{ margin_left_up_to_767px }}px;
+    }
+}

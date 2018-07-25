@@ -38,7 +38,8 @@ logger.setLevel(20)
 
 if sys.version_info[:2] < (3, 0):
     logger.warning(
-        'Deprecation warning: Python 2 support will be removed in future releases!'
+        'Deprecation warning: Python 2 support will be removed '
+        'in future releases of tinymce4-lite!'
     )
 
 

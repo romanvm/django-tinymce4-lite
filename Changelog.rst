@@ -1,9 +1,13 @@
 Changelog
 =========
 
+1.7.2
+-----
+- Upgraded TinyMCE to v.4.8.0.
+- Various fixes (maqmigh, ojiii, rvanlaar).
+
 1.7.1
 -----
-
 - Upgraded TinyMCE to v.4.7.11
 
 1.7.0

@@ -122,7 +122,7 @@ class SpellCheckViewTestCase(TestCase):
         if lang not in languages:
             lang = lang[:2]
             if lang not in languages:
-                raise RuntimeError('Enchant package does not have English spellckecker dictionary!')
+                raise LookupError('Enchant package does not have English spellckecker dictionary!')
         text = 'The quick brown fox jumps over the lazy dog.'
         data = {'id': '0', 'params': {'lang': lang, 'text': text}}
         response = self.client.post(reverse('tinymce-spellchecker'), data=json.dumps(data),

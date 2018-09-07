@@ -1,6 +1,0 @@
-docs/*
-test_tinymce/*
-manage.py
-setup.py
-metadata.py
-publish_docs.py

@@ -30,7 +30,7 @@ before_install:
   - chmod +x chromedriver
   - export PATH=$TRAVIS_BUILD_DIR:$PATH
 install:
-  - pip install -q codecov, tox, tox-travis
+  - pip install -q codecov tox tox-travis
 script: tox
 after_success:
  - codecov

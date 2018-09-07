@@ -44,12 +44,8 @@ INSTALLED_APPS = [
     'test_tinymce',
 ]
 
-# A hack to allow testing with Django 2.0
-if VERSION[:2] <= (1, 11):
-    INSTALLED_APPS.insert(0, 'filebrowser')
 
 MIDDLEWARE_CLASSES = [
-    # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,11 +53,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-if VERSION[:2] < (1, 10):
-    MIDDLEWARE_CLASSES.append(
-        'django.contrib.auth.middleware.SessionAuthenticationMiddleware'
-    )
 
 MIDDLEWARE = MIDDLEWARE_CLASSES
 

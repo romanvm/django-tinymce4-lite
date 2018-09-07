@@ -47,7 +47,7 @@ def spell_check(request):
     try:
         if data['params']['lang'] not in list_languages():
             error = 'Missing {0} dictionary!'.format(data['params']['lang'])
-            raise RuntimeError(error)
+            raise LookupError(error)
         spell_checker = checker.SpellChecker(data['params']['lang'])
         spell_checker.set_text(strip_tags(data['params']['text']))
         output['result'] = {spell_checker.word: spell_checker.suggest()
@@ -55,7 +55,7 @@ def spell_check(request):
     except NameError:
         error = 'The pyenchant package is not installed!'
         logger.exception(error)
-    except RuntimeError:
+    except LookupError:
         logger.exception(error)
     except Exception:
         error = 'Unknown error!'

@@ -7,7 +7,7 @@ or to try a live TinyMCE 4 editor widget. The test project can also serve as a b
 
 To use the test project, first you need to install the necessary dependencies::
 
-  $ pip install -r test_requirements.txt
+  $ pip install -r requirements.txt
 
 Then you need to create the test database::
 

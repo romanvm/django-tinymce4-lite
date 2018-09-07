@@ -101,7 +101,6 @@ DATABASES = {
 
 LANGUAGES = [
     ('en-us', 'English (US)'),
-    ('de-de', 'Deutsch (Deutschland)'),
 ]
 
 LANGUAGE_CODE = 'en-us'

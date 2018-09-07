@@ -1,6 +1,7 @@
 language: python
 dist: xenial
 sudo: required
+cache: pip
 python:
   - "2.7"
   - "3.5"

@@ -11,7 +11,8 @@ for Django forms and models.
 """
 
 from __future__ import absolute_import
+from .fields import SplitArrayTinyMCEField
 from .models import HTMLField
 from .widgets import TinyMCE, AdminTinyMCE
 
-__all__ = ['HTMLField', 'TinyMCE', 'AdminTinyMCE']
+__all__ = ['HTMLField', 'TinyMCE', 'AdminTinyMCE', 'SplitArrayTinyMCEField']

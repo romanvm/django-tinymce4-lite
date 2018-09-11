@@ -15,6 +15,7 @@ import os
 import sys
 from django.conf import settings
 from django.contrib.staticfiles import finders
+from django.contrib.postgres.forms import SplitArrayWidget
 from django.forms import Textarea, Media
 from django.forms.utils import flatatt
 from django.utils.encoding import smart_text
@@ -210,3 +211,24 @@ class TinyMCE(Textarea):
 class AdminTinyMCE(TinyMCE, admin_widgets.AdminTextareaWidget):
     """TinyMCE 4 widget for Django Admin interface"""
     pass
+
+
+class SplitArrayTinyMCEWidget(SplitArrayWidget):
+    def render(self, name, value, attrs=None, renderer=None):
+        attrs = {} if attrs is None else attrs
+        if self.is_localized:
+            self.widget.is_localized = self.is_localized
+        value = value or []
+        final_attrs = self.build_attrs(attrs)
+        id_ = final_attrs.get('id')
+        html = ""
+        for i in range(max(len(value), self.size)):
+            try:
+                widget_value = value[i]
+            except IndexError:
+                widget_value = None
+            if id_:
+                final_attrs = dict(final_attrs, id='%s_%s' % (id_, i))
+            html = html + self.widget.render(name + '_%s' % i, widget_value,
+                                             final_attrs) + "<br/>"
+        return mark_safe(html)

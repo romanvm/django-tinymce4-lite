@@ -34,10 +34,13 @@ install:
 script: tox
 after_success:
  - codecov
-before_deploy: wget https://raw.githubusercontent.com/romanvm/travis_scripts/master/publish_docs.py
+before_deploy:
+  - cd docs
+  - make html
 deploy:
-  - provider: script
-    script: python publish_docs.py
+  - provider: pages
+    local-dir: docs/_build/html
+    github-token: $GH_TOKEN
     skip_cleanup: true
     on:
       branch: master

@@ -3,8 +3,14 @@
 ## Submitting Issues
 
 When creating issue tickets please provide as much information as possible,
-including Django version, your project setups, exception traceback (if any)
-and steps to reproduce the issue.
+including:
+
+- Detailed description of your issue (not just "does not work").
+- Python and Django version.
+- Your project setup.
+- Steps to reproduse the issue.
+- Exception traceback if this is a back-end issue.
+- Browser console output if this is a front-end issue.
 
 ## Creating Pull Requests
 

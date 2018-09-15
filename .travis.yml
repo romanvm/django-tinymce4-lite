@@ -46,7 +46,7 @@ deploy:
     on:
       branch: master
       python: "3.7"
-      condition: $DJANGO=2.1
+      condition: $DJANGO = 2.1
   - provider: pypi
     skip_cleanup: true
     user: $PYPI_USER
@@ -55,6 +55,6 @@ deploy:
     on:
       tags: true
       python: "3.7"
-      condition: $DJANGO=2.1
+      condition: $DJANGO = 2.1
 notifications:
   email: false

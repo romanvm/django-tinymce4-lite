@@ -35,7 +35,7 @@ script: tox
 after_success:
  - codecov
 before_deploy:
-  - pip install -q -r requirements-base Sphinx
+  - pip install -q -r requirements-base.txt Sphinx
   - cd docs
   - make html
 deploy:

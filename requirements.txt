@@ -1,8 +1,7 @@
-Django>=1.11
+-r requirements-base.txt
 pyenchant
-mock
 django-filebrowser-no-grappelli
 Pillow
-Sphinx
+mock
 Selenium
-jsmin
+coverage

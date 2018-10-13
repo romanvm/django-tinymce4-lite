@@ -38,6 +38,7 @@ before_deploy:
   - pip install -q -r requirements-base.txt Sphinx
   - cd docs
   - make html
+  - cd $TRAVIS_BUILD_DIR
 deploy:
   - provider: pages
     local-dir: docs/_build/html

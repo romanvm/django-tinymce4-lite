@@ -82,9 +82,7 @@ to define both options in your project's :file:`settings.py`.
 ``LANGUAGES`` option defines the list of available spellchecker languages. The first language in this list
 is used as the default one. The list of spellchecker languages also depends on available **pyenchant** dictionaries.
 For example, on Windows the default **pyenchant** installation includes only English, German and French spellchecker
-dictionaries. Read `pyenchant documentation`_ to learn how to add additional spellchecker dictionaries.
-
-You can view the list available spellchecker dictionaries by running ``enchant.list_languages()`` function in a console
+dictionaries. You can view the list available spellchecker dictionaries by running ``enchant.list_languages()`` function in a console
 from your working Python environment. For example::
 
   >>> import enchant
@@ -92,9 +90,17 @@ from your working Python environment. For example::
   ['de_DE', 'en_AU', 'en_GB', 'en_US', 'fr_FR']
 
 
+On Linux you can install `Hunspell`_ dictionaries for your languages
+that will be automatically used by **pyenchant**.
+E.g. for Ukrainian spelling dictionary on Ubuntu/Debian::
+
+  $ sudo apt install hunspell-uk
+
+Un Windows you need to add the necessary dictionaries manually to **enchant** package
+in ``site-packages`` directory of your working Python environment.
 Additional spellchecker dictionaries can be downloaded from `this page`_. Unpack a :file:`.sox` file
-using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`.aff` for your language into
-**pyenchant**/**enchant** installation.
+using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`.aff` for your language to
+``enchant/share/enchant/myspell/`` directory inside **enchant** package.
 
 .. note:: Django language codes in ``LANGUAGES`` must match dictionary filenames.
   For example, ``'en-us'`` in ``LANGUAGES`` (with a country code)
@@ -113,3 +119,4 @@ in `TINYMCE_DEFAULT_CONFIG`_.
 .. _7zip: http://www.7-zip.org/
 .. _INSTALLED_APPS: https://docs.djangoproject.com/en/2.0/ref/settings/#installed-apps
 .. _spellchecker: https://www.tinymce.com/docs/plugins/spellchecker/
+.. _Hunspell: http://hunspell.github.io

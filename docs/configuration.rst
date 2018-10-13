@@ -96,7 +96,7 @@ E.g. for Ukrainian spelling dictionary on Ubuntu/Debian::
 
   $ sudo apt install hunspell-uk
 
-Un Windows you need to add the necessary dictionaries manually to **enchant** package
+On Windows you need to add the necessary dictionaries manually to **enchant** package
 in ``site-packages`` directory of your working Python environment.
 Additional spellchecker dictionaries can be downloaded from `this page`_. Unpack a :file:`.sox` file
 using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`.aff` for your language to

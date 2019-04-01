@@ -105,7 +105,7 @@ using an archive manager, for example `7zip`_, and copy :file:`.dic` and :file:`
 .. note:: Django language codes in ``LANGUAGES`` must match dictionary filenames.
   For example, ``'en-us'`` in ``LANGUAGES`` (with a country code)
   corresponds to :file:`en_US.dic`/:file:`en_US.aff` dictionary files,
-  and ``'uk'`` (no country code) corresponds to :file:`uk.dic`/:file:`uk.aff` dictionary files.
+  and ``'en'`` (no country code) corresponds to :file:`en.dic`/:file:`en.aff` dictionary files.
 
 Also you can completely override TinyMCE automatic language configuration by defining the necessary language options
 in `TINYMCE_DEFAULT_CONFIG`_.

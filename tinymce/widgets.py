@@ -9,12 +9,15 @@ http://code.djangoproject.com/wiki/CustomWidgetsTinyMCE
 
 from __future__ import unicode_literals
 from __future__ import absolute_import
+
 import json
 import logging
 import os
 import sys
+
 from django.conf import settings
 from django.contrib.staticfiles import finders
+from django.core.serializers.json import DjangoJSONEncoder
 from django.forms import Textarea, Media
 from django.forms.utils import flatatt
 from django.utils.encoding import smart_text
@@ -133,11 +136,15 @@ def render_tinymce_init_js(mce_config, callbacks, id_):
         callbacks['file_browser_callback'] = 'djangoFileBrowser'
     if mce_settings.USE_SPELLCHECKER and 'spellchecker_callback' not in callbacks:
         callbacks['spellchecker_callback'] = 'tinymce4_spellcheck'
+
     if id_:
         mce_config['selector'] = mce_config.get('selector', 'textarea') + '#{0}'.format(id_)
+
+    config = json.dumps(mce_config, cls=DjangoJSONEncoder)[1:-1]
+
     return render_to_string('tinymce/tinymce_init.js',
                             context={'callbacks': callbacks,
-                                     'tinymce_config': json.dumps(mce_config)[1:-1],
+                                     'tinymce_config': config,
                                      'is_admin_inline': '__prefix__' in id_})
 
 

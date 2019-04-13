@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Unreleased
+----------
+- Support translated strings in settings (with gettext_lazy).
+
 1.7.4
 -----
 - Upgraded TinyMCE to v.4.9.2

@@ -94,7 +94,7 @@ def get_language_config():
             if lang not in enchant_languages:
                 lang = lang[:2]
             if lang not in enchant_languages:
-                logger.error('Missing {0} spellchecker dictionary!'.format(lang))
+                logger.warning('Missing {0} spellchecker dictionary!'.format(lang))
                 continue
             if config.get('spellchecker_language') is None:
                 config['spellchecker_language'] = lang

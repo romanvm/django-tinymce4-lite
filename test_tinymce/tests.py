@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 import json
 import sys
 import time
@@ -73,12 +73,18 @@ class RenderTinyMceWidgetTestCase(SeleniumTestCase):
         with log_browser_errors(self.browser):
             self.browser.find_element_by_id('mceu_16')
 
-    def test_rendering_with_different_language(self):
+    def test_rendering_in_different_languages(self):
         with self.settings(LANGUAGE_CODE='fr-fr'):
             self.browser.get(self.live_server_url + reverse('create'))
             with log_browser_errors(self.browser):
                 self.browser.find_element_by_id('mceu_16')
                 self.assertTrue('Appuyer sur ALT-F9 pour le menu.' in
+                                self.browser.page_source)
+        with self.settings(LANGUAGE_CODE='uk'):
+            self.browser.refresh()
+            with log_browser_errors(self.browser):
+                self.browser.find_element_by_id('mceu_16')
+                self.assertTrue('Параграф' in
                                 self.browser.page_source)
 
 

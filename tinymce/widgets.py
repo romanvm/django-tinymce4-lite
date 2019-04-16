@@ -78,6 +78,17 @@ def get_language_config():
         config['directionality'] = 'rtl'
     else:
         config['directionality'] = 'ltr'
+    return config
+
+
+def get_spellcheck_config():
+    """
+    Create TinyMCE spellchecker config based on Django settings
+
+    :return: spellchecker parameters for TinyMCE
+    :rtype: dict
+    """
+    config = {}
     if mce_settings.USE_SPELLCHECKER:
         try:
             from enchant import list_languages
@@ -168,7 +179,7 @@ class TinyMCE(Textarea):
     def __init__(self, attrs=None, mce_attrs=None, profile=None):
         super(TinyMCE, self).__init__(attrs)
         self.mce_attrs = mce_attrs or {}
-        self.profile = get_language_config()
+        self.profile = get_spellcheck_config()
         default_profile = profile or mce_settings.CONFIG.copy()
         self.profile.update(default_profile)
 
@@ -187,6 +198,8 @@ class TinyMCE(Textarea):
         final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4-editor').lstrip()
         mce_config = self.profile.copy()
         mce_config.update(self.mce_attrs)
+        if 'language' not in mce_config:
+            mce_config.update(get_language_config())
         if mce_config.get('inline'):
             html = '<div{0}>{1}</div>\n'.format(flatatt(final_attrs), escape(value))
         else:

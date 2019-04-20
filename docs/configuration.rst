@@ -73,13 +73,20 @@ Read `TinyMCE documentation`_ to learn about available callbacks.
 Language Configuration
 ----------------------
 
-By default **tinymce4-lite** uses `LANGUAGE_CODE`_ and `LANGUAGES`_ Django options to automatically set up
-TinyMCE interface language and available spellchecker dictionaries. That is why it is recommended
-to define both options in your project's :file:`settings.py`.
+By default **tinymce4-lite** sets TinyMCE interface language and writing direcionality
+depending on the current Django language. However, to correctly select a TinyMCE 4 translation file
+Django language code must match the name of TinyMCE translation file. Supported combinations:
 
-``LANGUAGE_CODE`` option defines TinyMCE interface language and writing directionality.
+- ``ll`` (Django) => ``ll.js`` (TinyMCE)
+- ``ll-cc`` (Django) => ``ll_CC.js`` (TinyMCE)
+- ``ll-cc`` (Django) => ``ll.js`` (TinyMCE)
 
-``LANGUAGES`` option defines the list of available spellchecker languages. The first language in this list
+The ``ll`` (Django) => ``ll_CC.js`` (TinyMCE) is not supported because TinyMCE
+may have several country-specific variants of translation files. In this case
+you can manually rename the necessary TinyMCE translation file to match your
+Django language code.
+
+The ``LANGUAGES`` option  defines the list of available spellchecker languages. The first language in this list
 is used as the default one. The list of spellchecker languages also depends on available **pyenchant** dictionaries.
 For example, on Windows the default **pyenchant** installation includes only English, German and French spellchecker
 dictionaries. You can view the list available spellchecker dictionaries by running ``enchant.list_languages()`` function in a console

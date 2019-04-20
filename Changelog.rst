@@ -1,9 +1,12 @@
 Changelog
 =========
 
-Unreleased
+1.7.5
 ----------
-- Support translated strings in settings (with gettext_lazy).
+- Support translated strings in settings (merwok).
+- Set TinyMCE localization language when rendering the widget instead of the
+  widget class initialization (allows to set TinyMCE language depending on
+  the web page locale).
 
 1.7.4
 -----

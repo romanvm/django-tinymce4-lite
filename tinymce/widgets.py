@@ -90,12 +90,7 @@ def get_spellcheck_config():
     """
     config = {}
     if mce_settings.USE_SPELLCHECKER:
-        try:
-            from enchant import list_languages
-        except ImportError as ex:
-            raise ImportError(
-                'To use spellchecker you need to install pyenchant first!'
-            ).with_traceback(ex.__traceback__)
+        from enchant import list_languages
         enchant_languages = list_languages()
         if settings.DEBUG:
             logger.info('Enchant languages: {0}'.format(enchant_languages))

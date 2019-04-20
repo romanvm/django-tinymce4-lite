@@ -20,6 +20,10 @@ for TinyMCE 4 to insert images and file links into edited text.
 **Warning**: TinyMCE 4 is incompatible with TinyMCE 3. Read `TinyMCE docs`_
 for more information about how to configure TimyMCE 4 editor widget.
 
+**Note**: This package includes the latest available version of TinyMCE 4 -
+4.9.2. Currently there are no concrete plans to support TinyMCE 5, and **if**
+it happens, it will be in a separate package with a different name.
+
 Compatibility
 -------------
 

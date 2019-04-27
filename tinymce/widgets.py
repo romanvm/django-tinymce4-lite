@@ -173,10 +173,11 @@ class TinyMCE(Textarea):
     """
     def __init__(self, attrs=None, mce_attrs=None, profile=None):
         super(TinyMCE, self).__init__(attrs)
-        self.mce_attrs = mce_attrs or {}
-        self.profile = get_spellcheck_config()
-        default_profile = profile or mce_settings.CONFIG.copy()
-        self.profile.update(default_profile)
+        mce_attrs = mce_attrs or {}
+        self.profile = profile or mce_settings.CONFIG.copy()
+        self.profile.update(mce_attrs)
+        if 'spellchecker_languages' not in self.profile:
+            self.profile.update(get_spellcheck_config())
 
     def build_attrs(self, base_attrs, extra_attrs=None, **kwargs):
         attributes = dict(base_attrs, **kwargs)
@@ -192,7 +193,6 @@ class TinyMCE(Textarea):
         final_attrs['name'] = name
         final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4-editor').lstrip()
         mce_config = self.profile.copy()
-        mce_config.update(self.mce_attrs)
         if 'language' not in mce_config:
             mce_config.update(get_language_config())
         if mce_config.get('inline'):

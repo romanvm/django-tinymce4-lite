@@ -7,15 +7,17 @@
         {% for key, value in callbacks.items %}
           '{{ key }}': {{ value|safe }},
         {% endfor %}
-        setup: function (editor) {
-          editor.on('change', function () {
-            editor.save();
-          });
-        },
         {{ tinymce_config|safe }}
       };
       if (typeof selector != 'undefined') {
         tinymce4_config['selector'] = selector;
+      }
+      if (!('setup' in tinymce4_config)) {
+        tinymce4_config['setup'] = function (editor) {
+          editor.on('change', function () {
+            editor.save();
+          });
+        }
       }
       tinymce.init(tinymce4_config);
     } // End tinymce4_init

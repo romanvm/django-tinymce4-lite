@@ -28,7 +28,8 @@ __all__ = ['TinyMCE', 'render_tinymce_init_js']
 
 logging.basicConfig(format='[%(asctime)s] %(module)s: %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-logger.setLevel(20)
+logger_level = logging.DEBUG if settings.DEBUG else logging.WARNING
+logger.setLevel(logger_level)
 
 
 def language_file_exists(language_code):
@@ -77,8 +78,7 @@ def get_spellcheck_config():
     if mce_settings.USE_SPELLCHECKER:
         from enchant import list_languages
         enchant_languages = list_languages()
-        if settings.DEBUG:
-            logger.info('Enchant languages: {0}'.format(enchant_languages))
+        logger.debug('Enchant languages: {0}'.format(enchant_languages))
         lang_names = []
         for lang, name in settings.LANGUAGES:
             lang = convert_language_code(lang)

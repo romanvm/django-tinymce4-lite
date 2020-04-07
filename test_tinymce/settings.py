@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # To use filebrowser you must create "uploads" folder within your "media" folder
+    # 'filebrowser',
     'test_tinymce',
 ]
 

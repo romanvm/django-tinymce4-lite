@@ -1,8 +1,6 @@
-# coding: utf-8
 # Copyright (c) 2008 Joost Cassee, 2016 Roman Miroshnychenko
 # Licensed under the terms of the MIT License (see LICENSE.txt)
 
-from __future__ import absolute_import
 from django.db import models
 from django.contrib.admin.widgets import AdminTextareaWidget
 from .widgets import TinyMCE, AdminTinyMCE

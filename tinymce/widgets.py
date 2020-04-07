@@ -1,4 +1,3 @@
-# coding: utf-8
 # License: MIT, see LICENSE.txt
 """
 TinyMCE 4 forms widget
@@ -6,14 +5,9 @@ TinyMCE 4 forms widget
 This TinyMCE widget was copied and extended from this code by John D'Agostino:
 http://code.djangoproject.com/wiki/CustomWidgetsTinyMCE
 """
-
-from __future__ import unicode_literals
-from __future__ import absolute_import
-
 import json
 import logging
 import os
-import sys
 
 from django.conf import settings
 from django.contrib.staticfiles import finders
@@ -25,10 +19,7 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils.translation import get_language, get_language_bidi
 from django.template.loader import render_to_string
-try:
-    from django.urls import reverse
-except ImportError:
-    from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.admin import widgets as admin_widgets
 from jsmin import jsmin
 from . import settings as mce_settings
@@ -38,12 +29,6 @@ __all__ = ['TinyMCE', 'render_tinymce_init_js']
 logging.basicConfig(format='[%(asctime)s] %(module)s: %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 logger.setLevel(20)
-
-if sys.version_info[:2] < (3, 0):
-    logger.warning(
-        'Deprecation warning: Python 2 support will be removed '
-        'in future releases of tinymce4-lite!'
-    )
 
 
 def language_file_exists(language_code):

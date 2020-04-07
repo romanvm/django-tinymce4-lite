@@ -1,9 +1,5 @@
-from __future__ import absolute_import
 from django.db import models
-try:
-    from django.urls import reverse, reverse
-except ImportError:
-    from django.core.urlresolvers import reverse
+from django.urls import reverse
 from tinymce import HTMLField
 
 

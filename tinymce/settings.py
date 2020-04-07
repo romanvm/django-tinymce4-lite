@@ -1,8 +1,6 @@
-# coding: utf-8
 # License: MIT, see LICENSE.txt
 """The django-tinymce4-lite configuration options"""
 
-from __future__ import absolute_import
 import re
 import sys
 from django.conf import settings

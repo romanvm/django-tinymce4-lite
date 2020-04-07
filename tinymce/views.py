@@ -1,17 +1,11 @@
-# coding: utf-8
 # License: MIT, see LICENSE.txt
 """
 django-tinymce4-lite views
 """
-
-from __future__ import absolute_import
 import json
 import logging
 from django import VERSION
-try:
-    from django.urls import reverse
-except ImportError:
-    from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags

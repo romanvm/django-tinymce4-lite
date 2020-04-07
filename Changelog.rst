@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.8.0
+-----
+- Removed Python 2.7 support.
+- Added support for Python 3.8, Django 2.2 and 3.0
+
 1.7.5
 -----
 - Support translated strings in settings (merwok).

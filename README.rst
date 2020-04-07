@@ -27,8 +27,8 @@ it happens, it will be in a separate package with a different name.
 Compatibility
 -------------
 
-- **Python**: 2.7, 3+ (2.7 support to be removed)
-- **Django**: 1.11-2.1
+- **Python**: 3.5+
+- **Django**: 1.11+
 
 Quick Start
 ===========
@@ -47,6 +47,16 @@ Add ``tinymce`` to ``INSTALLED_APPS`` in ``settings.py`` for your Django project
   )
 
 Add ``tinymce.urls`` to ``urls.py`` for your project:
+
+.. code-block:: python
+
+  urlpatterns = [
+      ...
+      path('tinymce/', include('tinymce.urls')),
+      ...
+  ]
+
+Or with old-style regex ``url``:
 
 .. code-block:: python
 

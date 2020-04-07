@@ -20,10 +20,19 @@ Add ``tinymce.urls`` to ``urls.py`` for your project:
 
   urlpatterns = [
       ...
-      url(r'^tinymce/', include('tinymce.urls')),
+      path('tinymce/', include('tinymce.urls')),
       ...
   ]
 
+Or with old-style regex ``url``:
+
+.. code-block:: python
+
+  urlpatterns = [
+      ...
+      url(r'^tinymce/', include('tinymce.urls')),
+      ...
+  ]
 
 If you want to use `django-filebrowser-no-grappelli`_ file manager,
 install this package. Refer to `django-filebrowser documentation`_ to learn

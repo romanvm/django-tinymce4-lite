@@ -26,8 +26,8 @@ plugin.
 Compatibility
 -------------
 
-- **Python**: 2.7, 3+ (2.7 support to be removed)
-- **Django**: 1.11-2.1
+- **Python**: 3.5+
+- **Django**: 1.11+
 
 .. note:: I try to keep **django-tinymce4-lite** up to date with current Python and Django versions,
   but third-party packages, like filebrowsers, may be incompatible with the latest Python/Django.

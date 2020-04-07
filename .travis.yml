@@ -12,6 +12,7 @@ env:
   - DJANGO=2.0
   - DJANGO=2.1
   - DJANGO=2.2
+  - DJANGO=3.0
 matrix:
   exclude:
     - env: DJANGO=1.11
@@ -22,6 +23,8 @@ matrix:
       python: "3.8"
     - env: DJANGO=2.1
       python: "3.8"
+    - env: DJANGO=3.0
+      python: "3.5"
 addons:
   chrome: stable
   apt:
@@ -49,7 +52,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      python: "3.7"
+      python: "3.8"
       condition: $DJANGO = 2.2
   - provider: pypi
     skip_cleanup: true
@@ -58,7 +61,7 @@ deploy:
     distributions: "sdist bdist_wheel"
     on:
       tags: true
-      python: "3.7"
+      python: "3.8"
       condition: $DJANGO = 2.2
 notifications:
   email: false

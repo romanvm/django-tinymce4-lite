@@ -51,7 +51,7 @@ setup(
     platforms=['any'],
     url='https://github.com/romanvm/django-tinymce4-lite',
     install_requires=[
-        'Django>=1.8.0',
+        'Django>=1.11',
         'jsmin',
     ],
     zip_safe=False

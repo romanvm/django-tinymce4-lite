@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>tinymce.widgets &#8212; django-tinymce4-lite 1.8.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tinymce.widgets</h1><div class="highlight"><pre>
+<span></span><span class="c1"># License: MIT, see LICENSE.txt</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TinyMCE 4 forms widget</span>
+
+<span class="sd">This TinyMCE widget was copied and extended from this code by John D&#39;Agostino:</span>
+<span class="sd">http://code.djangoproject.com/wiki/CustomWidgetsTinyMCE</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.contrib.staticfiles</span> <span class="kn">import</span> <span class="n">finders</span>
+<span class="kn">from</span> <span class="nn">django.core.serializers.json</span> <span class="kn">import</span> <span class="n">DjangoJSONEncoder</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">Textarea</span><span class="p">,</span> <span class="n">Media</span>
+<span class="kn">from</span> <span class="nn">django.forms.utils</span> <span class="kn">import</span> <span class="n">flatatt</span>
+<span class="kn">from</span> <span class="nn">django.utils.encoding</span> <span class="kn">import</span> <span class="n">smart_text</span>
+<span class="kn">from</span> <span class="nn">django.utils.safestring</span> <span class="kn">import</span> <span class="n">mark_safe</span>
+<span class="kn">from</span> <span class="nn">django.utils.html</span> <span class="kn">import</span> <span class="n">escape</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">get_language</span><span class="p">,</span> <span class="n">get_language_bidi</span>
+<span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">render_to_string</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.contrib.admin</span> <span class="kn">import</span> <span class="n">widgets</span> <span class="k">as</span> <span class="n">admin_widgets</span>
+<span class="kn">from</span> <span class="nn">jsmin</span> <span class="kn">import</span> <span class="n">jsmin</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">settings</span> <span class="k">as</span> <span class="n">mce_settings</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TinyMCE&#39;</span><span class="p">,</span> <span class="s1">&#39;render_tinymce_init_js&#39;</span><span class="p">]</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;[</span><span class="si">%(asctime)s</span><span class="s1">] </span><span class="si">%(module)s</span><span class="s1">: </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">logger_level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEBUG</span> <span class="k">else</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logger_level</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">language_file_exists</span><span class="p">(</span><span class="n">language_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if TinyMCE has a language file for the specified lang code</span>
+
+<span class="sd">    :param language_code: language code</span>
+<span class="sd">    :type language_code: str</span>
+<span class="sd">    :return: check result</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.js&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">language_code</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;tinymce&#39;</span><span class="p">,</span> <span class="s1">&#39;js&#39;</span><span class="p">,</span> <span class="s1">&#39;tinymce&#39;</span><span class="p">,</span> <span class="s1">&#39;langs&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">finders</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">get_language_config</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a language configuration for TinyMCE4 based on Django project settings</span>
+
+<span class="sd">    :return: language- and locale-related parameters for TinyMCE 4</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">language_code</span> <span class="o">=</span> <span class="n">convert_language_code</span><span class="p">(</span><span class="n">get_language</span><span class="p">()</span> <span class="ow">or</span> <span class="n">settings</span><span class="o">.</span><span class="n">LANGUAGE_CODE</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">language_file_exists</span><span class="p">(</span><span class="n">language_code</span><span class="p">):</span>
+        <span class="n">language_code</span> <span class="o">=</span> <span class="n">language_code</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">language_file_exists</span><span class="p">(</span><span class="n">language_code</span><span class="p">):</span>
+            <span class="c1"># Fall back to English if Tiny MCE 4 does not have required translation</span>
+            <span class="n">language_code</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;language&#39;</span><span class="p">:</span> <span class="n">language_code</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">get_language_bidi</span><span class="p">():</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;directionality&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rtl&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;directionality&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ltr&#39;</span>
+    <span class="k">return</span> <span class="n">config</span>
+
+
+<span class="k">def</span> <span class="nf">get_spellcheck_config</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create TinyMCE spellchecker config based on Django settings</span>
+
+<span class="sd">    :return: spellchecker parameters for TinyMCE</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">USE_SPELLCHECKER</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">enchant</span> <span class="kn">import</span> <span class="n">list_languages</span>
+        <span class="n">enchant_languages</span> <span class="o">=</span> <span class="n">list_languages</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Enchant languages: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">enchant_languages</span><span class="p">))</span>
+        <span class="n">lang_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">lang</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">LANGUAGES</span><span class="p">:</span>
+            <span class="n">lang</span> <span class="o">=</span> <span class="n">convert_language_code</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">lang</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">enchant_languages</span><span class="p">:</span>
+                <span class="n">lang</span> <span class="o">=</span> <span class="n">lang</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">lang</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">enchant_languages</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Missing </span><span class="si">{0}</span><span class="s1"> spellchecker dictionary!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lang</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;spellchecker_language&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;spellchecker_language&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lang</span>
+            <span class="n">lang_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lang</span><span class="p">))</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;spellchecker_languages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lang_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">config</span>
+
+
+<span class="k">def</span> <span class="nf">convert_language_code</span><span class="p">(</span><span class="n">django_lang</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts Django language codes &quot;ll-cc&quot; into ISO codes &quot;ll_CC&quot; or &quot;ll&quot;</span>
+
+<span class="sd">    :param django_lang: Django language code as ll-cc</span>
+<span class="sd">    :type django_lang: str</span>
+<span class="sd">    :return: ISO language code as ll_CC</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lang_and_country</span> <span class="o">=</span> <span class="n">django_lang</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">lang_and_country</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lang_and_country</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lang_and_country</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">render_tinymce_init_js</span><span class="p">(</span><span class="n">mce_config</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">id_</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders TinyMCE.init() JavaScript code</span>
+
+<span class="sd">    :param mce_config: TinyMCE 4 configuration</span>
+<span class="sd">    :type mce_config: dict</span>
+<span class="sd">    :param callbacks: TinyMCE callbacks</span>
+<span class="sd">    :type callbacks: dict</span>
+<span class="sd">    :param id_: HTML element&#39;s ID to which TinyMCE is attached.</span>
+<span class="sd">    :type id_: str</span>
+<span class="sd">    :return: TinyMCE.init() code</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">USE_FILEBROWSER</span> <span class="ow">and</span> <span class="s1">&#39;file_browser_callback&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">callbacks</span><span class="p">:</span>
+        <span class="n">callbacks</span><span class="p">[</span><span class="s1">&#39;file_browser_callback&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;djangoFileBrowser&#39;</span>
+    <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">USE_SPELLCHECKER</span> <span class="ow">and</span> <span class="s1">&#39;spellchecker_callback&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">callbacks</span><span class="p">:</span>
+        <span class="n">callbacks</span><span class="p">[</span><span class="s1">&#39;spellchecker_callback&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;tinymce4_spellcheck&#39;</span>
+
+    <span class="k">if</span> <span class="n">id_</span><span class="p">:</span>
+        <span class="n">mce_config</span><span class="p">[</span><span class="s1">&#39;selector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mce_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;selector&#39;</span><span class="p">,</span> <span class="s1">&#39;textarea&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;#</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">id_</span><span class="p">)</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">mce_config</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">DjangoJSONEncoder</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;tinymce/tinymce_init.js&#39;</span><span class="p">,</span>
+                            <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;callbacks&#39;</span><span class="p">:</span> <span class="n">callbacks</span><span class="p">,</span>
+                                     <span class="s1">&#39;tinymce_config&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span>
+                                     <span class="s1">&#39;is_admin_inline&#39;</span><span class="p">:</span> <span class="s1">&#39;__prefix__&#39;</span> <span class="ow">in</span> <span class="n">id_</span><span class="p">})</span>
+
+
+<div class="viewcode-block" id="TinyMCE"><a class="viewcode-back" href="../../modules.html#tinymce.TinyMCE">[docs]</a><span class="k">class</span> <span class="nc">TinyMCE</span><span class="p">(</span><span class="n">Textarea</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TinyMCE 4 widget</span>
+
+<span class="sd">    It replaces a textarea form widget with a rich-text WYSIWYG `TinyMCE 4`_ editor widget.</span>
+
+<span class="sd">    :param attrs: General Django widget attributes.</span>
+<span class="sd">    :type attrs: dict</span>
+<span class="sd">    :param mce_attrs: Additional configuration parameters for TinyMCE 4.</span>
+<span class="sd">        They *amend* the existing configuration.</span>
+<span class="sd">    :type mce_attrs: dict</span>
+<span class="sd">    :param profile: TinyMCE 4 configuration parameters.</span>
+<span class="sd">        They *replace* the existing configuration.</span>
+<span class="sd">    :type profile: dict</span>
+
+<span class="sd">    .. _TinyMCE 4: https://www.tinymce.com/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mce_attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TinyMCE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mce_attrs</span> <span class="o">=</span> <span class="n">mce_attrs</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">profile</span> <span class="o">=</span> <span class="n">get_spellcheck_config</span><span class="p">()</span>
+        <span class="n">default_profile</span> <span class="o">=</span> <span class="n">profile</span> <span class="ow">or</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">CONFIG</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">default_profile</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TinyMCE.build_attrs"><a class="viewcode-back" href="../../modules.html#tinymce.TinyMCE.build_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">build_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_attrs</span><span class="p">,</span> <span class="n">extra_attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">base_attrs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">extra_attrs</span><span class="p">:</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_attrs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">attributes</span></div>
+
+<div class="viewcode-block" id="TinyMCE.render"><a class="viewcode-back" href="../../modules.html#tinymce.TinyMCE.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">renderer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">smart_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">final_attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_attrs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+        <span class="n">final_attrs</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">final_attrs</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">final_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; tinymce4-editor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+        <span class="n">mce_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">mce_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mce_attrs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;language&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mce_config</span><span class="p">:</span>
+            <span class="n">mce_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">get_language_config</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">mce_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inline&#39;</span><span class="p">):</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;div</span><span class="si">{0}</span><span class="s1">&gt;</span><span class="si">{1}</span><span class="s1">&lt;/div&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">flatatt</span><span class="p">(</span><span class="n">final_attrs</span><span class="p">),</span> <span class="n">escape</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;textarea</span><span class="si">{0}</span><span class="s1">&gt;</span><span class="si">{1}</span><span class="s1">&lt;/textarea&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">flatatt</span><span class="p">(</span><span class="n">final_attrs</span><span class="p">),</span> <span class="n">escape</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;script type=&quot;text/javascript&quot;&gt;</span><span class="si">{0}</span><span class="s1">&lt;/script&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">jsmin</span><span class="p">(</span><span class="n">render_tinymce_init_js</span><span class="p">(</span><span class="n">mce_config</span><span class="p">,</span>
+                                         <span class="n">mce_settings</span><span class="o">.</span><span class="n">CALLBACKS</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                                         <span class="n">final_attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+                  <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">mark_safe</span><span class="p">(</span><span class="n">html</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">media</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">[</span><span class="n">mce_settings</span><span class="o">.</span><span class="n">JS_URL</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">USE_FILEBROWSER</span><span class="p">:</span>
+            <span class="n">js</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;tinymce-filebrowser&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">ADDIONAL_JS_URLS</span><span class="p">:</span>
+            <span class="n">js</span> <span class="o">+=</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">ADDIONAL_JS_URLS</span>
+        <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">USE_SPELLCHECKER</span><span class="p">:</span>
+            <span class="n">js</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;tinymce-spellcheck-callback&#39;</span><span class="p">))</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;all&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;tinymce-css&#39;</span><span class="p">)]}</span>
+        <span class="k">if</span> <span class="n">mce_settings</span><span class="o">.</span><span class="n">CSS_URL</span><span class="p">:</span>
+            <span class="n">css</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mce_settings</span><span class="o">.</span><span class="n">CSS_URL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Media</span><span class="p">(</span><span class="n">js</span><span class="o">=</span><span class="n">js</span><span class="p">,</span> <span class="n">css</span><span class="o">=</span><span class="n">css</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AdminTinyMCE"><a class="viewcode-back" href="../../modules.html#tinymce.AdminTinyMCE">[docs]</a><span class="k">class</span> <span class="nc">AdminTinyMCE</span><span class="p">(</span><span class="n">TinyMCE</span><span class="p">,</span> <span class="n">admin_widgets</span><span class="o">.</span><span class="n">AdminTextareaWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;TinyMCE 4 widget for Django Admin interface&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">django-tinymce4-lite</a></h1>
+
+
+
+<p class="blurb">TinyMCE 4 editor for Django</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=django-tinymce4-lite&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/romanvm/django-tinymce4-lite">
+    <img
+        alt="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+        src="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/romanvm/django-tinymce4-lite">
+    <img
+    alt="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    src="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../test.html">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/django-tinymce4-lite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

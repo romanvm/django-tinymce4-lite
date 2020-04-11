@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuration &#8212; django-tinymce4-lite 1.8.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="application-configuration">
+<h2>Application Configuration<a class="headerlink" href="#application-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The following options can be defined for <strong>tinymce4-lite</strong> in your Django project’s
+<code class="file docutils literal notranslate"><span class="pre">settings.py</span></code> file.</p>
+<p id="tinymce-default-config"><code class="docutils literal notranslate"><span class="pre">TINYMCE_DEFAULT_CONFIG</span></code> – TinyMCE 4 widget configuration.
+<strong>tinymce4-lite</strong> provides a reasonable default configuration with essential editing capabilities,
+so you need to use this option only if you want to create your own custom TinyMCE configuration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <strong>tinymce4-lite</strong> the TinyMCE configuration is defined as a Python <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.
+The <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> configuration is then translated to JSON configuration
+according to <a class="reference external" href="https://docs.python.org/3.6/library/json.html#json.JSONEncoder" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">json.JSONEncoder</span></code></a> rules.</p>
+</div>
+<p>See <a class="reference external" href="https://www.tinymce.com/docs/">TinyMCE documentation</a> for available configuration options.</p>
+<p>Default configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEFAULT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;selector&#39;</span><span class="p">:</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;theme&#39;</span><span class="p">:</span> <span class="s1">&#39;modern&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;plugins&#39;</span><span class="p">:</span> <span class="s1">&#39;link image preview codesample contextmenu table code lists&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;toolbar1&#39;</span><span class="p">:</span> <span class="s1">&#39;formatselect | bold italic underline | alignleft aligncenter alignright alignjustify &#39;</span>
+               <span class="s1">&#39;| bullist numlist | outdent indent | table | link image | codesample | preview code&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;contextmenu&#39;</span><span class="p">:</span> <span class="s1">&#39;formats | link image&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;menubar&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;inline&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;statusbar&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="mi">360</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">TINYMCE_SPELLCHECKER</span></code> – enables spellchecker function for TinyMCE. For the default configuration it also adds
+a spellcheck button to TinyMCE toolbar. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a custom TinyMCE configuration, don’t forget to add <a class="reference external" href="https://www.tinymce.com/docs/plugins/spellchecker/">spellchecker</a> plugin to
+your configuration, and add the necessary menu item/toolbar button. Also read <a class="reference internal" href="#language-configuration">Language Configuration</a>
+subsection about how to configure the spellchecker.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">TINYMCE_FILEBROWSER</span></code> – enables file browser support in TinyMCE image and link dialogs.
+<strong>tinymce4-lite</strong> supports <a class="reference external" href="https://github.com/smacker/django-filebrowser-no-grappelli">django-filebrowser-no-grappelli</a> file browser.
+Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">'filebrowser'</span></code> is added to <a class="reference external" href="https://docs.djangoproject.com/en/2.0/ref/settings/#installed-apps">INSTALLED_APPS</a>, else <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TINYMCE_JS_URL</span></code> – a path to TinyMCE JavaScript library.
+Default: <code class="file docutils literal notranslate"><em><span class="pre">your_static_url</span></em><span class="pre">/tinymce/js/tinymce/tinymce.min.js</span></code>.
+The following example shows how to load the TinyMCE library from a CDN:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TINYMCE_JS_URL</span> <span class="o">=</span> <span class="s1">&#39;//cdn.tinymce.com/4/tinymce.min.js&#39;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">TINYMCE_ADDITIONAL_JS_URLS</span></code> – a <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#list" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of URLs for additional JavaScript files to be used with the TinyMCE
+widget, for example, custom TinyMCE plugins. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TINYMCE_CSS_URL</span></code> – a path to a CSS file with additional styles for TinyMCE. Unlike
+<code class="docutils literal notranslate"><span class="pre">content_style</span></code> and <code class="docutils literal notranslate"><span class="pre">content_css</span></code> TinyMCE settings (see “<a class="reference internal" href="advanced.html#custom-css"><span class="std std-ref">Applying custom CSS</span></a>”),
+this CSS is applied to the TinyMCE widget itself, for example to correct the widget position on a page.
+Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TINYMCE_CALLBACKS</span></code> – allows to define custom TinyMCE callbacks, for example <code class="docutils literal notranslate"><span class="pre">file_browser_callback</span></code>
+or <code class="docutils literal notranslate"><span class="pre">spellchecker_callback</span></code>. This is a Python <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> where keys are the names of callbacks and values are
+JavaScript objects as Python strings. Default: <code class="docutils literal notranslate"><span class="pre">{}</span></code> (an empty <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#dict" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>).
+Read <a class="reference external" href="https://www.tinymce.com/docs/">TinyMCE documentation</a> to learn about available callbacks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Custom <code class="docutils literal notranslate"><span class="pre">file_browser_callback</span></code> and <code class="docutils literal notranslate"><span class="pre">spellchecker_callback</span></code> options defined in <code class="docutils literal notranslate"><span class="pre">TINYMCE_CALLBACKS</span></code>
+override <strong>tinymce4-lite</strong> built-in callbacks.</p>
+</div>
+</div>
+<div class="section" id="language-configuration">
+<span id="language-config"></span><h2>Language Configuration<a class="headerlink" href="#language-configuration" title="Permalink to this headline">¶</a></h2>
+<p>By default <strong>tinymce4-lite</strong> sets TinyMCE interface language and writing direcionality
+depending on the current Django language. However, to correctly select a TinyMCE 4 translation file
+Django language code must match the name of TinyMCE translation file. Supported combinations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ll</span></code> (Django) =&gt; <code class="docutils literal notranslate"><span class="pre">ll.js</span></code> (TinyMCE)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ll-cc</span></code> (Django) =&gt; <code class="docutils literal notranslate"><span class="pre">ll_CC.js</span></code> (TinyMCE)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ll-cc</span></code> (Django) =&gt; <code class="docutils literal notranslate"><span class="pre">ll.js</span></code> (TinyMCE)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">ll</span></code> (Django) =&gt; <code class="docutils literal notranslate"><span class="pre">ll_CC.js</span></code> (TinyMCE) is not supported because TinyMCE
+may have several country-specific variants of translation files. In this case
+you can manually rename the necessary TinyMCE translation file to match your
+Django language code.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> option  defines the list of available spellchecker languages. The first language in this list
+is used as the default one. The list of spellchecker languages also depends on available <strong>pyenchant</strong> dictionaries.
+For example, on Windows the default <strong>pyenchant</strong> installation includes only English, German and French spellchecker
+dictionaries. You can view the list available spellchecker dictionaries by running <code class="docutils literal notranslate"><span class="pre">enchant.list_languages()</span></code> function in a console
+from your working Python environment. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">enchant</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enchant</span><span class="o">.</span><span class="n">list_languages</span><span class="p">()</span>
+<span class="go">[&#39;de_DE&#39;, &#39;en_AU&#39;, &#39;en_GB&#39;, &#39;en_US&#39;, &#39;fr_FR&#39;]</span>
+</pre></div>
+</div>
+<p>On Linux you can install <a class="reference external" href="http://hunspell.github.io">Hunspell</a> dictionaries for your languages
+that will be automatically used by <strong>pyenchant</strong>.
+E.g. for Ukrainian spelling dictionary on Ubuntu/Debian:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt install hunspell-uk
+</pre></div>
+</div>
+<p>On Windows you need to add the necessary dictionaries manually to <strong>enchant</strong> package
+in <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> directory of your working Python environment.
+Additional spellchecker dictionaries can be downloaded from <a class="reference external" href="http://www.softmaker.com/en/download/dictionaries">this page</a>. Unpack a <code class="file docutils literal notranslate"><span class="pre">.sox</span></code> file
+using an archive manager, for example <a class="reference external" href="http://www.7-zip.org/">7zip</a>, and copy <code class="file docutils literal notranslate"><span class="pre">.dic</span></code> and <code class="file docutils literal notranslate"><span class="pre">.aff</span></code> for your language to
+<code class="docutils literal notranslate"><span class="pre">enchant/share/enchant/myspell/</span></code> directory inside <strong>enchant</strong> package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Django language codes in <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> must match dictionary filenames.
+For example, <code class="docutils literal notranslate"><span class="pre">'en-us'</span></code> in <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> (with a country code)
+corresponds to <code class="file docutils literal notranslate"><span class="pre">en_US.dic</span></code>/<code class="file docutils literal notranslate"><span class="pre">en_US.aff</span></code> dictionary files,
+and <code class="docutils literal notranslate"><span class="pre">'uk'</span></code> (no country code) corresponds to <code class="file docutils literal notranslate"><span class="pre">uk.dic</span></code>/<code class="file docutils literal notranslate"><span class="pre">uk.aff</span></code> dictionary files.</p>
+</div>
+<p>Also you can completely override TinyMCE automatic language configuration by defining the necessary language options
+in <a class="reference internal" href="#tinymce-default-config">TINYMCE_DEFAULT_CONFIG</a>.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">django-tinymce4-lite</a></h1>
+
+
+
+<p class="blurb">TinyMCE 4 editor for Django</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=django-tinymce4-lite&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/romanvm/django-tinymce4-lite">
+    <img
+        alt="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+        src="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/romanvm/django-tinymce4-lite">
+    <img
+    alt="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    src="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#application-configuration">Application Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#language-configuration">Language Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/configuration.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/romanvm/django-tinymce4-lite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

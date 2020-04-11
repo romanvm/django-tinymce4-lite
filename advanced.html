@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Advanced Usage &#8212; django-tinymce4-lite 1.8.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Test Project" href="test.html" />
+    <link rel="prev" title="Usage" href="usage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="advanced-usage">
+<h1>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="applying-custom-css">
+<span id="custom-css"></span><h2>Applying custom CSS<a class="headerlink" href="#applying-custom-css" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.tinymce.com/docs/configure/content-appearance/#content_style">content_style</a> and <a class="reference external" href="https://www.tinymce.com/docs/configure/content-appearance/#content_css">content_css</a> TinyMCE configuration options allow to define custom Cascading Style Sheets
+for the content in TinyMCE editor window.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">contents_style</span></code> option defines inline styles and the <code class="docutils literal notranslate"><span class="pre">content_css</span></code> option defines a URL or a list of URLs
+for CSS files. For large Style Sheets the latter option is preferable because a browser can cache CSS files.</p>
+<p>For example, if your website uses <a class="reference external" href="http://getbootstrap.com/">Bootstrap</a> styles,
+you can apply those styles to edited content in the TinyMCE widget:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">TINYMCE_DEFAULT_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;content_css&#39;</span><span class="p">:</span> <span class="s1">&#39;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="code-samples">
+<h2>Code Samples<a class="headerlink" href="#code-samples" title="Permalink to this headline">¶</a></h2>
+<p>TinyMCE v.4.3 and later includes <a class="reference external" href="https://www.tinymce.com/docs/plugins/codesample/">codesample</a> plugin that allows to insert the samples of programming code
+into edited content with pretty syntax highlighting. The <code class="docutils literal notranslate"><span class="pre">codesample</span></code> plugin uses <a class="reference external" href="http://prismjs.com/">Prism</a> library
+for syntax highlighting (default theme). The plugin supports the following languages:
+<strong>HTML/XML</strong>, <strong>JavaScript</strong>, <strong>CSS</strong>, <strong>PHP</strong>, <strong>Ruby</strong>, <strong>Python</strong>, <strong>Java</strong>, <strong>C#</strong> and <strong>C</strong>/<strong>C++</strong>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">codesample</span></code> plugin already includes the necessary Prism components to correctly display code samples
+in TinyMCE, but to make code samples correctly appear on webpages authored with TinyMCE you need to include
+the links to Prism JavaScript/CSS files into the HTML code of your pages. The <strong>tinymce4-lite</strong> application already
+includes <code class="file docutils literal notranslate"><span class="pre">prism.js</span></code> and <code class="file docutils literal notranslate"><span class="pre">prism.css</span></code> files that can be referenced in your Django templates.
+For example:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">static</span> <span class="nv">from</span> <span class="nv">staticfiles</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">&lt;head&gt;</span>
+<span class="x">  ...</span>
+<span class="x">&lt;!-- Prism CSS --&gt;</span>
+<span class="x">&lt;link href=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s2">&quot;tinymce/css/prism.css&quot;</span> <span class="cp">%}</span><span class="x">&quot; rel=&quot;stylesheet&quot;&gt;</span>
+<span class="x">&lt;/head&gt;</span>
+<span class="x">&lt;body&gt;</span>
+<span class="x">...</span>
+<span class="x">&lt;!-- Prism JS --&gt;</span>
+<span class="x">&lt;script src=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s2">&quot;tinymce/js/prism.js&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;&lt;/script&gt;</span>
+<span class="x">&lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>You can use different Prism themes for your webpages but in TinyMCE the content is always displayed
+with the default Prism theme.</p>
+</div>
+<div class="section" id="the-preview-button">
+<h2>The Preview Button<a class="headerlink" href="#the-preview-button" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.tinymce.com/docs/plugins/preview/">preview</a> plugin in TinyMCE 4, unlike in TinyMCE 3, does not support custom preview dialogs.
+Use <a class="reference internal" href="#custom-css"><span class="std std-ref">custom Style Sheets</span></a> as described in the first subsection on this page.
+They work for the preview window too.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">django-tinymce4-lite</a></h1>
+
+
+
+<p class="blurb">TinyMCE 4 editor for Django</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=django-tinymce4-lite&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/romanvm/django-tinymce4-lite">
+    <img
+        alt="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+        src="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/romanvm/django-tinymce4-lite">
+    <img
+    alt="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    src="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#applying-custom-css">Applying custom CSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-samples">Code Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-preview-button">The Preview Button</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/advanced.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/romanvm/django-tinymce4-lite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Usage &#8212; django-tinymce4-lite 1.8.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced Usage" href="advanced.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="htmlfield-for-models">
+<h2>HTMLField for Models<a class="headerlink" href="#htmlfield-for-models" title="Permalink to this headline">¶</a></h2>
+<p>For developers who want to implement TinyMCE editor in their Django applications in the simplest possible way,
+<strong>tinymce4-lite</strong> provides a <a class="reference internal" href="modules.html#tinymce.HTMLField" title="tinymce.HTMLField"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMLField</span></code></a> field for models.
+This field can can be used instead of a <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/models/fields/#django.db.models.TextField" title="(in Django v1.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextField</span></code></a>.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">tinymce</span> <span class="kn">import</span> <span class="n">HTMLField</span>
+
+<span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">HTMLField</span><span class="p">(</span><span class="s1">&#39;Content&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Don’t forget to apply <a class="reference external" href="https://docs.djangoproject.com/es/1.9/ref/templates/builtins/#safe">safe</a> filter to the HTML content in your templates to render it properly.
+For example:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">my_model.content</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are using TinyMCE editor in publicly facing webpages, it is strongly recommended to define
+<a class="reference external" href="https://www.tinymce.com/docs/configure/content-filtering/#valid_elements">valid_elements</a> option for TinyMCE to limit the set of allowed HTML elements and/or
+to filter submitted content for security reasons.</p>
+</div>
+<p>In Django Admin interface the widget is used automatically for all models that have
+<a class="reference internal" href="modules.html#tinymce.HTMLField" title="tinymce.HTMLField"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMLField</span></code></a> fields.</p>
+<p id="forms-media">If you are using TinyMCE 4 in your website forms,
+you need to add <code class="docutils literal notranslate"><span class="pre">form.media</span></code> template variable to the <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> section of your templates:</p>
+<div class="highlight-django notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">&lt;head&gt;</span>
+<span class="x">  ...</span>
+<span class="x">  </span><span class="cp">{{</span> <span class="nv">form.media</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">&lt;/head&gt;</span>
+<span class="x">&lt;body&gt;</span>
+<span class="x">...</span>
+<span class="x">&lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tinymce-widget-for-forms">
+<h2>TinyMCE Widget for Forms<a class="headerlink" href="#tinymce-widget-for-forms" title="Permalink to this headline">¶</a></h2>
+<p>In custom forms you can use <a class="reference internal" href="modules.html#tinymce.TinyMCE" title="tinymce.TinyMCE"><code class="xref py py-class docutils literal notranslate"><span class="pre">TinyMCE</span></code></a> form widget to render TinyMCE editor
+instead of a simple <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/forms/fields/#django.forms.CharField" title="(in Django v1.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CharField</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">tinymce</span> <span class="kn">import</span> <span class="n">TinyMCE</span>
+
+
+<span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">TinyMCE</span><span class="p">(</span><span class="n">mce_attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;width&#39;</span><span class="p">:</span> <span class="mi">800</span><span class="p">}))</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="modules.html#tinymce.TinyMCE" title="tinymce.TinyMCE"><code class="xref py py-class docutils literal notranslate"><span class="pre">TinyMCE</span></code></a> class constructor takes 3 parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">attrs</span></code> – general Django widget attributes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mce_attrs</span></code> – additional configuration parameters for TinyMCE 4.
+These parameters <strong>amend</strong> the existing configuration. For example, in the preceding code sample <code class="docutils literal notranslate"><span class="pre">'width'</span></code>
+parameter sets TinyMCE widget width to 800 pixels without changing other configuration options.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profile</span></code> – TinyMCE 4 configuration parameters. They <strong>replace</strong> the existing configuration.
+That is, you need to provide a fully defined TinyMCE configuration for <code class="docutils literal notranslate"><span class="pre">profile</span></code> parameter.</p></li>
+</ul>
+<p>Also see the information about <a class="reference internal" href="#forms-media"><span class="std std-ref">form.media</span></a> template variable in the preceding subsection.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">django-tinymce4-lite</a></h1>
+
+
+
+<p class="blurb">TinyMCE 4 editor for Django</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=django-tinymce4-lite&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/romanvm/django-tinymce4-lite">
+    <img
+        alt="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+        src="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/romanvm/django-tinymce4-lite">
+    <img
+    alt="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    src="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#htmlfield-for-models">HTMLField for Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tinymce-widget-for-forms">TinyMCE Widget for Forms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/romanvm/django-tinymce4-lite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

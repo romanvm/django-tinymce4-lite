@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Project &#8212; django-tinymce4-lite 1.8.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="modules.html" />
+    <link rel="prev" title="Advanced Usage" href="advanced.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="test-project">
+<h1>Test Project<a class="headerlink" href="#test-project" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>tinymce4-lite</strong> sources include <strong>test_tinymce</strong> project that can be used to run automated tests
+or to try a live TinyMCE 4 editor widget. The test project can also serve as a basic example of
+<strong>tinymce4-lite</strong> usage.</p>
+<p>To use the test project, first you need to install the necessary dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.txt
+</pre></div>
+</div>
+<p>Then you need to create the test database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py migrate
+</pre></div>
+</div>
+<p>If you want to try TinyMCE in Django Admin, create a superuser to access the Admin interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py createsuperuser
+</pre></div>
+</div>
+<p>To run automated tests, enter in the console:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py test test_tinymce
+</pre></div>
+</div>
+<p>Tests require web-browsers: Firefox on Windows and Chrome on other platforms.
+You also need to download respective Selenium drivers for your platform:
+<a class="reference external" href="https://github.com/mozilla/geckodriver/releases">Gecko driver</a> or
+<a class="reference external" href="https://sites.google.com/a/chromium.org/chromedriver/">Chrome driver</a>.
+Set the necessary permissions for a driver executable and add the directory
+where it resides your system <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable.
+Also check Travis CI configuration <code class="docutils literal notranslate"><span class="pre">.travis.yml</span></code>.</p>
+<p>To open TinyMCE 4 editor, run the test server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python manage.py runserver
+</pre></div>
+</div>
+<p>Then open the project’s start page in your browser: <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>.
+The browser will open a webpage with a TinyMCE 4 editor.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The commands described in this section need to be run from the <strong>tinymce4-lite</strong>
+sources root directory.</p>
+</div>
+<p>The test project is very simple. It allows you to try rich text editing in
+TinyMCE 4 and then save the text and see how it looks on a web-page.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">django-tinymce4-lite</a></h1>
+
+
+
+<p class="blurb">TinyMCE 4 editor for Django</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=django-tinymce4-lite&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/romanvm/django-tinymce4-lite">
+    <img
+        alt="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+        src="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/romanvm/django-tinymce4-lite">
+    <img
+    alt="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    src="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/romanvm/django-tinymce4-lite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

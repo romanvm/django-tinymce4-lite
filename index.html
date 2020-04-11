@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to django-tinymce4-lite documentation! &#8212; django-tinymce4-lite 1.8.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-django-tinymce4-lite-documentation">
+<h1>Welcome to django-tinymce4-lite documentation!<a class="headerlink" href="#welcome-to-django-tinymce4-lite-documentation" title="Permalink to this headline">¶</a></h1>
+<p><strong>django-tinymce4-lite</strong> is a reworked fork of <a class="reference external" href="https://github.com/dani0805/django-tinymce4">django-tinymce4</a>. It provides a <a class="reference external" href="https://www.tinymce.com/">TinyMCE 4</a>
+editor widget that can be used in Django forms and models.</p>
+<div class="figure align-default" id="id1">
+<img alt="TinyMCE 4 in Django Admin" src="_images/screenshot.png" />
+<p class="caption"><span class="caption-text"><em>TinyMCE 4 editor in Django Admin interface</em></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this fork all legacy and broken code has been cleaned in order to provide simple
+but full-featured TinyMCE 4 experience in Django projects.</p>
+<p><strong>django-tinymce4-lite</strong> can use <a class="reference external" href="https://github.com/smacker/django-filebrowser-no-grappelli">django-filebrowser-no-grappelli</a>
+as a file manager for TinyMCE 4 to insert images and file links into edited text.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently <code class="docutils literal notranslate"><span class="pre">django-filebrowser</span></code> (grapelli-based) is not compatible
+with <strong>django-tinymce4-lite</strong> because it lacks support for TinyMCE 4. See this
+<a class="reference external" href="https://github.com/sehmaschine/django-filebrowser/pull/255">pull request</a>
+for more details.</p>
+</div>
+<p>The application also includes a spellchecker service for TinyMCE 4 spellchecker
+plugin.</p>
+<div class="section" id="compatibility">
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Python</strong>: 3.5+</p></li>
+<li><p><strong>Django</strong>: 1.11+</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I try to keep <strong>django-tinymce4-lite</strong> up to date with current Python and Django versions,
+but third-party packages, like filebrowsers, may be incompatible with the latest Python/Django.
+It’s up to those packages’ authors/maintainers to keep their work in sync with recent developments.</p>
+</div>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>django-tinymce4-lite</strong> software: <a class="reference external" href="https://en.wikipedia.org/wiki/MIT_License">MIT license</a>.</p></li>
+<li><p>This documentation: <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="naming-conventions">
+<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h2>
+<p>In this documentation <strong>django-tinymce4-lite</strong> or <strong>tinymce4-lite</strong> (all lowercase) refers to this
+Python/Django application, and <strong>TinyMCE 4</strong> or <strong>TinyMCE</strong> (CamelCase) refers to
+a JavaScript <a class="reference external" href="https://www.tinymce.com/">TinyMCE</a> editor widget. If a version number is omitted, TinyMCE v.4.x.x is assumed.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#upgrade">Upgrade</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#application-configuration">Application Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#language-configuration">Language Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#htmlfield-for-models">HTMLField for Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#tinymce-widget-for-forms">TinyMCE Widget for Forms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#applying-custom-css">Applying custom CSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#code-samples">Code Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#the-preview-button">The Preview Button</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#django-tinymce4-lite">django-tinymce4-lite</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">1.8.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id2">1.7.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id3">1.7.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id4">1.7.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id5">1.7.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id6">1.7.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id7">1.7.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id8">1.6.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id9">1.5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id10">1.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id11">1.5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id12">1.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id13">1.4.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id14">1.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id15">1.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id16">1.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id17">1.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id18">1.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id19">1.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id20">1.0.0</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">django-tinymce4-lite</a></h1>
+
+
+
+<p class="blurb">TinyMCE 4 editor for Django</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=django-tinymce4-lite&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://travis-ci.org/romanvm/django-tinymce4-lite">
+    <img
+        alt="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+        src="https://secure.travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master"
+    />
+</a>
+</p>
+
+
+
+
+    
+
+<p>
+<a class="badge" href="https://codecov.io/github/romanvm/django-tinymce4-lite">
+    <img
+    alt="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    src="https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master"
+    />
+</a>
+</p>
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/romanvm/django-tinymce4-lite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

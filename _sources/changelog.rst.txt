@@ -1,0 +1,2 @@
+.. include:: ../Changelog.rst
+

@@ -63,10 +63,7 @@ CALLBACKS = getattr(settings, 'TINYMCE_CALLBACKS', {})
 """TinyMCE 4 calback JavaScript functions"""
 USE_FILEBROWSER = getattr(settings, 'TINYMCE_FILEBROWSER', 'filebrowser' in settings.INSTALLED_APPS)
 """
-Enable integration with django-filebrowser
+Enable integration with `django-filebrowser-no-grappelli`_.
 
-Both `django-filebrowser`_ and `django-filebrowser-no-grappelli`_ are supported.
-
-.. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
 """

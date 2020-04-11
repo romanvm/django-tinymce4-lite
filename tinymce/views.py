@@ -5,11 +5,10 @@ django-tinymce4-lite views
 import json
 import logging
 from django import VERSION
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from django.conf import settings
 from django.views.decorators.cache import never_cache
 from jsmin import jsmin
 try:
@@ -88,12 +87,7 @@ def css(request):
     :return: Django http response with CSS file for TinyMCE 4
     :rtype: django.http.HttpResponse
     """
-    if 'grappelli' in settings.INSTALLED_APPS:
-        margin_left = 0
-    elif VERSION[:2] <= (1, 8):
-        margin_left = 110  # For old style admin
-    else:
-        margin_left = 170  # For Django >= 1.9 style admin
+    margin_left = 170  # For Django >= 1.9 style admin
     # For Django >= 2.0 responsive admin
     responsive_admin = VERSION[:2] >= (2, 0)
     return HttpResponse(render_to_string('tinymce/tinymce4.css',
@@ -119,7 +113,7 @@ def filebrowser(request):
     """
     try:
         fb_url = reverse('fb_browse')
-    except:
+    except NoReverseMatch:
         fb_url = reverse('filebrowser:fb_browse')
     return HttpResponse(jsmin(render_to_string('tinymce/filebrowser.js',
                                                context={'fb_url': fb_url},

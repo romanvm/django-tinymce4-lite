@@ -14,7 +14,7 @@ from django.contrib.staticfiles import finders
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms import Textarea, Media
 from django.forms.utils import flatatt
-from django.utils.encoding import smart_text
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils.translation import get_language, get_language_bidi
@@ -172,7 +172,7 @@ class TinyMCE(Textarea):
     def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             value = ''
-        value = smart_text(value)
+        value = force_str(value)
         final_attrs = self.build_attrs(self.attrs, attrs)
         final_attrs['name'] = name
         final_attrs['class'] = (final_attrs.get('class', '') + ' tinymce4-editor').lstrip()

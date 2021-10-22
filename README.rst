@@ -1,6 +1,11 @@
 django-tinymce4-lite
 ====================
 
+** This project is closed. I created it because at that time there was no fully functional
+Django library that allowed to use TinyMCE 4 editor (the latest at that time).
+Now TinyMCE 5 has been released and there is `django-tinymce`_ library
+that allows to use TinyMCE 5 so this library has become obsolete.**
+
 .. image:: https://travis-ci.org/romanvm/django-tinymce4-lite.svg?branch=master
   :target: https://travis-ci.org/romanvm/django-tinymce4-lite
 .. image:: https://codecov.io/github/romanvm/django-tinymce4-lite/coverage.svg?branch=master
@@ -101,3 +106,4 @@ MIT license. See LICENSE.txt
 .. _django-filebrowser: https://github.com/sehmaschine/django-filebrowser
 .. _django-filebrowser-no-grappelli: https://github.com/smacker/django-filebrowser-no-grappelli
 .. _TinyMCE docs: https://www.tinymce.com/docs/
+.. _django-tinymce: https://github.com/jazzband/django-tinymce

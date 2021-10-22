@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.6
+-----
+- Fixed overriding of logging config.
+
 1.7.5
 -----
 - Support translated strings in settings (merwok).
